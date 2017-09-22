@@ -19,7 +19,7 @@ module.exports = {
     },
     checkUserExists: async (user) => {
         try {
-            let result = await db.auth.findOne(user, { password: 0 });
+            let result = await db.auth.findOne(user, { id:1,accountType:1,_id:0 });
             if (result) {
                 return ({ ok: true, user: result });
             }
@@ -33,6 +33,7 @@ module.exports = {
     },
     registerUser: async (user) => {
         try {
+            user.accountType = 10;
             let result = await db.auth.insert(user);
             if (result.result.ok == 1 && result.result.n == 1) {
                 return ({ ok: true, message: 'User created' });

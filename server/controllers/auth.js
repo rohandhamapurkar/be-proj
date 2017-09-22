@@ -4,7 +4,7 @@ module.exports.routes = {
             req.body.user.password = await Services.auth.hashPassword(req.body.user.password);
             let result = await Services.auth.checkUserExists(req.body.user);
             if (result.ok) {
-                let token = await Services.auth.issueToken({ id: result.user.id });
+                let token = await Services.auth.issueToken({ id: result.user.id , accountType: result.user.accountType });
                 res.json({ ok: true, token: token });
             } else {
                 res.json(result);
