@@ -39,7 +39,7 @@ module.exports = {
                 return ({ ok: true, message: 'User created' });
             }
             else {
-                return ({ ok: false, message: 'User created' })
+                return ({ ok: false, message: 'User created' });
             }
         } catch (err) {
             if (err.code && err.code == 11000) {
