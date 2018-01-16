@@ -1,10 +1,6 @@
 module.exports = {
     port: 3000,
-    db: {
-        host: 'localhost',
-        port: 27017,
-        dbname: 'test'
-    },
+    dbURL:"mongodb://root:root@ds157057.mlab.com:57057/login-api",
     auth: {
         secret: '6twgh876ejlwhi8e2ej2i878eyh2d3g74gi4g38gno65756giosekrgi43ogv8347gvirelngkb4i3gib',
         tokenLifeInSec: 60 * 60 * 24 * 3,// 3 days

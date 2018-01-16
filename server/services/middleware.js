@@ -20,7 +20,7 @@ module.exports = {
             res.json({ ok: false, message: "You are not a User." });
         }
     },
-    isAdmin: async (req, res, next) => {
+    isSudoAdmin: async (req, res, next) => {
         if (req.auth.hasOwnProperty('accountType') && req.auth.accountType == 1) {
             next();
         } else {

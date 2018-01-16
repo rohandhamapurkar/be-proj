@@ -5,5 +5,29 @@ import store from '@/vuex';
 const baseUri = 'http://localhost:3000';
 
 export default {
-
+    login: (userdata) => {
+        // NOTE => userdata :{id:<user_id>,password:<user_password>}
+        return axios.post(baseUri + '/auth/v0.1/user/login', { user: userdata })
+            .then(function (response) {
+                console.log(response);
+                return response.data;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    },
+    signupUser: (userdata) => {
+        return axios.post(baseUri + '/sudoAdmin/v0.1/createUser',{ user: userdata }, {
+            headers: {
+                auth: store.getters.auth.auth
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                return response.data.ok;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    }
 }

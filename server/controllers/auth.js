@@ -1,5 +1,5 @@
 module.exports.routes = {
-    'POST /login': async (req, res) => {
+    'POST /user/login': async (req, res) => {
         if (req.body && req.body.user && req.body.user.hasOwnProperty('id') && req.body.user.hasOwnProperty('password')) {
             req.body.user.password = await Services.auth.hashPassword(req.body.user.password);
             let result = await Services.auth.checkUserExists(req.body.user);
@@ -13,13 +13,13 @@ module.exports.routes = {
             res.json({ ok: false, message: "Missing Params" });
         }
     },
-    'POST /register': async (req, res) => {
+    'POST /sudoAdmin/signup': async (req, res) => {
+        log(req.body);
         if (req.body && req.body.user && req.body.user.hasOwnProperty('id') && req.body.user.hasOwnProperty('password')) {
-            req.body.user.password = await Services.auth.hashPassword(req.body.user.password);
-            let result = await Services.auth.registerUser(req.body.user);
-            res.json(result);
+            const pwHash = Services.auth.hashPassword(req.body.user.password);
+            res.json(await Services.sudoAdmin.registerAdmin({ id: req.body.user.id.toLowerCase(), password: pwHash}));
         } else {
-            res.json({ ok: false, message: "Missing Params" });
+            res.json({ ok: false, message: 'missing params id || pw || name' });
         }
     }
 }

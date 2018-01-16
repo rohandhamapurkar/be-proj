@@ -102,7 +102,6 @@ let loadStaticRoutes = () => new Promise((resolve, reject) => {
 let expressServer = () => new Promise((resolve, reject) => {
     server.app.use(require('body-parser').json());
     server.app.use(require('cors')());
-
     server.app.listen(config.port, err => {
         if (err) return reject(err);
         resolve(true);

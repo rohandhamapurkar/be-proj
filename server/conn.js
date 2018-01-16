@@ -6,7 +6,7 @@ let MongoClient = require('mongodb').MongoClient;
 
 db.connect = async () => {
     try {
-        let connection = await MongoClient.connect(`mongodb://${config.db.host}:${config.db.port}/${config.db.dbname}`);
+        let connection = await MongoClient.connect(config.dbURL);
         db.auth = connection.collection('accounts');
         //rest of the collections go here
         db.auth.ensureIndex({ "id": 1 }, { unique: true }); //unique id field always so as to avoid multiple same accounts

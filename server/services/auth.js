@@ -30,24 +30,5 @@ module.exports = {
             console.log('Mongo issue ', err);
             return ({ ok: false, message: 'unknown db issue' });
         }
-    },
-    registerUser: async (user) => {
-        try {
-            user.accountType = 10;
-            let result = await db.auth.insert(user);
-            if (result.result.ok == 1 && result.result.n == 1) {
-                return ({ ok: true, message: 'User created' });
-            }
-            else {
-                return ({ ok: false, message: 'User created' });
-            }
-        } catch (err) {
-            if (err.code && err.code == 11000) {
-                return ({ ok: false, message: 'user already present' });
-            } else {
-                console.log('Mongo issue ', err.code);
-                return ({ ok: false, message: 'unknown db issue' });
-            }
-        }
     }
 }
