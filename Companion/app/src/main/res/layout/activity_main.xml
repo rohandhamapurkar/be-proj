@@ -16,6 +16,8 @@
             android:background="@drawable/bg_gradient"/>
     </RelativeLayout>
     <RelativeLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/padding"
@@ -24,19 +26,11 @@
         android:paddingTop="@dimen/padding"
         tools:context="com.prozekt.companion.MainActivity">
 
-        <Space
-            android:id="@+id/space0"
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true" />
-
         <TextView
             android:id="@+id/titleText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:layout_below="@+id/space0"
             android:text="@string/a_title"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
@@ -48,12 +42,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/titleText"
+            android:labelFor="@id/pinEntry"
             android:padding="@dimen/padding"
             android:text="@string/authenticate"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
-            android:textSize="16sp"
-            android:labelFor="@id/pinEntry"/>
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/fpIcon"
@@ -68,13 +62,28 @@
             android:id="@+id/pinEntry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:layout_marginStart="63dp"
             android:background="@drawable/bg_text"
             android:drawablePadding="15dp"
             android:ems="10"
+            android:imeOptions="actionDone"
             android:inputType="numberPassword"
             android:padding="16dp"
             android:singleLine="true" />
+
+        <Button
+            android:id="@+id/button"
+            android:textColor="@android:color/white"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/pinEntry"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/pinEntry"
+            android:background="@drawable/bg_button"
+            android:drawablePadding="15dp"
+            android:padding="18dp"
+            android:text="@string/check" />
     </RelativeLayout>
 </LinearLayout>

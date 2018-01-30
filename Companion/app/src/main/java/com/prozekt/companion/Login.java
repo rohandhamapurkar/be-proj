@@ -61,7 +61,7 @@ public class Login extends AppCompatActivity{
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putString("JWT", js.get("token").toString());
                                 editor.apply();
-                                Intent intent = new Intent(ctx, MainActivity.class);
+                                Intent intent = new Intent(ctx, setPIN.class);
                                 ctx.startActivity(intent);
                             } else {
                                 dialog.show();

@@ -1,6 +1,10 @@
 package com.prozekt.companion;
 
+        import android.app.Activity;
         import android.app.KeyguardManager;
+        import android.content.Context;
+        import android.content.Intent;
+        import android.content.SharedPreferences;
         import android.content.pm.PackageManager;
         import android.hardware.fingerprint.FingerprintManager;
         import android.Manifest;
@@ -11,6 +15,11 @@ package com.prozekt.companion;
         import android.security.keystore.KeyProperties;
         import android.support.v7.app.AppCompatActivity;
         import android.support.v4.app.ActivityCompat;
+        import android.view.KeyEvent;
+        import android.view.View;
+        import android.view.inputmethod.EditorInfo;
+        import android.widget.Button;
+        import android.widget.EditText;
         import android.widget.TextView;
         import java.io.IOException;
         import java.security.InvalidAlgorithmParameterException;
@@ -36,11 +45,41 @@ public class MainActivity extends AppCompatActivity {
     private FingerprintManager.CryptoObject cryptoObject;
     private FingerprintManager fingerprintManager;
     private KeyguardManager keyguardManager;
+//    private EditText pinMain;
+//    private Context ctx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        SharedPreferences sp = getSharedPreferences("PIN", Activity.MODE_PRIVATE);
+//        final int pinStore = sp.getInt("pinValue",-1);
+//        pinMain = findViewById(R.id.pinEntry);
+//        Button button = findViewById(R.id.savePin);
+//        ctx = this;
+//
+//        button.setOnClickListener(new View.OnClickListener() {
+//             @Override
+//             public void onClick(View view) {
+//                 boolean cancel = false;
+//                 final String pinone = pinMain.getText().toString();
+//                 final int pinteger = Integer.parseInt(pinone);
+//                 View focusView = null;
+//                 pinMain.setError(null);
+//                 if(pinteger != pinStore){
+//                     cancel = true;
+//                     pinMain.setError("You have entered a wrong PIN");
+//                     focusView = pinMain;
+//                 } else {
+//                     Intent intent = new Intent(ctx, OTP.class);
+//                     ctx.startActivity(intent);
+//                 }
+//
+//
+//             }
+//        });
+
+
 
         // If you’ve set your app’s minSdkVersion to anything lower than 23, then you’ll need to verify that the device is running Marshmallow
         // or higher before executing any fingerprint-related code

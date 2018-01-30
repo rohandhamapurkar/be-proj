@@ -10,4 +10,7 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="submit">Submit</string>
+    <string name="setPinHint">Set a 4-Digit PIN</string>
+    <string name="confirmPinHint">Confirm the 4 Digit PIN</string>
+    <string name="check">✓</string>
 </resources>
