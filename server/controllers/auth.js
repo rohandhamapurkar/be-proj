@@ -1,3 +1,7 @@
+let otplib = require("otplib");
+otplib.authenticator.options = {
+    step: 5,
+}
 module.exports.routes = {
     'POST /user/login': async (req, res) => {
         if (req.body && req.body.user && req.body.user.hasOwnProperty('id') && req.body.user.hasOwnProperty('password')) {
@@ -21,5 +25,13 @@ module.exports.routes = {
         } else {
             res.json({ ok: false, message: 'missing params id || pw || name' });
         }
+    },
+    'GET /otp': async (req,res) => {
+        const secret = otplib.authenticator.generateSecret();
+        res.json({ok:true,secret});
+    },
+    'POST /verify': async(req,res) => {
+        res.json(otplib.authenticator.check(token, secret));
     }
+
 }
