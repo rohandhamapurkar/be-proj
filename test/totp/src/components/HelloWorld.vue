@@ -22,7 +22,7 @@ export default {
   created(){
     let that = this;
 
-    axios.get('http://192.168.1.220:3000/auth/v0.1/otp',{},)
+    axios.get('https://beproject.tk/auth/v0.1/otp',{},)
     .then(function (response) {
         //  console.log(response);
       console.log(response.data)
@@ -48,7 +48,7 @@ export default {
       },5000)
     },
     submit: function(){
-      axios.post('http://192.168.1.220:3000/auth/v0.1/verify',{token:this.token,secret:this.secret})
+      axios.post('https://beproject.tk/auth/v0.1/verify',{token:this.token,secret:this.secret})
         .then(function (response) {
           console.log(response.data);
         })
