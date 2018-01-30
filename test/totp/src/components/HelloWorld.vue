@@ -10,6 +10,9 @@
 <script>
 import otplib from 'otplib';
 import axios from 'axios';
+otplib.authenticator.options = {
+      step: 5
+}
 export default {
   name: 'HelloWorld',
   data () {
@@ -39,9 +42,6 @@ export default {
   methods: {
     repeat: function(){
       let that = this;
-      otplib.authenticator.options = {
-            step: 5
-      }
       that.otp = otplib.authenticator.generate(that.secret);
       setInterval(function(){
         that.otp = otplib.authenticator.generate(that.secret);

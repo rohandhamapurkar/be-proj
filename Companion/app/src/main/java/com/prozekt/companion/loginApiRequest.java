@@ -16,8 +16,7 @@ public class loginApiRequest extends AsyncTask<Void, Void, String> {
     AsyncResponse delegate = null;
     private final String username;
     private final String password;
-    private final String host = "http://192.168.1.220";
-    private final String port = "3000";
+    private final String host = "https://beproject.tk";
     loginApiRequest(String Username, String Password,AsyncResponse delegate)
     {
         username = Username;
@@ -28,7 +27,7 @@ public class loginApiRequest extends AsyncTask<Void, Void, String> {
 
     @Override
     protected String doInBackground(Void... params) {
-        String url  = host+":"+port+"/auth/v0.1/user/login";
+        String url  = host+"/auth/v0.1/user/login";
         try {
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
