@@ -26,12 +26,14 @@ module.exports.routes = {
             res.json({ ok: false, message: 'missing params id || pw || name' });
         }
     },
+    //test Time based OTP
     'GET /otp': async (req,res) => {
         const secret = otplib.authenticator.generateSecret();
         res.json({ok:true,secret});
     },
     'POST /verify': async(req,res) => {
-        res.json(otplib.authenticator.check(token, secret));
+        console.log(req.body);
+        res.json(otplib.authenticator.check(req.body.token, req.body.secret));
     }
 
 }

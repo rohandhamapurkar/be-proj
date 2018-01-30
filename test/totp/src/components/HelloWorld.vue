@@ -1,6 +1,10 @@
 <template>
-  <h3>YOUR AUTHENTICATOR CODE IS<h3>
+<div>
+  <h3>YOUR AUTHENTICATOR CODE IS</h3>
   <h1>{{otp}}</h1>
+  <span>TOKEN I/P</span>  <input v-model="token"></input>
+  <button @click="submit">VERIFY</button>
+</div>
 </template>
 
 <script>
@@ -11,13 +15,14 @@ export default {
   data () {
     return {
       otp: 'TEST',
-      secret:""
+      secret:"",
+      token:""
     }
   },
   created(){
     let that = this;
 
-    axios.get('http://192.168.1.27:3000/auth/v0.1/otp',{},)
+    axios.get('http://192.168.1.220:3000/auth/v0.1/otp',{},)
     .then(function (response) {
         //  console.log(response);
       console.log(response.data)
@@ -35,13 +40,22 @@ export default {
     repeat: function(){
       let that = this;
       otplib.authenticator.options = {
-            step: 5,
+            step: 5
       }
       that.otp = otplib.authenticator.generate(that.secret);
       setInterval(function(){
-      that.otp = otplib.authenticator.generate(that.secret);
-      console.log(that.otp)
-      },6000)
+        that.otp = otplib.authenticator.generate(that.secret);
+      },5000)
+    },
+    submit: function(){
+      axios.post('http://192.168.1.220:3000/auth/v0.1/verify',{token:this.token,secret:this.secret})
+        .then(function (response) {
+          console.log(response.data);
+        })
+        .catch(function (error) {
+            alert(error);
+            console.error(error);
+        });
     }
   }
 }
