@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Companion</string>
+    <string name="instructions">Place your fingertip on the Home button to verify your identity</string>
+    <string name="a_title">Authentication</string>
+    <string name="authenticate">Enter the 4 digit PIN or just tap the fingerprint sensor with your registered fingerprint</string>
+    <string name="pin">Enter the PIN</string>
+    <string name="or">OR</string>
+    <string name="dialog_message">You have not signed up with us yet. Please register on our website before using this application</string>
+    <string name="dialog_title">Not Registered</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="submit">Submit</string>
+</resources>
