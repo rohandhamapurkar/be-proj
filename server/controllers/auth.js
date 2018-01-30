@@ -32,7 +32,6 @@ module.exports.routes = {
         res.json({ok:true,secret});
     },
     'POST /verify': async(req,res) => {
-        console.log(req.body);
         res.json(otplib.authenticator.check(req.body.token, req.body.secret));
     }
 

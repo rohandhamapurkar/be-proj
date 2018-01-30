@@ -10,6 +10,9 @@
 <script>
 import otplib from 'otplib';
 import axios from 'axios';
+otplib.authenticator.options = {
+      step: 5
+}
 export default {
   name: 'HelloWorld',
   data () {
@@ -22,7 +25,7 @@ export default {
   created(){
     let that = this;
 
-    axios.get('http://192.168.1.220:3000/auth/v0.1/otp',{},)
+    axios.get('https://beproject.tk/auth/v0.1/otp',{},)
     .then(function (response) {
         //  console.log(response);
       console.log(response.data)
@@ -39,16 +42,13 @@ export default {
   methods: {
     repeat: function(){
       let that = this;
-      otplib.authenticator.options = {
-            step: 5
-      }
       that.otp = otplib.authenticator.generate(that.secret);
       setInterval(function(){
         that.otp = otplib.authenticator.generate(that.secret);
       },5000)
     },
     submit: function(){
-      axios.post('http://192.168.1.220:3000/auth/v0.1/verify',{token:this.token,secret:this.secret})
+      axios.post('https://beproject.tk/auth/v0.1/verify',{token:this.token,secret:this.secret})
         .then(function (response) {
           console.log(response.data);
         })

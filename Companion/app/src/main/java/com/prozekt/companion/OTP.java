@@ -10,8 +10,7 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 
 public class OTP extends AppCompatActivity {
-    private String host = "http://192.168.1.220";
-    private String port = "5000";
+    private String host = "https://testotp.beproject.tk";
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +22,7 @@ public class OTP extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setLayerType(View.LAYER_TYPE_HARDWARE,null);
         //webView.loadUrl("http://exchangerpoint.com");
-        webView.loadUrl(host+":"+port);
+        webView.loadUrl(host);
 
         ImageView imageView = (ImageView) findViewById(R.id.successCheck);
         Drawable drawable = imageView.getDrawable();
