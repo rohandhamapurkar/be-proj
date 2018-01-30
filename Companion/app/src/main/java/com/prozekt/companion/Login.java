@@ -1,14 +1,20 @@
 package com.prozekt.companion;
 
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -27,36 +33,36 @@ public class Login extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         username = findViewById(R.id.username);
-        password =  findViewById(R.id.password);
+        password = findViewById(R.id.password);
         Button submit = findViewById(R.id.submitButton);
+        Button test = findViewById(R.id.buttontest);
         ctx = this;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.dialog_message)
                 .setTitle(R.string.dialog_title)
-                .setPositiveButton("Okay",new DialogInterface.OnClickListener() {
+                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         username.setText("");
                         password.setText("");
                     }
                 });
         final AlertDialog dialog = builder.create();
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 new loginApiRequest(username.getText().toString(), password.getText().toString(), new AsyncResponse() {
                     @Override
                     public void processFinish(String success) {
                         try {
                             JSONObject js = new JSONObject(success);
                             Boolean result = (Boolean) js.get("ok");
-                            if(result){
+                            if (result) {
                                 SharedPreferences settings = getSharedPreferences(CRED, 0);
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putString("JWT", js.get("token").toString());
                                 editor.apply();
-                                Intent intent = new Intent(ctx, OTP.class );
+                                Intent intent = new Intent(ctx, OTP.class);
                                 ctx.startActivity(intent);
                             } else {
                                 dialog.show();
@@ -66,6 +72,14 @@ public class Login extends AppCompatActivity{
                         }
                     }
                 }).execute();
+            }
+        });
+
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ctx, MainActivity.class);
+                ctx.startActivity(i);
             }
         });
     }

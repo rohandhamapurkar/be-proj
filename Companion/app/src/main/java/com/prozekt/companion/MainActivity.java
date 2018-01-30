@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             fingerprintManager =
                     (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
 
-            textView = (TextView) findViewById(R.id.textView);
+            textView = (TextView) findViewById(R.id.textSuccess);
 
             //Check whether the device has a fingerprint sensor//
             if (!fingerprintManager.isHardwareDetected()) {
