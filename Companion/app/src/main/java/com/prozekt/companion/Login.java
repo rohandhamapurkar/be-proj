@@ -35,7 +35,6 @@ public class Login extends AppCompatActivity{
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         Button submit = findViewById(R.id.submitButton);
-        Button test = findViewById(R.id.buttontest);
         ctx = this;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -62,7 +61,7 @@ public class Login extends AppCompatActivity{
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putString("JWT", js.get("token").toString());
                                 editor.apply();
-                                Intent intent = new Intent(ctx, OTP.class);
+                                Intent intent = new Intent(ctx, MainActivity.class);
                                 ctx.startActivity(intent);
                             } else {
                                 dialog.show();
@@ -72,14 +71,6 @@ public class Login extends AppCompatActivity{
                         }
                     }
                 }).execute();
-            }
-        });
-
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ctx, MainActivity.class);
-                ctx.startActivity(i);
             }
         });
     }

@@ -35,12 +35,10 @@
             android:id="@+id/titleText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:padding="10dp"
             android:layout_below="@+id/space0"
             android:text="@string/a_title"
             android:textAlignment="center"
-            android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
 
