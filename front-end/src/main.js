@@ -3,19 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import VueMaterial from 'vue-material'
+import Vuetify from 'vuetify'
 import store from './vuex'
 
-import 'vue-material/dist/vue-material.css'
+Vue.use(Vuetify)
 
-Vue.use(VueMaterial) //Required to boot vue material
-
-Vue.material.registerTheme('default', {
-  primary: 'yellow',
-  accent: 'cyan',
-  warn: 'light-blue',
-  background: 'white',
-})
+import('../node_modules/vuetify/dist/vuetify.min.css') // Ensure you are using css-loader
 
 Vue.config.productionTip = false
 
@@ -27,3 +20,16 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+/*
+Commented out vue material code;
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.css'
+Vue.use(VueMaterial) //Required to boot vue material
+Vue.material.registerTheme('default', {
+    primary: 'yellow',
+    accent: 'cyan',
+    warn: 'light-blue',
+    background: 'white',
+  })
+*/
