@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
@@ -86,29 +87,33 @@ public class MainActivity extends AppCompatActivity {
             fingerprintManager =
                     (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
 
-            textView = (TextView) findViewById(R.id.textSuccess);
+            //textView = (TextView) findViewById(R.id.textSuccess);
 
             //Check whether the device has a fingerprint sensor//
-            if (!fingerprintManager.isHardwareDetected()) {
+            if (fingerprintManager != null && !fingerprintManager.isHardwareDetected()) {
                 // If a fingerprint sensor isn’t available, then inform the user that they’ll be unable to use your app’s fingerprint functionality//
-                textView.setText("Your device doesn't support fingerprint authentication");
+                Toast.makeText(ctx, "Your device doesn't support fingerprint authentication", Toast.LENGTH_LONG).show();
+                //textView.setText("Your device doesn't support fingerprint authentication");
             }
             //Check whether the user has granted your app the USE_FINGERPRINT permission//
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
                 // If your app doesn't have this permission, then display the following text//
-                textView.setText("Please enable the fingerprint permission");
+                Toast.makeText(ctx,"Please enable the fingerprint permission", Toast.LENGTH_LONG).show();
+                //textView.setText("Please enable the fingerprint permission");
             }
 
             //Check that the user has registered at least one fingerprint//
-            if (!fingerprintManager.hasEnrolledFingerprints()) {
+            if (fingerprintManager != null && !fingerprintManager.hasEnrolledFingerprints()) {
                 // If the user hasn’t configured any fingerprints, then display the following message//
-                textView.setText("No fingerprint configured. Please register at least one fingerprint in your device's Settings");
+                Toast.makeText(ctx,"No fingerprint configured. Please register at least one fingerprint in your device's Settings", Toast.LENGTH_LONG).show();
+                //textView.setText("No fingerprint configured. Please register at least one fingerprint in your device's Settings");
             }
 
             //Check that the lockscreen is secured//
             if (!keyguardManager.isKeyguardSecure()) {
                 // If the user hasn’t secured their lockscreen with a PIN password or pattern, then display the following text//
-                textView.setText("Please enable lockscreen security in your device's Settings");
+                Toast.makeText(ctx,"Please enable lockscreen security in your device's Settings to use fingerprint", Toast.LENGTH_LONG).show();
+                //textView.setText("Please enable lockscreen security in your device's Settings");
             } else {
                 try {
                     generateKey();
