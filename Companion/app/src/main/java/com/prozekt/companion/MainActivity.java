@@ -1,39 +1,37 @@
 package com.prozekt.companion;
 
-        import android.app.Activity;
-        import android.app.KeyguardManager;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.content.SharedPreferences;
-        import android.content.pm.PackageManager;
-        import android.hardware.fingerprint.FingerprintManager;
-        import android.Manifest;
-        import android.os.Build;
-        import android.os.Bundle;
-        import android.security.keystore.KeyGenParameterSpec;
-        import android.security.keystore.KeyPermanentlyInvalidatedException;
-        import android.security.keystore.KeyProperties;
-        import android.support.v7.app.AppCompatActivity;
-        import android.support.v4.app.ActivityCompat;
-        import android.view.KeyEvent;
-        import android.view.View;
-        import android.view.inputmethod.EditorInfo;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.TextView;
-        import java.io.IOException;
-        import java.security.InvalidAlgorithmParameterException;
-        import java.security.InvalidKeyException;
-        import java.security.KeyStore;
-        import java.security.KeyStoreException;
-        import java.security.NoSuchAlgorithmException;
-        import java.security.NoSuchProviderException;
-        import java.security.UnrecoverableKeyException;
-        import java.security.cert.CertificateException;
-        import javax.crypto.Cipher;
-        import javax.crypto.KeyGenerator;
-        import javax.crypto.NoSuchPaddingException;
-        import javax.crypto.SecretKey;
+import android.Manifest;
+import android.app.KeyguardManager;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.fingerprint.FingerprintManager;
+import android.os.Build;
+import android.os.Bundle;
+import android.security.keystore.KeyGenParameterSpec;
+import android.security.keystore.KeyPermanentlyInvalidatedException;
+import android.security.keystore.KeyProperties;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
+
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
 public class MainActivity extends AppCompatActivity {
 
     // Declare a string variable for the key we’re going to use in our fingerprint authentication
@@ -45,42 +43,40 @@ public class MainActivity extends AppCompatActivity {
     private FingerprintManager.CryptoObject cryptoObject;
     private FingerprintManager fingerprintManager;
     private KeyguardManager keyguardManager;
-//    private EditText pinMain;
-//    private Context ctx;
+    private PrefManager prefManager;
+    private EditText pinThree;
+    private Context ctx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        SharedPreferences sp = getSharedPreferences("PIN", Activity.MODE_PRIVATE);
-//        final int pinStore = sp.getInt("pinValue",-1);
-//        pinMain = findViewById(R.id.pinEntry);
-//        Button button = findViewById(R.id.savePin);
-//        ctx = this;
-//
-//        button.setOnClickListener(new View.OnClickListener() {
-//             @Override
-//             public void onClick(View view) {
-//                 boolean cancel = false;
-//                 final String pinone = pinMain.getText().toString();
-//                 final int pinteger = Integer.parseInt(pinone);
-//                 View focusView = null;
-//                 pinMain.setError(null);
-//                 if(pinteger != pinStore){
-//                     cancel = true;
-//                     pinMain.setError("You have entered a wrong PIN");
-//                     focusView = pinMain;
-//                 } else {
-//                     Intent intent = new Intent(ctx, OTP.class);
-//                     ctx.startActivity(intent);
-//                 }
-//
-//
-//             }
-//        });
+        prefManager = new PrefManager(this);
+        pinThree = findViewById(R.id.pinEntry);
+        Button button = findViewById(R.id.button);
+        ctx = this;
 
-
-
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View focusView = null;
+                boolean cancel = false;
+                final String pinthree = pinThree.getText().toString();
+                pinThree.setError(null);
+                if (pinthree.length() != 4) {
+                    cancel = true;
+                    pinThree.setError("Enter the 4 Digit PIN here");
+                    focusView = pinThree;
+                } else if (prefManager.getPinValue()!=(Integer.parseInt(pinthree))) {
+                    cancel = true;
+                    pinThree.setError("The PIN is incorrect");
+                    focusView = pinThree;
+                } else{
+                    Intent intent = new Intent(ctx, OTP.class);
+                    ctx.startActivity(intent);
+                }
+            }
+        });
         // If you’ve set your app’s minSdkVersion to anything lower than 23, then you’ll need to verify that the device is running Marshmallow
         // or higher before executing any fingerprint-related code
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

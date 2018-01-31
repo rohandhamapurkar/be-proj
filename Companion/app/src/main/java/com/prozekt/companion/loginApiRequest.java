@@ -3,6 +3,8 @@ package com.prozekt.companion;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.wang.avi.AVLoadingIndicatorView;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -10,7 +12,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
-
 
 public class loginApiRequest extends AsyncTask<Void, Void, String> {
     AsyncResponse delegate = null;
