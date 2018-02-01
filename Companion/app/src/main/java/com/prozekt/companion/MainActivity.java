@@ -13,7 +13,12 @@ import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -55,29 +60,34 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         prefManager = new PrefManager(this);
         pinThree = findViewById(R.id.pinEntry);
-        Button button = findViewById(R.id.button);
         ImageView imageView = findViewById(R.id.fpIcon);
         ctx = this;
 
-        button.setOnClickListener(new View.OnClickListener() {
+        pinThree.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View view) {
-                View focusView = null;
-                boolean cancel = false;
-                final String pinthree = pinThree.getText().toString();
-                pinThree.setError(null);
-                if (pinthree.length() != 4) {
-                    cancel = true;
-                    pinThree.setError("Enter the 4 Digit PIN here");
-                    focusView = pinThree;
-                } else if (prefManager.getPinValue()!=(Integer.parseInt(pinthree))) {
-                    cancel = true;
-                    pinThree.setError("The PIN is incorrect");
-                    focusView = pinThree;
-                } else{
-                    Intent intent = new Intent(ctx, OTP.class);
-                    ctx.startActivity(intent);
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(charSequence.length() == 4){
+                    final String pinthree = pinThree.getText().toString();
+                    pinThree.setError(null);
+                    if (prefManager.getPinValue()!=(Integer.parseInt(pinthree))) {
+                        pinThree.setError("The PIN is incorrect");
+                    } else{
+                        Intent intent = new Intent(ctx, OTP.class);
+                        ctx.startActivity(intent);
+                        pinThree.setText("");
+                        finish();
+                    }
                 }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
         // If you’ve set your app’s minSdkVersion to anything lower than 23, then you’ll need to verify that the device is running Marshmallow
@@ -95,27 +105,27 @@ public class MainActivity extends AppCompatActivity {
             if (fingerprintManager != null && !fingerprintManager.isHardwareDetected()) {
                 // If a fingerprint sensor isn’t available, then inform the user that they’ll be unable to use your app’s fingerprint functionality//
                 imageView.setVisibility(View.INVISIBLE);
-                Toast.makeText(ctx, "Your device doesn't support fingerprint authentication", Toast.LENGTH_LONG).show();
+                new customToast( "Your device doesn't support fingerprint authentication",ctx).show();
                 //textView.setText("Your device doesn't support fingerprint authentication");
             }
             //Check whether the user has granted your app the USE_FINGERPRINT permission//
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
                 // If your app doesn't have this permission, then display the following text//
-                Toast.makeText(ctx,"Please enable the fingerprint permission", Toast.LENGTH_LONG).show();
+                new customToast("Please enable the fingerprint permission", ctx).show();
                 //textView.setText("Please enable the fingerprint permission");
             }
 
             //Check that the user has registered at least one fingerprint//
             if (fingerprintManager != null && !fingerprintManager.hasEnrolledFingerprints()) {
                 // If the user hasn’t configured any fingerprints, then display the following message//
-                Toast.makeText(ctx,"No fingerprint configured. Please register at least one fingerprint in your device's Settings", Toast.LENGTH_LONG).show();
+                new customToast("No fingerprint configured. Please register at least one fingerprint in your device's Settings", ctx).show();
                 //textView.setText("No fingerprint configured. Please register at least one fingerprint in your device's Settings");
             }
 
             //Check that the lockscreen is secured//
             if (!keyguardManager.isKeyguardSecure()) {
                 // If the user hasn’t secured their lockscreen with a PIN password or pattern, then display the following text//
-                Toast.makeText(ctx,"Please enable lockscreen security in your device's Settings for safety reasons", Toast.LENGTH_LONG).show();
+                new customToast("Please enable lockscreen security in your device's Settings for safety reasons", ctx).show();
                 //textView.setText("Please enable lockscreen security in your device's Settings");
             } else {
                 try {
@@ -130,7 +140,16 @@ public class MainActivity extends AppCompatActivity {
 
                     // Here, I’m referencing the FingerprintHandler class that we’ll create in the next section. This class will be responsible
                     // for starting the authentication process (via the startAuth method) and processing the authentication process events//
-                    FingerprintHandler helper = new FingerprintHandler(this);
+                    FingerprintHandler helper = new FingerprintHandler(this, new onAuthenticated() {
+                        @Override
+                        public void onFinish() {
+                            //new customToast(ctx,"Success!",Toast.LENGTH_LONG).show();
+                            new customToast("Success!",ctx).show();
+                            Intent i = new Intent(ctx, OTP.class);
+                            ctx.startActivity(i);
+                            finish();
+                        }
+                    });
                     helper.startAuth(fingerprintManager, cryptoObject);
                 }
             }
@@ -218,6 +237,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onBackPressed() {
         moveTaskToBack(true);
-        finish();
+        finishAndRemoveTask ();
     }
 }

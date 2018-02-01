@@ -60,7 +60,7 @@ public class setPIN extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        moveTaskToBack(true);
-        finish();
+        moveTaskToBack(false);
+        finishAndRemoveTask ();
     }
 }

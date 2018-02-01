@@ -17,7 +17,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      otp: 'TEST',
+      otp: '',
       secret:"",
       token:""
     }
@@ -36,7 +36,7 @@ export default {
         alert(error);
         console.error(error);
     });
-    
+
 
   },
   methods: {
