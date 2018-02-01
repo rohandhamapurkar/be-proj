@@ -2,8 +2,6 @@
 <div>
   <h3>YOUR AUTHENTICATOR CODE IS</h3>
   <h1>{{otp}}</h1>
-  <span>TOKEN I/P</span>  <input v-model="token"></input>
-  <button @click="submit">VERIFY</button>
 </div>
 </template>
 
@@ -18,8 +16,7 @@ export default {
   data () {
     return {
       otp: '',
-      secret:"",
-      token:""
+      secret:""
     }
   },
   created(){
@@ -46,16 +43,6 @@ export default {
       setInterval(function(){
         that.otp = otplib.authenticator.generate(that.secret);
       },5000)
-    },
-    submit: function(){
-      axios.post('https://beproject.tk/auth/v0.1/verify',{token:this.token,secret:this.secret})
-        .then(function (response) {
-          console.log(response.data);
-        })
-        .catch(function (error) {
-            alert(error);
-            console.error(error);
-        });
     }
   }
 }
