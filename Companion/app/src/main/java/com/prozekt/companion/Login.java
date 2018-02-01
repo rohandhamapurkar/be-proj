@@ -26,12 +26,14 @@ public class Login extends AppCompatActivity{
     private View vieww;
     private EditText username;
     private EditText password;
+    private PrefManager prefManager;
     private Context ctx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        prefManager = new PrefManager(this);
         String indicator=getIntent().getStringExtra("indicator");
         avi= (AVLoadingIndicatorView) findViewById(R.id.avi);
         vieww = findViewById(R.id.greyview);
@@ -40,6 +42,12 @@ public class Login extends AppCompatActivity{
         password = findViewById(R.id.password);
         Button submit = findViewById(R.id.submitButton);
         ctx = this;
+
+        if (!prefManager.isFirstTimeLaunch()) {
+            Intent intent = new Intent(ctx, MainActivity.class);
+            ctx.startActivity(intent);
+            finish();
+        }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.dialog_message)

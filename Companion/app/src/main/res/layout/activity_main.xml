@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -15,11 +17,12 @@
             android:layout_height="5dp"
             android:background="@drawable/bg_gradient"/>
     </RelativeLayout>
+
     <RelativeLayout
-        android:focusable="true"
-        android:focusableInTouchMode="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:paddingBottom="@dimen/padding"
         android:paddingLeft="@dimen/padding"
         android:paddingRight="@dimen/padding"
@@ -40,14 +43,49 @@
             android:id="@+id/descriptionText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
             android:layout_below="@+id/titleText"
             android:labelFor="@id/pinEntry"
             android:padding="@dimen/padding"
             android:text="@string/authenticate"
             android:textAlignment="center"
-            android:textColor="@color/colorAccent"
+            android:textColor="@android:color/tertiary_text_light"
             android:textSize="16sp" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/space">
+
+            <EditText
+                android:id="@+id/pinEntry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="60dp"
+                android:background="@drawable/bg_text"
+                android:drawablePadding="15dp"
+                android:ems="10"
+                android:imeOptions="actionDone"
+                android:inputType="numberPassword"
+                android:padding="16dp"
+                android:singleLine="true" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/pinEntry"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@+id/pinEntry"
+                android:background="@drawable/bg_button"
+                android:drawablePadding="15dp"
+                android:padding="18dp"
+                android:text="@string/check"
+                android:textColor="@android:color/white" />
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/fpIcon"
@@ -58,32 +96,12 @@
             app:srcCompat="@drawable/ic_action_fingerprint"
             tools:ignore="ContentDescription" />
 
-        <EditText
-            android:id="@+id/pinEntry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="63dp"
-            android:background="@drawable/bg_text"
-            android:drawablePadding="15dp"
-            android:ems="10"
-            android:imeOptions="actionDone"
-            android:inputType="numberPassword"
-            android:padding="16dp"
-            android:singleLine="true" />
+            android:layout_below="@+id/descriptionText"
+            android:id="@+id/space" />
 
-        <Button
-            android:id="@+id/button"
-            android:textColor="@android:color/white"
-            android:layout_width="55dp"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/pinEntry"
-            android:layout_marginStart="8dp"
-            android:layout_toEndOf="@+id/pinEntry"
-            android:background="@drawable/bg_button"
-            android:drawablePadding="15dp"
-            android:padding="18dp"
-            android:text="@string/check" />
     </RelativeLayout>
 </LinearLayout>

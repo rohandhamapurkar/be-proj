@@ -51,8 +51,16 @@ public class setPIN extends AppCompatActivity {
             focusView = pinTwo;
         } else {
             prefManager.setPinValue(Integer.parseInt(pinone));
+            prefManager.setFirstTimeLaunch(Boolean.FALSE);
             Intent intent = new Intent(ctx, MainActivity.class);
             ctx.startActivity(intent);
+            finish();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+        finish();
     }
 }

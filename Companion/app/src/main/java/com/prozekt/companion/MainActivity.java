@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         prefManager = new PrefManager(this);
         pinThree = findViewById(R.id.pinEntry);
         Button button = findViewById(R.id.button);
+        ImageView imageView = findViewById(R.id.fpIcon);
         ctx = this;
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
             //Check whether the device has a fingerprint sensor//
             if (fingerprintManager != null && !fingerprintManager.isHardwareDetected()) {
                 // If a fingerprint sensor isn’t available, then inform the user that they’ll be unable to use your app’s fingerprint functionality//
+                imageView.setVisibility(View.INVISIBLE);
                 Toast.makeText(ctx, "Your device doesn't support fingerprint authentication", Toast.LENGTH_LONG).show();
                 //textView.setText("Your device doesn't support fingerprint authentication");
             }
@@ -112,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             //Check that the lockscreen is secured//
             if (!keyguardManager.isKeyguardSecure()) {
                 // If the user hasn’t secured their lockscreen with a PIN password or pattern, then display the following text//
-                Toast.makeText(ctx,"Please enable lockscreen security in your device's Settings to use fingerprint", Toast.LENGTH_LONG).show();
+                Toast.makeText(ctx,"Please enable lockscreen security in your device's Settings for safety reasons", Toast.LENGTH_LONG).show();
                 //textView.setText("Please enable lockscreen security in your device's Settings");
             } else {
                 try {
@@ -211,5 +214,10 @@ public class MainActivity extends AppCompatActivity {
         public FingerprintException(Exception e) {
             super(e);
         }
+    }
+
+    public void onBackPressed() {
+        moveTaskToBack(true);
+        finish();
     }
 }

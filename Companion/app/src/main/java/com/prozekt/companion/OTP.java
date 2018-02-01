@@ -30,4 +30,10 @@ public class OTP extends AppCompatActivity {
             ((Animatable)drawable).start();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+        finish();
+    }
 }

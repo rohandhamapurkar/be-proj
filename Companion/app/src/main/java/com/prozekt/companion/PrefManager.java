@@ -15,6 +15,7 @@ public class PrefManager {
 
     private static final String PREF_NAME = "pinPreference";
     private static final String PIN_VALUE = "pinValue";
+    private static final String ISFIRST = "IsFirstTimeLaunch";
 
     public PrefManager(Context context){
         this.ctx = context;
@@ -29,5 +30,14 @@ public class PrefManager {
 
     public int getPinValue() {
         return sp.getInt(PIN_VALUE, -1);
+    }
+
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        editor.putBoolean(ISFIRST, isFirstTime);
+        editor.commit();
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return sp.getBoolean(ISFIRST, true);
     }
 }
