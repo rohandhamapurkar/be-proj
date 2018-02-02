@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div>Next token in: <span class="otp-countdown"></span></div>
-
+  <div class="container">
+    <h3>YOUR AUTHENTICATION CODE IS</h3>
     <div id="otp-token"></div>
-    
+    <div>NEXT TOKEN IN: <span class="otp-countdown"></span></div>
+  </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="./otplib-browser.js"></script>
     <script type="text/javascript">
@@ -29,13 +30,12 @@
     function generator() {
         const epoch = Math.floor(new Date().getTime() / 1000);
         const count = epoch % step;
-
         if (count === 0){
             document.getElementById('otp-token').innerHTML = otplib.authenticator.generate(secret);
         }
         document.querySelector('.otp-countdown').innerHTML = step - count + 's';
     }
-    
     </script>
+
 </body>
 </html>
