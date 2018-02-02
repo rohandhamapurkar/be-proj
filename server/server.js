@@ -99,7 +99,6 @@ let loadStaticRoutes = () => new Promise((resolve, reject) => {
     server.app.use('/welcome', express.static(process.cwd()+"/index.html"));
     server.app.use('/otp',express.static(process.cwd()+"/test/totp"));
     server.app.get('/', (req,res)=>{res.redirect('/welcome')});
-    server.app.get('/testotp',(req,res)=>{res.redirect('/otp')} );
     resolve();
 });
 
