@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans');
 
 html, body {
-  height:100vh;
+  /* height:100vh; */
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -15,6 +15,7 @@ html, body {
     width: 90%;
     margin: 5%;
     padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 #otp-token {
