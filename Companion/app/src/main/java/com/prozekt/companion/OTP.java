@@ -10,7 +10,7 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 
 public class OTP extends AppCompatActivity {
-    private String host = "https://testotp.beproject.tk";
+    private String host = "https://beproject.tk/otp";
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
