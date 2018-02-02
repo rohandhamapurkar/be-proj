@@ -1,12 +1,41 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>totp</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TOTP</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div>Next token in: <span class="otp-countdown"></span></div>
+
+    <div id="otp-token"></div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./otplib-browser.js"></script>
+    <script type="text/javascript">
+    secret = ""
+    step = 5;
+    window.otplib.authenticator.options = {
+        step : step
+    }
+    $.get("https://beproject.tk/auth/v0.1/otp",function(data,status){
+            secret = data.secret;
+            document.getElementById('otp-token').innerHTML = otplib.authenticator.generate(secret);
+            window.setInterval(generator, 1000);
+    })
+
+    function generator() {
+        const epoch = Math.floor(new Date().getTime() / 1000);
+        const count = epoch % step;
+
+        if (count === 0){
+            document.getElementById('otp-token').innerHTML = otplib.authenticator.generate(secret);
+        }
+        document.querySelector('.otp-countdown').innerHTML = step - count + 's';
+    }
+    
+    </script>
+</body>
 </html>
