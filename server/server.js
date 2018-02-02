@@ -96,7 +96,8 @@ let loadControllers = () => {
 
 let loadStaticRoutes = () => new Promise((resolve, reject) => {
     //static files to be added here Ex. server.app.use('/admin', express.static(BuiltDistributablePath));
-    server.app.use('/', express.static(process.cwd()+"/index.html"));
+    server.app.use('/welcome', express.static(process.cwd()+"/index.html"));
+    server.app.get('/', (req,res)=>{res.redirect('/welcome')});
     resolve();
 });
 
