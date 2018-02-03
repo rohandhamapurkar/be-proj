@@ -25,7 +25,7 @@
                                 </v-layout>
                                 <v-layout row justify-space-between>
                                     <v-flex xs5>
-                                        <v-text-field name="email" label="Email" id="email" v-model="email" :rules="emailRules" type="email" required></v-text-field>
+                                        <v-text-field name="email" label="Email" id="email" v-model="email" type="email" required></v-text-field>
                                     </v-flex>
                                     <v-flex xs6>
                                         <v-text-field name="mobileNumber" label="Mobile Number" id="mobileNumber" v-model="mobileNumber" type="text" required></v-text-field>
@@ -57,7 +57,7 @@
                                          ></v-checkbox>
                                     </v-flex>
                                 </v-layout>
-                                <v-btn type="submit" @click="sumbit" color="primary" :disabled="!valid">Sign Up</v-btn>
+                                <v-btn type="submit" @click="submit" color="primary" :disabled="!valid">Sign Up</v-btn>
                                 <v-btn @click="clear" color="error">Clear</v-btn>
                             </v-form>
                         </v-container>
