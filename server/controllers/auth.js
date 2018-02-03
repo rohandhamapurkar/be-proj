@@ -1,7 +1,5 @@
 let otplib = require("otplib");
-otplib.authenticator.options = {
-    step: 5,
-}
+
 module.exports.routes = {
     'POST /user/login': async (req, res) => {
         if (req.body && req.body.user && req.body.user.hasOwnProperty('id') && req.body.user.hasOwnProperty('password')) {
@@ -28,10 +26,19 @@ module.exports.routes = {
     },
     //test Time based OTP
     'GET /otp': async (req,res) => {
+        let epoch = Math.round(new Date().getTime()/1000)
+        otplib.authenticator.options = {
+            step: 5,
+            epoch : epoch
+        }
         const secret = otplib.authenticator.generateSecret();
-        res.json({ok:true,secret});
+        res.json({ok:true,secret,epoch});
     },
     'POST /verify': async(req,res) => {
+        otplib.authenticator.options = {
+            step: 5,
+            epoch : req.body.epoch
+        }
         res.json(otplib.authenticator.check(req.body.token, req.body.secret));
     }
 
