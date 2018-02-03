@@ -26,18 +26,15 @@ module.exports.routes = {
     },
     //test Time based OTP
     'GET /otp': async (req,res) => {
-        let epoch = Math.round(new Date().getTime()/1000)
         otplib.authenticator.options = {
-            step: 5,
-            epoch : epoch
+            step: 5
         }
         const secret = otplib.authenticator.generateSecret();
-        res.json({ok:true,secret,epoch});
+        res.json({ok:true,secret});
     },
     'POST /verify': async(req,res) => {
         otplib.authenticator.options = {
-            step: 5,
-            epoch : req.body.epoch
+            step: 5
         }
         res.json(otplib.authenticator.check(req.body.token, req.body.secret));
     }
