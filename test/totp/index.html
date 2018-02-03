@@ -12,29 +12,48 @@
     <h3>YOUR AUTHENTICATION CODE IS</h3>
     <div id="otp-token"></div>
     <div>NEXT TOKEN IN: <span class="otp-countdown"></span></div>
+    <div>VERIFY: <span class="otp-verify"></span></div>
+    <button id="test">VERIFY</button>
   </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="./otplib-browser.js"></script>
     <script type="text/javascript">
-    secret = ""
-    step = 5;
-    window.otplib.authenticator.options = {
-        step : step
-    }
-    $.get("https://beproject.tk/auth/v0.1/otp",function(data,status){
-            secret = data.secret;
-            document.getElementById('otp-token').innerHTML = otplib.authenticator.generate(secret);
-            window.setInterval(generator, 1000);
-    })
-
-    function generator() {
-        const epoch = Math.floor(new Date().getTime() / 1000);
-        const count = epoch % step;
-        if (count === 0){
-            document.getElementById('otp-token').innerHTML = otplib.authenticator.generate(secret);
+        $(document).ready(function(){
+            $("button").click(function(){
+                console.log("VERIFICATION")
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://beproject.tk/auth/v0.1/verify',
+                    data: JSON.stringify({
+                        token:document.getElementById('otp-token').innerHTML,
+                        secret:secret
+                    }),
+                    success: function(data) { document.querySelector('.otp-verify').innerHTML = JSON.stringify(data)  },
+                    contentType: "application/json",
+                    dataType: 'json'
+                });
+            });
+        });
+        secret = ""
+        step = 5;
+        window.otplib.authenticator.options = {
+            step : step
         }
-        document.querySelector('.otp-countdown').innerHTML = step - count + 's';
-    }
+        $.get("https://beproject.tk/auth/v0.1/otp",function(data,status){
+                secret = data.secret;
+                document.getElementById('otp-token').innerHTML = window.otplib.authenticator.generate(secret);
+                window.setInterval(generator, 1000);
+        })
+
+        function generator() {
+            const epoch = Math.floor(new Date().getTime() / 1000);
+            const count = epoch % step;
+            if (count === 0){
+                console.log(window.otplib.authenticator.generate(secret));
+                document.getElementById('otp-token').innerHTML = window.otplib.authenticator.generate(secret);
+            }
+            document.querySelector('.otp-countdown').innerHTML = step - count + 's';
+        }
     </script>
 
 </body>
