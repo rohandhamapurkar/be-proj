@@ -17,15 +17,15 @@
     <script src="./otplib-browser.js"></script>
     <script type="text/javascript">
     secret = ""
-    epoch = 0;
+    incomingepoch = 0;
     step = 5;
     
     $.get("https://beproject.tk/auth/v0.1/otp",function(data,status){
             secret = data.secret;
-            epoch = data.epoch;
+            incomingepoch = data.epoch;
             otplib.authenticator.options = {
                 step : step,
-                epoch : epoch
+                epoch : incomingepoch
             }
             document.getElementById('otp-token').innerHTML = otplib.authenticator.generate(secret);
             window.setInterval(generator, 1000);
