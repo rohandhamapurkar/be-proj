@@ -39,18 +39,18 @@
                                 </v-layout>
                                 <v-layout row>
                                     <v-flex xs12>
-                                        <v-text-field name="confirmPassword" label="Confirm Password" id="confirmPassword" v-model="confirmPassword" type="password" required :rules="[comparePasswords]"></v-text-field>
+                                        <v-text-field name="confirmPassword" label="Confirm Password" id="confirmPassword" v-model="confirmPassword" type="password" required :rules="confirmPasswordRules"></v-text-field>
                                     </v-flex>
                                 </v-layout>
                                 <v-layout>
                                     <h3>Upload image for embedded key</h3>
                                 </v-layout>
                                 <v-layout row>
-                                    <input type="file"  accept="image/x-png,image/gif,image/jpeg" name="uploadImage" value="Upload Image"/>
+                                    <input type="file" @change="onFileChange" accept="image/x-png,image/gif,image/jpeg" name="uploadImage" value="Upload Image"  />
                                 </v-layout>
                                 <v-layout row>
                                     <v-flex xs12>
-                                        <v-checkbox label="Upload later?" v-model="checkbox" :rules="[checkIfImageIsAdded]"></v-checkbox>
+                                        <v-checkbox label="Upload later?" v-model="checkbox"></v-checkbox>
                                     </v-flex>
                                 </v-layout>
                                 <v-btn @click="updateView" color="primary" :disabled="!valid">Next</v-btn>
@@ -88,49 +88,49 @@
                                 </v-card>
                             </v-flex>
                             <v-flex xs4>
-                                <v-card flat tile  v-bind:class="{blackBorderClass: colorClassName[2], blue:true}">
+                                <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[2], blue:true}">
                                     <v-card-media @click="updateColorClass(2)" height="150px">
                                     </v-card-media>
                                 </v-card>
                             </v-flex>
                             <v-flex xs4>
-                                <v-card flat tile  v-bind:class="{blackBorderClass: colorClassName[3], green:true}">
+                                <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[3], green:true}">
                                     <v-card-media @click="updateColorClass(3)" height="150px">
                                     </v-card-media>
                                 </v-card>
                             </v-flex>
                             <v-flex xs4>
-                                <v-card flat tile  v-bind:class="{blackBorderClass: colorClassName[4], yellow:true}">
+                                <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[4], yellow:true}">
                                     <v-card-media @click="updateColorClass(4)" height="150px">
                                     </v-card-media>
                                 </v-card>
                             </v-flex>
                             <v-flex xs4>
-                                <v-card flat tile  v-bind:class="{blackBorderClass: colorClassName[5], pink:true}">
+                                <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[5], pink:true}">
                                     <v-card-media @click="updateColorClass(5)" height="150px">
                                     </v-card-media>
                                 </v-card>
                             </v-flex>
                             <v-flex xs4>
-                                <v-card flat tile  v-bind:class="{blackBorderClass: colorClassName[6], purple:true}">
+                                <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[6], purple:true}">
                                     <v-card-media @click="updateColorClass(6)" height="150px">
                                     </v-card-media>
                                 </v-card>
                             </v-flex>
                             <v-flex xs4>
-                                <v-card flat tile  v-bind:class="{blackBorderClass: colorClassName[7], brown:true}">
+                                <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[7], brown:true}">
                                     <v-card-media @click="updateColorClass(7)" height="150px">
                                     </v-card-media>
                                 </v-card>
                             </v-flex>
                             <v-flex xs4>
-                                <v-card flat tile  v-bind:class="{blackBorderClass: colorClassName[8], gray:true}">
+                                <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[8], gray:true}">
                                     <v-card-media @click="updateColorClass(8)" height="150px">
                                     </v-card-media>
                                 </v-card>
                             </v-flex>
                             <v-flex xs4>
-                                <v-card flat tile  v-bind:class="{blackBorderClass: colorClassName[9], orange:true}">
+                                <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[9], orange:true}">
                                     <v-card-media @click="updateColorClass(9)" height="150px">
                                     </v-card-media>
                                 </v-card>
@@ -168,6 +168,15 @@
                 (v) => !!v || 'Password is required',
                 (v) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/.test(v) || 'Password Must be atleast 8 char, 1 lowercase, 1 Uppercase char and 1 number'
             ],
+            confirmPasswordRules: [
+                (v) => {
+                    if (v == password.value && password.value != '') {
+                        return true;
+                    } else {
+                        return 'Passwords do not match'
+                    }
+                },
+            ],
             emailRules: [
                 v => !!v || 'E-mail is required',
                 v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
@@ -202,21 +211,14 @@
             },
             displayGrid: false,
             imageSelectionCounter: 0,
-            colorSelectionCounter: 0
+            colorSelectionCounter: 0,
+            embedImage: null
         }),
         computed: {
-            comparePasswords() {
-                return this.password !== this.confirmPassword ? 'Passwords do not match' : true
-            },
-            checkIfImageIsAdded() {
-                // return  ? :
-            }
         },
         methods: {
             submit() {
-                if (this.$refs.form.validate()) {
-
-                }
+                if (this.$refs.form.validate()) {}
             },
             clear() {
                 this.$refs.form.reset()
@@ -250,6 +252,9 @@
             },
             updateView() {
                 this.displayGrid = true;
+            },
+            onFileChange(e) {
+                this.embedImage = e.target.files[0];
             }
         }
     }
@@ -260,11 +265,9 @@
     .redBorderClass {
         border: 2.5px solid red !important;
     }
-
     .blackBorderClass {
         border: 4px solid black !important;
     }
-
     .red {
         background-color: red !important;
     }

@@ -65,39 +65,11 @@
                         path: '/mainapp/home'
                     }
                 ],
-                size: 'xs',
-                items: [{
-                        text: 'Extra small (1px)',
-                        value: 'xs'
-                    },
-                    {
-                        text: 'Small (4px)',
-                        value: 'sm'
-                    },
-                    {
-                        text: 'Medium (8px)',
-                        value: 'md'
-                    },
-                    {
-                        text: 'Large (16px)',
-                        value: 'lg'
-                    },
-                    {
-                        text: 'Extra large (24px)',
-                        value: 'xl'
-                    }
-                ],
-                className:{'1':true,'2':true,'3':true,'4':true,'5':true,'6':true,'7':true,'8':true,'9':true},
-                oneSelected:-1,
-                twoSelected:-1
             }
         },
         methods: {
             updateRoute(path) {
                 router.replace(path);
-            },
-            updateClass(num) {
-                this.className[num] = !this.className[num];
             }
         }
     }
