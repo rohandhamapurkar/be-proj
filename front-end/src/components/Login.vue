@@ -10,9 +10,10 @@
                         <v-text-field label="Username" v-model="username" required></v-text-field>
                         <v-text-field label="Password" type="password" v-model="password" :rules="passwordRules" required></v-text-field>
                         <v-btn @click="submit" color="primary" :disabled="!valid">
-                            submit
+                            Login
                         </v-btn>
                         <v-btn @click="clear" color="error">clear</v-btn>
+                        <v-btn @click="updateRoute('/signup')" color="cyan darken-3">SignUp</v-btn>
                     </v-form>
                 </v-flex>
                 <v-flex xs12 sm3 md3>
@@ -46,6 +47,9 @@
             },
             clear() {
                 this.$refs.form.reset()
+            },
+            updateRoute(path) {
+                router.replace(path);
             }
         }
     }
@@ -53,8 +57,8 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.logo {
-    align: 'center';
-    height: 250px;
-  }
+    .logo {
+        align: 'center';
+        height: 250px;
+    }
 </style>
