@@ -18,12 +18,12 @@
                                         </v-text-field>
                                     </v-flex>
                                 </v-layout>
-                                <v-layout row>
+                                <!--v-layout row>
                                     <v-flex xs12>
                                         <v-text-field name="username" label="Username" id="username" v-model="username" type="text" required>
                                         </v-text-field>
                                     </v-flex>
-                                </v-layout>
+                                </v-layout-->
                                 <v-layout row justify-space-between>
                                     <v-flex xs5>
                                         <v-text-field name="email" label="Email" id="email" v-model="email" :rules="emailRules" type="email" required></v-text-field>
@@ -43,15 +43,10 @@
                                     </v-flex>
                                 </v-layout>
                                 <v-layout>
-                                    <h3>Upload image for embedded key</h3>
+                                    <h3>Upload image for embedded key (optional)</h3>
                                 </v-layout>
                                 <v-layout row>
                                     <input type="file" @change="onFileChange" accept="image/x-png,image/gif,image/jpeg" name="uploadImage" value="Upload Image"  />
-                                </v-layout>
-                                <v-layout row>
-                                    <v-flex xs12>
-                                        <v-checkbox label="Upload later?" v-model="checkbox"></v-checkbox>
-                                    </v-flex>
                                 </v-layout>
                                 <v-btn @click="updateView" color="primary" :disabled="!valid">Next</v-btn>
                                 <v-btn @click="clear" color="error">Clear</v-btn>
