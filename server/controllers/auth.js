@@ -58,6 +58,20 @@ module.exports.routes = {
             step: 5
         }
         res.json(otplib.authenticator.check(req.body.token, req.body.secret));
+    },
+    'POST /verifyApiKey': async (req, res) => {
+        if (req.body && req.body.key){
+            let result = await Services.auth.verifyApiKey(req.body.key);
+            if (result.ok) {
+                let token = await Services.auth.issueToken({ id: result.resp.id });
+                res.json({ ok: true, token: token });
+            } else {
+                res.json(result);
+            }
+        } else {
+            res.json({ ok: false, message: "Missing Params" });
+        }
     }
+
 
 }

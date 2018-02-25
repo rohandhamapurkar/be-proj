@@ -31,7 +31,7 @@ export default {
             });
     },
     apiKeyVerification: (key) => {
-        return axios.post(baseUri + '/authentication/v0.1/verifyApiKey',{ key: key }, {
+        return axios.post(baseUri + '/auth/v0.1/verifyApiKey',{ key: key }, {
             headers: {
                 auth: store.getters.auth.auth
             }
