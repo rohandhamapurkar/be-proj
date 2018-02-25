@@ -7,7 +7,7 @@
                 <v-flex xs12 sm6 md6>
                     <img class="logo" src="../assets/logo.png">
                     <v-form v-model="valid" ref="form" lazy-validation>
-                        <v-text-field label="Username" v-model="username" required></v-text-field>
+                        <v-text-field label="Email" v-model="email" required></v-text-field>
                         <v-text-field label="Password" type="password" v-model="password" :rules="passwordRules" required></v-text-field>
                         <v-btn @click="submit" color="primary" :disabled="!valid">
                             Login
@@ -31,7 +31,7 @@
         data() {
             return {
                 valid: true,
-                username: '',
+                email: '',
                 password: '',
                 passwordRules: [
                     (v) => !!v || 'Password is required',
