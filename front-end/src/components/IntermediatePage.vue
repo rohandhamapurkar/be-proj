@@ -15,17 +15,21 @@
                                         </v-flex>
                                     </v-layout>
                                 </v-layout>
-                                <v-layout>
-                                    <v-layout row>
-                                        <v-btn @click="updatePath('/authprogress/imagebased')" color="primary" :disabled="!valid">Image Grid Based</v-btn>
-                                        <v-btn @click="updatePath('/authprogress/embeddedimagebased')" color="primary" :disabled="!valid">Embedded Image Based</v-btn>
-                                        <v-btn @click="updatePath('/authprogress/otpbased')" color="primary" :disabled="!valid">OTP Based</v-btn>
-                                    </v-layout>
-                                </v-layout>
                             </v-form>
                         </v-container>
                     </v-card-text>
                 </v-card>
+                <v-layout>
+                    <v-layout row>
+                        <v-btn @click="updatePath('/authprogress/imagebased')" color="primary" :disabled="!valid">Image Grid Based</v-btn>
+                    </v-layout>
+                    <v-layout row>
+                        <v-btn @click="updatePath('/authprogress/embeddedimagebased')" color="primary" :disabled="!valid">Embedded Image Based</v-btn>
+                    </v-layout>
+                    <v-layout row>
+                        <v-btn @click="updatePath('/authprogress/otpbased')" color="primary" :disabled="!valid">OTP Based</v-btn>
+                    </v-layout>
+                </v-layout>
             </v-flex>
         </v-layout>
     </v-container>
@@ -48,7 +52,6 @@
         methods: {
             updatePath(path) {
                 router.replace(path);
-                
             }
         }
     }
