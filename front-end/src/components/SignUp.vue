@@ -7,14 +7,14 @@
                 <v-card>
                     <v-card-text>
                         <v-container>
-                            <v-form v-model="valid" ref="form">
+                            <v-form v-model="valid">
                                 <v-layout justify-space-between>
                                     <v-flex xs5>
-                                        <v-text-field name="firstName" label="First Name" id="firstName" v-model="firstName" :rules="nameRules" type="text" required>
+                                        <v-text-field label="First Name" id="firstName" v-model="firstName" :rules="nameRules" type="text" required>
                                         </v-text-field>
                                     </v-flex>
                                     <v-flex xs6>
-                                        <v-text-field name="lastName" label="Last Name" id="lastName" v-model="lastName" :rules="nameRules" type="text" required>
+                                        <v-text-field label="Last Name" id="lastName" v-model="lastName" :rules="nameRules" type="text" required>
                                         </v-text-field>
                                     </v-flex>
                                 </v-layout>
@@ -26,20 +26,20 @@
                                 </v-layout-->
                                 <v-layout row justify-space-between>
                                     <v-flex xs5>
-                                        <v-text-field name="email" label="Email" id="email" v-model="email" :rules="emailRules" type="email" required></v-text-field>
+                                        <v-text-field label="Email" id="email" v-model="email" :rules="emailRules" type="email" required></v-text-field>
                                     </v-flex>
                                     <v-flex xs6>
-                                        <v-text-field name="mobileNumber" label="Mobile Number" id="mobileNumber" v-model="mobileNumber" :rules="mobileNumberRules" type="number" required></v-text-field>
+                                        <v-text-field label="Mobile Number" id="mobileNumber" v-model="mobileNumber" :rules="mobileNumberRules" type="number" required></v-text-field>
                                     </v-flex>
                                 </v-layout>
                                 <v-layout row>
                                     <v-flex xs12>
-                                        <v-text-field name="password" label="Password" id="password" v-model="password" :rules="passwordRules" type="password" required></v-text-field>
+                                        <v-text-field label="Password" id="password" v-model="password" :rules="passwordRules" type="password" required></v-text-field>
                                     </v-flex>
                                 </v-layout>
                                 <v-layout row>
                                     <v-flex xs12>
-                                        <v-text-field name="confirmPassword" label="Confirm Password" id="confirmPassword" v-model="confirmPassword" type="password" required :rules="confirmPasswordRules"></v-text-field>
+                                        <v-text-field label="Confirm Password" id="confirmPassword" v-model="confirmPassword" type="password" required :rules="confirmPasswordRules"></v-text-field>
                                     </v-flex>
                                 </v-layout>
                                 <v-layout>
