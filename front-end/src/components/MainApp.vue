@@ -6,17 +6,17 @@
             <v-spacer></v-spacer>
             <!-- The below commented code adds 3 more buttons to the right hand side of the toolbar -->
             <!--v-btn icon>
-                                    <v-icon>search</v-icon>
-                                </v-btn>
-                                <v-btn icon>
-                                    <v-icon>apps</v-icon>
-                                </v-btn>
-                                <v-btn icon>
-                                    <v-icon>refresh</v-icon>
-                                </v-btn>
-                                <v-btn icon>
-                                    <v-icon>more_vert</v-icon>
-                                </v-btn-->
+                <v-icon>search</v-icon>
+            </v-btn>
+            <v-btn icon>
+                <v-icon>apps</v-icon>
+            </v-btn>
+            <v-btn icon>
+                <v-icon>refresh</v-icon>
+            </v-btn>
+            <v-btn icon>
+                <v-icon>more_vert</v-icon>
+            </v-btn-->
         </v-toolbar>
         <v-navigation-drawer temporary v-model="drawer" light absolute>
             <v-list class="pa-1">
@@ -57,7 +57,7 @@
                 items: [{
                         title: 'Profile',
                         icon: 'dashboard',
-                        path: '/mainapp/home'
+                        path: '/mainapp/hello'
                     },
                     {
                         title: 'Settings',
