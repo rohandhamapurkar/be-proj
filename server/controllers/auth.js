@@ -26,7 +26,10 @@ module.exports.routes = {
     'POST /createUser': async (req, res) => {
         if (req.body && req.body.user && req.body.user.hasOwnProperty('id') && req.body.user.hasOwnProperty('password')) {
             const pwHash = Services.auth.hashPassword(req.body.user.password);
-            res.json(await Services.auth.registerUser({ id: req.body.user.id.toLowerCase(), password: pwHash, accountType:10}));
+            req.body.user.password = pwHash;
+            req.body.user.accountType = 10;
+            req.body.user.id = req.body.user.id.toLowerCase();
+            res.json(await Services.auth.registerUser(req.body.user));
         } else {
             res.json({ ok: false, message: 'missing params id || pw || name' });
         }
@@ -34,7 +37,10 @@ module.exports.routes = {
     'POST /createDev': async (req, res) => {
         if (req.body && req.body.user && req.body.user.hasOwnProperty('id') && req.body.user.hasOwnProperty('password')) {
             const pwHash = Services.auth.hashPassword(req.body.user.password);
-            res.json(await Services.auth.registerUser({ id: req.body.user.id.toLowerCase(), password: pwHash, accountType:1}));
+            req.body.user.password = pwHash;
+            req.body.user.accountType = 1;
+            req.body.user.id = req.body.user.id.toLowerCase();
+            res.json(await Services.auth.registerUser(req.body.user));
         } else {
             res.json({ ok: false, message: 'missing params id || pw || name' });
         }

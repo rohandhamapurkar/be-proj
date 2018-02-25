@@ -48,9 +48,10 @@ module.exports = {
             let result = null;
             if(user.accountType == '1'){
                 apiKey = generateUUID();
-                result = await db.auth.insert({id:user.id,password:user.password,accountType:user.accountType,apiKey:apiKey});
+                user.apiKey = apiKey;
+                result = await db.auth.insert(user);
             } else {
-                result = await db.auth.insert({id:user.id,password:user.password,accountType:user.accountType});
+                result = await db.auth.insert(user);
             }
             if(result.result.ok==1 && result.result.n==1){
                 return {ok:true, message:'user account created',apiKey:apiKey}
