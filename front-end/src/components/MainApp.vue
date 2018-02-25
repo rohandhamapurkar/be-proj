@@ -57,12 +57,17 @@
                 items: [{
                         title: 'Profile',
                         icon: 'dashboard',
-                        path: '/mainapp/hello'
+                        path: '/mainapp/profile'
                     },
                     {
-                        title: 'Settings',
+                        title: 'Grid Settings',
                         icon: 'question_answer',
-                        path: '/mainapp/home'
+                        path: '/mainapp/gridsettings'
+                    },
+                    {
+                        title: 'Embedded Image Settings',
+                        icon: 'question_answer',
+                        path: '/mainapp/embeddedimagesettings'
                     }
                 ],
             }
@@ -71,6 +76,9 @@
             updateRoute(path) {
                 router.replace(path);
             }
+        },
+        created() {
+            router.replace('/mainapp/profile');
         }
     }
 </script>
