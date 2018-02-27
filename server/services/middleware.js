@@ -10,7 +10,21 @@ module.exports = {
                 res.json({ ok: false, message: "Invalid Token" });
             }
         } else {
-
+            res.json({ ok: false, message: "Missing params" });
+        }
+    },
+    isSessionId: async (req,res,next) => {
+        if (req.headers.hasOwnProperty('sessionId') && typeof req.headers.sessionId == 'string') {
+            let verification = await Services.auth.verifyToken(req.headers.auth);
+            if (!!verification) {
+                req.auth = verification;
+                next();
+            } else {
+                res.status = 401;
+                res.json({ ok: false, message: "Invalid Token" });
+            }
+        } else {
+            res.json({ ok: false, message: "Missing params" });
         }
     },
     isUser: async (req, res, next) => {

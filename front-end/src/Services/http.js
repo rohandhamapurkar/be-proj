@@ -17,14 +17,28 @@ export default {
             });
     },
     signupUser: (userdata) => {
-        return axios.post(baseUri + '/sudoAdmin/v0.1/createUser',{ user: userdata }, {
+        return axios.post(baseUri + '/auth/v0.1/createUser',{ user: userdata }, {
             headers: {
                 auth: store.getters.auth.auth
             }
         })
             .then(function (response) {
                 console.log(response);
-                return response.data.ok;
+                return response.data;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    },
+    apiKeyVerification: (key) => {
+        return axios.post(baseUri + '/auth/v0.1/verifyApiKey',{ key: key }, {
+            headers: {
+                auth: store.getters.auth.auth
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                return response.data;
             })
             .catch(function (error) {
                 console.error(error);

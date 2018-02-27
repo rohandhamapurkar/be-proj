@@ -6,17 +6,17 @@
             <v-spacer></v-spacer>
             <!-- The below commented code adds 3 more buttons to the right hand side of the toolbar -->
             <!--v-btn icon>
-                                    <v-icon>search</v-icon>
-                                </v-btn>
-                                <v-btn icon>
-                                    <v-icon>apps</v-icon>
-                                </v-btn>
-                                <v-btn icon>
-                                    <v-icon>refresh</v-icon>
-                                </v-btn>
-                                <v-btn icon>
-                                    <v-icon>more_vert</v-icon>
-                                </v-btn-->
+                <v-icon>search</v-icon>
+            </v-btn>
+            <v-btn icon>
+                <v-icon>apps</v-icon>
+            </v-btn>
+            <v-btn icon>
+                <v-icon>refresh</v-icon>
+            </v-btn>
+            <v-btn icon>
+                <v-icon>more_vert</v-icon>
+            </v-btn-->
         </v-toolbar>
         <v-navigation-drawer temporary v-model="drawer" light absolute>
             <v-list class="pa-1">
@@ -41,26 +41,7 @@
                 </v-list-tile>
             </v-list>
         </v-navigation-drawer>
-        <v-layout>
-            <v-flex xs12 sm6 offset-sm3>
-                <v-card>
-                    <v-card-actions>
-                        <v-select label="Size" :items="items" v-model="size"></v-select>
-                        <v-spacer></v-spacer>
-                    </v-card-actions>
-                    <v-container fluid v-bind="{ [`grid-list-${size}`]: true }">
-                        <v-layout row wrap>
-                            <v-flex xs4 v-for="n in 9" :key="n">
-                                <v-card flat tile v-bind:class="{nayaClass: className[n]}">
-                                    <v-card-media @click="updateClass(n)" :src="`https://unsplash.it/150/300?image=${Math.floor(Math.random() * 100) + 1}`" height="150px">
-                                    </v-card-media>
-                                </v-card>
-                            </v-flex>
-                        </v-layout>
-                    </v-container>
-                </v-card>
-            </v-flex>
-        </v-layout>
+        
         <router-view></router-view>
     </div>
 </template>
@@ -76,48 +57,28 @@
                 items: [{
                         title: 'Profile',
                         icon: 'dashboard',
-                        path: '/mainapp/home'
+                        path: '/mainapp/profile'
                     },
                     {
-                        title: 'Settings',
+                        title: 'Grid Settings',
                         icon: 'question_answer',
-                        path: '/mainapp/home'
+                        path: '/mainapp/gridsettings'
+                    },
+                    {
+                        title: 'Embedded Image Settings',
+                        icon: 'question_answer',
+                        path: '/mainapp/embeddedimagesettings'
                     }
                 ],
-                size: 'xs',
-                items: [{
-                        text: 'Extra small (1px)',
-                        value: 'xs'
-                    },
-                    {
-                        text: 'Small (4px)',
-                        value: 'sm'
-                    },
-                    {
-                        text: 'Medium (8px)',
-                        value: 'md'
-                    },
-                    {
-                        text: 'Large (16px)',
-                        value: 'lg'
-                    },
-                    {
-                        text: 'Extra large (24px)',
-                        value: 'xl'
-                    }
-                ],
-                className:{'1':true,'2':true,'3':true,'4':true,'5':true,'6':true,'7':true,'8':true,'9':true},
-                oneSelected:-1,
-                twoSelected:-1
             }
         },
         methods: {
             updateRoute(path) {
                 router.replace(path);
-            },
-            updateClass(num) {
-                this.className[num] = !this.className[num];
             }
+        },
+        created() {
+            router.replace('/mainapp/profile');
         }
     }
 </script>
