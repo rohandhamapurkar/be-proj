@@ -3,10 +3,12 @@ import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import MainApp from '@/components/MainApp'
 import Profile from '@/components/Profile'
+import AdminProfile from '@/components/AdminProfile'
 import GridSettings from '@/components/GridSettings'
 import EmbeddedImageSettings from '@/components/EmbeddedImageSettings'
 import Login from '@/components/Login'
 import SignUp from '@/components/SignUp'
+import AdminSignUp from '@/components/AdminSignUp'
 import AuthProgress from '@/components/AuthProgress'
 import IntermediatePage from '@/components/IntermediatePage'
 import ImageBased from '@/components/ImageBased'
@@ -28,6 +30,11 @@ export default new Router({
       component: SignUp
     },
     {
+      path: '/adminsignup',
+      name: 'AdminSignUp',
+      component: AdminSignUp
+    },
+    {
       path: '/404',
       name: '404',
       component: PageNotFound
@@ -40,6 +47,11 @@ export default new Router({
           path: 'profile',
           name: 'Profile',
           component: Profile
+        },
+        {
+          path: 'adminprofile',
+          name: 'AdminProfile',
+          component: AdminProfile
         },
         {
           path: 'gridsettings',

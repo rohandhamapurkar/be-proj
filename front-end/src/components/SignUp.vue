@@ -154,7 +154,7 @@
             ],
             passwordRules: [
                 (v) => !!v || 'Password is required',
-                (v) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/.test(v) || 'Password Must be atleast 8 char, 1 lowercase, 1 Uppercase char and 1 number'
+                (v) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(v) || 'Password Must be atleast 8 char, 1 lowercase, 1 Uppercase char and 1 number'
             ],
             confirmPasswordRules: [
                 (v) => {
@@ -257,7 +257,7 @@
         }),
         methods: {
             async submit() {
-                if (this.colorSelectionCounter != 2 || this.colorSelectionCounter != 2) {
+                if (this.colorSelectionCounter != 2 || this.imageSelectionCounter != 2) {
                     alert("please select atleast 2 categories and 2 colors")
                 } else {
                     let categories = [];

@@ -14,6 +14,8 @@
                         </v-btn>
                         <v-btn @click="clear" color="error">clear</v-btn>
                         <v-btn @click="updateRoute('/signup')" color="cyan darken-3">SignUp</v-btn>
+                        <br><br>
+                        <a class="text-xs-center" @click="updateRoute('/adminsignup')">Admin SignUp?</a>    
                     </v-form>
                 </v-flex>
                 <v-flex xs12 sm3 md3>
