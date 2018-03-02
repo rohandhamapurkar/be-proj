@@ -32,67 +32,22 @@
                     <v-card-text>
                         <v-container>
                             <h3>Whitelisted Domain(s)</h3>
-                            <v-form v-model="valid">
+                            <v-form>
                                 <v-layout>
                                     <v-flex>
-                                        <v-text-field v-if="saved" :disabled="true" v-model="domainLinks" v-type="text" v-for="links in domainLinks">{{links.text}}</v-text-field>
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                          <v-layout row justify-center>
-                            <v-dialog v-model="dialog" persistent max-width="500px">
-                              <v-btn color="primary" dark slot="activator">Add Domain</v-btn>
-                              <v-card>
-                                <v-card-text>
-                                  <v-container grid-list-md>
-                                    <v-layout wrap>
-                                      <v-flex xs12>
-                                        <v-text-field label="Domain Link" name="link" id="link" v-model="link" required></v-text-field>
-                                      </v-flex>
-                                    </v-layout>
-                                  </v-container>
-                                </v-card-text>
-                                <v-card-actions>
-                                  <v-spacer></v-spacer>
-                                  <v-btn color="blue darken-1" flat @click.native="closeDialog()">Close</v-btn>
-                                  <v-btn color="blue darken-1" flat @click.native="saveLink()">Save</v-btn>
-                                </v-card-actions>
-                              </v-card>
-                            </v-dialog>
-                          </v-layout>
-
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
+                                        <v-layout v-for="(link, i) in domainLinks">
+                                            <v-text-field label="Domain Name" id="domain" type="text" v-model="link.text" required disabled></v-text-field>
+                                            <v-btn @click="deleteLink(i)" color="error">Delete</v-btn>
+                                        </v-layout>
+                                        <v-text-field label="Domain Name" id="newDomain" type="text" required v-if="newInput" v-model.lazy="newDomain"></v-text-field>
+                                        <v-btn v-if="newInput" @click="cancelLink()" color="error">Cancel</v-btn>
+                                        <v-btn v-if="newInput" @click="saveLink()" color="primary">Save</v-btn>
+                                        <v-btn @click="newInput=!newInput" v-if="newInput == false" color="accent">Add Domain</v-btn>
                                     </v-flex>
                                 </v-layout>
                             </v-form>
                         </v-container>
-                    </v-card-text>    
+                    </v-card-text>
                 </v-card>
                 <v-card>
                     <v-card-text>
@@ -147,12 +102,12 @@
             editContact: true,
             editPassword: true,
             valid: true,
+            newInput: false,
+            domainLinks: [],
+            newDomain: '',
             firstName: '',
             lastName: '',
             email: '',
-            domainLinks: [],
-            link: '',
-            saved: false,
             mobileNumber: '',
             password: '',
             dialog: false,
@@ -169,7 +124,6 @@
                 v => /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/.test(v) || 'Number must be valid'
             ],
         }),
-        computed: {},
         methods: {
             editFields(choice) {
                 let temp = [];
@@ -217,14 +171,17 @@
             },
             saveLink() {
                 this.domainLinks.push({
-                    text: this.link
-                }),
-                this.saved = true,
-                this.dialog = false
+                   text:  this.newDomain
+                });
+                this.newDomain = '',
+                this.newInput = false
             },
-            closeDialog() {
-                this.dialog = false
-                
+            cancelLink() {
+                this.newDomain = '',
+                this.newInput = false
+            },
+            deleteLink(i) {
+                this.domainLinks.splice(i, 1)
             }
         }
     }
