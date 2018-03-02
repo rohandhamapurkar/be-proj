@@ -35,7 +35,7 @@
                             <v-form v-model="valid">
                                 <v-layout>
                                     <v-flex>
-                                        <v-text-field :disabled="false" v-model="domainLinks" v-type="text" v-for="link in domainLinks"></v-text-field>
+                                        <v-text-field v-if="saved" :disabled="true" v-model="domainLinks" v-type="text" v-for="links in domainLinks">{{links.text}}</v-text-field>
                                         
                                         
                                         
@@ -63,7 +63,7 @@
                                 </v-card-text>
                                 <v-card-actions>
                                   <v-spacer></v-spacer>
-                                  <v-btn color="blue darken-1" flat @click.native="dialog = false">Close</v-btn>
+                                  <v-btn color="blue darken-1" flat @click.native="closeDialog()">Close</v-btn>
                                   <v-btn color="blue darken-1" flat @click.native="saveLink()">Save</v-btn>
                                 </v-card-actions>
                               </v-card>
@@ -152,6 +152,7 @@
             email: '',
             domainLinks: [],
             link: '',
+            saved: false,
             mobileNumber: '',
             password: '',
             dialog: false,
@@ -218,7 +219,12 @@
                 this.domainLinks.push({
                     text: this.link
                 }),
+                this.saved = true,
                 this.dialog = false
+            },
+            closeDialog() {
+                this.dialog = false
+                
             }
         }
     }

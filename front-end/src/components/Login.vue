@@ -8,7 +8,7 @@
                     <img class="logo" src="../assets/logo.png">
                     <v-form v-model="valid" ref="form" lazy-validation>
                         <v-text-field label="Email" v-model="email" required></v-text-field>
-                        <v-text-field label="Password" type="password" v-model="password" :rules="passwordRules" required></v-text-field>
+                        <v-text-field label="Password" type="password" v-model="password" :rules="passwordRules" :append-icon="e1 ? 'visibility' :'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'" required></v-text-field>
                         <v-btn @click="submit" color="primary" :disabled="!valid">
                             Login
                         </v-btn>
@@ -34,10 +34,11 @@
             return {
                 valid: true,
                 email: '',
+                e1: false,
                 password: '',
                 passwordRules: [
                     (v) => !!v || 'Password is required',
-                    (v) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/.test(v) || 'Password Must be atleast 8 char, 1 lowercase, 1 Uppercase char and 1 number'
+                    (v) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(v) || 'Password Must be atleast 8 char, 1 lowercase, 1 Uppercase char and 1 number'
                 ],
             }
         },
