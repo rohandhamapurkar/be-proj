@@ -4,6 +4,7 @@ import Hello from '@/components/Hello'
 import MainApp from '@/components/MainApp'
 import Profile from '@/components/Profile'
 import AdminProfile from '@/components/AdminProfile'
+import ApiKey from '@/components/ApiKey'
 import GridSettings from '@/components/GridSettings'
 import EmbeddedImageSettings from '@/components/EmbeddedImageSettings'
 import Login from '@/components/Login'
@@ -47,6 +48,11 @@ export default new Router({
           path: 'profile',
           name: 'Profile',
           component: Profile
+        },
+        {
+          path: 'apikey',
+          name: 'ApiKey',
+          component: ApiKey
         },
         {
           path: 'adminprofile',

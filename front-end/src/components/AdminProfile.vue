@@ -52,6 +52,21 @@
                 <v-card>
                     <v-card-text>
                         <v-container>
+                            <h3>API Key</h3>
+                            <v-form>
+                                <v-layout justify-space-between>
+                                    <v-flex>
+                                        <v-text-field type="text" id="key" value="** Key **" disabled></v-text-field>
+                                    </v-flex>
+                                </v-layout>
+                            </v-form>
+                            <v-btn @click="" color="accent">Refresh</v-btn>
+                        </v-container>
+                    </v-card-text>
+                </v-card>
+                <v-card>
+                    <v-card-text>
+                        <v-container>
                             <h3>Contact Details</h3>
                             <v-form v-model="valid">
                                 <v-layout justify-space-between>
@@ -186,3 +201,9 @@
         }
     }
 </script>
+
+<style>
+#key {
+    text-align: center;    
+}
+</style>
