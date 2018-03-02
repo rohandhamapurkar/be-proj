@@ -37,7 +37,7 @@
                                     </v-flex>
                                 </v-layout>
                                 
-                                <v-btn @click="updateView" color="primary" :disabled="!valid">SignUp</v-btn>
+                                <v-btn @click="updateRoute('/')" color="primary" :disabled="!valid">SignUp</v-btn>
                                 <v-btn @click="clear" color="error">Clear</v-btn>
                                 <v-btn @click="updateRoute('/')" color="cyan darken-3">Back</v-btn>
                             </v-form>
