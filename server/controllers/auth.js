@@ -1,4 +1,3 @@
-let otplib = require("otplib");
 
 module.exports.routes = {
     'POST /user/login': async (req, res) => {
@@ -44,20 +43,6 @@ module.exports.routes = {
         } else {
             res.json({ ok: false, message: 'missing params id || pw || name' });
         }
-    },
-    //test Time based OTP
-    'GET /otp': async (req,res) => {
-        otplib.authenticator.options = {
-            step: 5
-        }
-        const secret = otplib.authenticator.generateSecret();
-        res.json({ok:true,secret});
-    },
-    'POST /verify': async(req,res) => {
-        otplib.authenticator.options = {
-            step: 5
-        }
-        res.json(otplib.authenticator.check(req.body.token, req.body.secret));
     },
     'POST /verifyApiKey': async (req, res) => {
         if (req.body && req.body.key){
