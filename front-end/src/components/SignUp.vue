@@ -42,9 +42,15 @@
                                 <v-layout row>
                                     <input type="file" @change="onFileChange" accept="image/x-png,image/gif,image/jpeg" name="uploadImage" value="Upload Image" />
                                 </v-layout>
-                                <v-btn @click="updateView" color="primary" :disabled="!valid">Next</v-btn>
-                                <v-btn @click="clear" color="error">Clear</v-btn>
-                                <v-btn @click="updateRoute('/')" color="cyan darken-3">Login</v-btn>
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn @click="updateView" color="primary" :disabled="!valid">Next</v-btn>
+                                    <v-spacer></v-spacer>
+                                    <v-btn @click="clear" color="error">Clear</v-btn>
+                                    <v-spacer></v-spacer>
+                                    <v-btn @click="updateRoute('/')" color="cyan darken-3">Login</v-btn>
+                                    <v-spacer></v-spacer>  
+                                </v-card-actions>
                             </v-form>
                         </v-container>
                     </v-card-text>
@@ -145,8 +151,8 @@
             firstName: '',
             lastName: '',
             email: '',
-            e1: false,
-            e2: false,
+            e1: true,
+            e2: true,
             mobileNumber: '',
             password: '',
             confirmPassword: '',
@@ -156,7 +162,7 @@
             ],
             passwordRules: [
                 (v) => !!v || 'Password is required',
-                (v) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(v) || 'Password Must be atleast 8 char, 1 lowercase, 1 Uppercase char and 1 number'
+                (v) => /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}/.test(v) || 'Password Must be atleast 8 char, 1 lowercase, 1 Uppercase char and 1 number'
             ],
             confirmPasswordRules: [
                 (v) => {

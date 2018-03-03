@@ -36,10 +36,15 @@
                                         <v-text-field label="Confirm Password" id="confirmPassword" v-model="confirmPassword" type="password" :append-icon="e2 ? 'visibility' :'visibility_off'" :append-icon-cb="() => (e2 = !e2)" :type="e2 ? 'password' : 'text'" required :rules="confirmPasswordRules"></v-text-field>
                                     </v-flex>
                                 </v-layout>
-                                
-                                <v-btn @click="updateRoute('/')" color="primary" :disabled="!valid">SignUp</v-btn>
-                                <v-btn @click="clear" color="error">Clear</v-btn>
-                                <v-btn @click="updateRoute('/')" color="cyan darken-3">Back</v-btn>
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn @click="updateRoute('/')" color="primary" :disabled="!valid">SignUp</v-btn>
+                                    <v-spacer></v-spacer>
+                                    <v-btn @click="clear" color="error">Clear</v-btn>
+                                    <v-spacer></v-spacer>
+                                    <v-btn @click="updateRoute('/')" color="cyan darken-3">Back</v-btn>
+                                    <v-spacer></v-spacer>
+                                </v-card-actions>
                             </v-form>
                         </v-container>
                     </v-card-text>
@@ -56,8 +61,8 @@
     export default {
         data: () => ({
             valid: true,
-            e1: false,
-            e2: false,
+            e1: true,
+            e2: true,
             firstName: '',
             lastName: '',
             email: '',
@@ -70,7 +75,7 @@
             ],
             passwordRules: [
                 (v) => !!v || 'Password is required',
-                (v) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(v) || 'Password Must be atleast 8 char, 1 lowercase, 1 Uppercase char and 1 number'
+                (v) => /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}/.test(v) || 'Password Must be atleast 8 char, 1 lowercase, 1 Uppercase char and 1 number'
             ],
             confirmPasswordRules: [
                 (v) => {
