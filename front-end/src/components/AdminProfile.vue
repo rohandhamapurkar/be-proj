@@ -35,7 +35,7 @@
                             <v-form>
                                 <v-layout>
                                     <v-flex>
-                                        <v-layout v-for="(link, i) in domainLinks">
+                                        <v-layout v-for="(link, i) in domainLinks" :key="i">
                                             <v-text-field label="Domain Name" id="domain" type="text" v-model="link.text" required disabled></v-text-field>
                                             <v-btn @click="deleteLink(i)" color="error">Delete</v-btn>
                                         </v-layout>

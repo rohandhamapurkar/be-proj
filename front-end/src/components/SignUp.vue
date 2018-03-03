@@ -185,39 +185,48 @@
             imageClassName: {
                 '1': {
                     set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg'
+                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
+                    name:'cat'
                 },
                 '2': {
                     set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg'
+                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
+                    name:'dog'
                 },
                 '3':{
                     set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg'
+                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
+                    name:'tesla'
                 },
                 '4': {
                     set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg'
+                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
+                    name:'building'
                 },
                 '5': {
                     set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg'
+                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
+                    name:'bird'
                 },
                 '6': {
                     set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg'
+                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
+                    name:'computer'
                 },
                 '7': {
                     set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg'
+                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
+                    name:'streetSign'
                 },
                 '8': {
                     set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg'
+                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
+                    name:'concert'
                 },
                 '9': {
                     set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg'
+                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
+                    name:'bridge'
                 }
             },
             colorClassName: {
@@ -271,10 +280,16 @@
                     let categories = [];
                     let colors = [];
                     for (let i in this.imageClassName) {
-                        if (this.imageClassName[i]['set']) categories.push(this.imageClassName[i]['url']);
+                        if (this.imageClassName[i]['set']) categories.push(this.imageClassName[i]['name']);
                     }
                     for (let i in this.colorClassName) {
                         if (this.colorClassName[i]['set']) colors.push(this.colorClassName[i]['color']);
+                    }
+                    let validSeq = [];
+                    for(let i of categories){
+                        for(let j of colors){
+                            validSeq.push(i+j);
+                        }
                     }
                     let user = {
                         id: this.email,
@@ -282,8 +297,7 @@
                         firstName: this.firstName,
                         lastName: this.lastName,
                         mobileNumber: this.mobileNumber,
-                        categories: categories,
-                        colors: colors
+                        validSeq: validSeq
                     }
                     if(this.embedImage == null) user.embedImage = this.embedImage
                     let result = await http.signupUser(user);
