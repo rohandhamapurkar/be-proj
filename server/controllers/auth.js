@@ -1,4 +1,3 @@
-
 module.exports.routes = {
     'POST /user/login': async (req, res) => {
         if (req.body && req.body.user && req.body.user.hasOwnProperty('id') && req.body.user.hasOwnProperty('password')) {
