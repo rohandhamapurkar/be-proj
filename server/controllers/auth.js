@@ -23,11 +23,20 @@ module.exports.routes = {
     },
     'POST /createUser': async (req, res) => {
         if (req.body && req.body.user && req.body.user.hasOwnProperty('id') && req.body.user.hasOwnProperty('password')) {
+            let imageData = null;
             const pwHash = Services.auth.hashPassword(req.body.user.password);
             req.body.user.password = pwHash;
             req.body.user.accountType = 10;
             req.body.user.id = req.body.user.id.toLowerCase();
+            if(req.body.user.hasOwnProperty('embedImage')){
+                imageData = req.body.user.embedImage;
+                delete req.body.user.embedImage;
+            }
             res.json(await Services.auth.registerUser(req.body.user));
+            if(imageData != null){
+                let result = await Services.embeddedImage.generateImageBase64(imageData,{id:req.body.user.id,accountType:10});
+                console.log(result)
+            }
         } else {
             res.json({ ok: false, message: 'missing params id || pw || name' });
         }
@@ -56,6 +65,4 @@ module.exports.routes = {
             res.json({ ok: false, message: "Missing Params" });
         }
     }
-
-
 }

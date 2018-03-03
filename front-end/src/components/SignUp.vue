@@ -40,7 +40,7 @@
                                     <h3>Upload image for embedded key (optional)</h3>
                                 </v-layout>
                                 <v-layout row>
-                                    <input type="file" @change="onFileChange" accept="image/x-png,image/gif,image/jpeg" name="uploadImage" value="Upload Image" />
+                                    <input type="file" @change="onFileChange" accept="image/jpeg" name="uploadImage" value="Upload Image" />
                                 </v-layout>
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
@@ -299,7 +299,7 @@
                         mobileNumber: this.mobileNumber,
                         validSeq: validSeq
                     }
-                    if(this.embedImage == null) user.embedImage = this.embedImage
+                    if(this.embedImage != null) user.embedImage = this.embedImage
                     let result = await http.signupUser(user);
                     // do something with response
                     console.log(result);
@@ -339,7 +339,21 @@
                 this.displayGrid = true;
             },
             onFileChange(e) {
-                this.embedImage = e.target.files[0];
+                var files = e.target.files;
+                if (!files.length)
+                    return;
+                this.createImage(files[0]);    
+            },
+            createImage(file) {
+                var image = new Image();
+                var reader = new FileReader();
+                var vm = this;
+
+                reader.onload = (e) => {
+                    console.log(e.target.result)
+                    this.embedImage = e.target.result;
+                };
+                reader.readAsDataURL(file);
             }
         }
     }
