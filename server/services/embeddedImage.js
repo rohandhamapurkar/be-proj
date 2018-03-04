@@ -40,11 +40,11 @@ module.exports = {
         let base64Data = data.replace('data:image/jpeg;base64,',"")
         base64Data += base64Data.replace('+', ' ');
         let imageArray = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0)) 
-        var message = stegger.extract(secretImage);
+        var message = stegger.extract(imageArray);
         try{
             let encodedData = JSON.parse(String.fromCharCode.apply(null, message))
             if(encodedData && encodedData.hasOwnProperty('token')){
-                let result = Services.auth.verifyToken(encodedData.token);
+                let result = await Services.auth.verifyToken(encodedData.token);
                 if(result.id == userId){
                     return({ok:true,authentication:true})
                 } else {

@@ -71,5 +71,19 @@ export default {
             .catch(function (error) {
                 console.error(error);
             });
+    },
+    verifyEmbededImage: (otp) => {
+        return axios.post(baseUri + '/authenticateTotp/v0.1/verifyOtp',{ token: otp, userId: store.getters.sessionEmail }, {
+            headers: {
+                sessionId: store.getters.sessionId
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                return response.data;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
     }
 }

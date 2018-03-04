@@ -40,6 +40,11 @@
                 reader.onload = async (e) => {
                     console.log(e.target.result)
                     let result = await http.verifyEmbededImage(e.target.result);
+                    if(result.authentication) {
+                        // some redirect code with positive feedback
+                    } else {
+                        // some redirect code with negative feedback
+                    }
                 };
                 reader.readAsDataURL(file);
             }
