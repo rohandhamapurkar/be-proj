@@ -72,7 +72,7 @@ export default {
                 console.error(error);
             });
     },
-    verifyEmbededImage: (otp) => {
+    verifyOTP: (otp) => {
         return axios.post(baseUri + '/authenticateTotp/v0.1/verifyOtp',{ token: otp, userId: store.getters.sessionEmail }, {
             headers: {
                 sessionId: store.getters.sessionId
