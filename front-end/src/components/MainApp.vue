@@ -78,7 +78,11 @@
             }
         },
         created() {
-            router.replace('/mainapp/profile');
+            if(!!this.$store.getters.auth) {
+                this.updateRoute('/mainapp/profile');
+            } else {
+                this.updateRoute('/')
+            }
         }
     }
 </script>

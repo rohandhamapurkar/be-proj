@@ -15,9 +15,9 @@ module.exports = {
     },
     isSessionId: async (req,res,next) => {
         if (req.headers.hasOwnProperty('sessionId') && typeof req.headers.sessionId == 'string') {
-            let verification = await Services.auth.verifyToken(req.headers.auth);
+            let verification = await Services.auth.verifyToken(req.headers.sessionId);
             if (!!verification) {
-                req.auth = verification;
+                req.sessionId = verification;
                 next();
             } else {
                 res.status = 401;

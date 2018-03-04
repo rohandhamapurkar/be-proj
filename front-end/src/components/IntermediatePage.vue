@@ -51,6 +51,7 @@
         computed: {},
         methods: {
             updatePath(path) {
+                this.$store.commit('sessionEmail', this.email);
                 router.replace(path);
             }
         }

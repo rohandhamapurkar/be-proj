@@ -57,9 +57,15 @@
             }
         },
         methods: {
-            submit() {
+            async submit() {
                 if (this.$refs.form.validate()) {
-                    console.log('login done', this.name, this.email);
+                    let result = await http.login({id:this.email,password:this.password});
+                    if(result.ok) {
+                        this.$store.commit('auth', result.token);
+                        this.updateRoute('/mainapp/profile');
+                    } else {
+                        alert("Invalid username or password");
+                    }
                 }
             },
             clear() {
