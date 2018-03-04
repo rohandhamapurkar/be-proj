@@ -1,16 +1,16 @@
 module.exports.policies = [Services.middleware.isSessionId];
 module.exports.routes = {
     'GET /grid': async(req,res) => {
-        if(req.headers.hasOwnProperty('userId')){
-            userSeq = await Services.imageGrid.getUserValidSeq(req.headers.userId);
+        if(req.headers.hasOwnProperty('userid')){
+            userSeq = await Services.imageGrid.getUserValidSeq(req.headers.userid);
             if(userSeq != null){
-                let result = Services.imageGrid.generateGridSequence(userSeq);
+                let result = await Services.imageGrid.generateGridSequence(userSeq);
                 res.json({ok:true,data:result.urls});
                 let update = {
-                    sessionId:req.headers.sessionId,
+                    sessionId:req.headers.sessionid,
                     validity:result.validity
                 };
-                Services.imageGrid.saveValidity(req.headers.userId,update);
+                await Services.imageGrid.saveValidity(req.headers.userid,update);
                 delete update;
             } else {
                 res.json({ok:false,message:"Something went wrong"});

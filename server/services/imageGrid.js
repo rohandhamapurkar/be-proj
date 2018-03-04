@@ -21,14 +21,14 @@ module.exports = {
     getUserValidSeq: async id => {
         let result = await db.auth.findOne({'id':id},{'validSeq':1});
         if (result) {
-            return validSeq;
+            return result.validSeq;
         }
         else {
             return null;
         } 
     },
     generateGridSequence: async(validSeq) =>{
-        let data = fs.readFileSync('./urls.json');
+        let data = JSON.parse(fs.readFileSync(process.cwd() + '/server/services/urls.json'));
         valid1 = false;
         valid2 = false;
         valid3 = false;

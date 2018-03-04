@@ -30,6 +30,21 @@ export default {
                 console.error(error);
             });
     },
+    getImageGrid: () => {
+        return axios.get(baseUri + '/imageGridAuth/v0.1/grid', {
+            headers: {
+                sessionid: store.getters.sessionId,
+                userid: store.getters.sessionEmail
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                return response.data;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    },
     signupUser: (userdata) => {
         return axios.post(baseUri + '/auth/v0.1/createUser',{ user: userdata }, {
             headers: {
