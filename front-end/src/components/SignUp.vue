@@ -184,49 +184,49 @@
             size: 'xs',
             imageClassName: {
                 '1': {
-                    set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
-                    name:'cat'
+                    set: false,
+                    url: 'https://github.com/rohandhamapurkar/be-proj/raw/master/static/fixedCategories/boat.jpeg',
+                    name:'boat'
                 },
                 '2': {
-                    set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
-                    name:'dog'
-                },
-                '3':{
-                    set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
-                    name:'tesla'
-                },
-                '4': {
-                    set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
+                    set: false,
+                    url: 'https://github.com/rohandhamapurkar/be-proj/raw/master/static/fixedCategories/building.jpeg',
                     name:'building'
                 },
+                '3': {
+                    set: false,
+                    url: 'https://github.com/rohandhamapurkar/be-proj/raw/master/static/fixedCategories/butterfly.jpeg',
+                    name:"butterfly"
+                },
+                '4': {
+                    set: false,
+                    url: 'https://github.com/rohandhamapurkar/be-proj/raw/master/static/fixedCategories/car.jpeg',
+                    name:'car'
+                },
                 '5': {
-                    set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
-                    name:'bird'
+                    set: false,
+                    url: 'https://github.com/rohandhamapurkar/be-proj/raw/master/static/fixedCategories/cat.jpeg',
+                    name:'cat'
                 },
                 '6': {
-                    set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
-                    name:'computer'
+                    set: false,
+                    url: 'https://github.com/rohandhamapurkar/be-proj/raw/master/static/fixedCategories/dog.jpeg',
+                    name:'dog'
                 },
                 '7': {
-                    set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
-                    name:'streetSign'
+                    set: false,
+                    url: 'https://github.com/rohandhamapurkar/be-proj/raw/master/static/fixedCategories/sign.jpeg',
+                    name:'sign'
                 },
                 '8': {
-                    set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
-                    name:'concert'
+                    set: false,
+                    url: 'https://github.com/rohandhamapurkar/be-proj/raw/master/static/fixedCategories/pizza.jpg',
+                    name:'pizza'
                 },
                 '9': {
-                    set:false,
-                    url:'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z.jpg',
-                    name:'bridge'
+                    set: false,
+                    url: 'https://github.com/rohandhamapurkar/be-proj/raw/master/static/fixedCategories/volcano.jpg',
+                    name:'volcano'
                 }
             },
             colorClassName: {
