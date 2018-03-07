@@ -17,6 +17,7 @@
 
 <script>
     import router from '../router';
+    import http from '@/Services/http';
     export default {
         name: 'intermediatePage',
         data: () => ({
@@ -24,9 +25,13 @@
         }),
         computed: {},
         methods: {
-            requestServer() {
-                let that = this;
-                console.log(that.otp.length);
+            async requestServer() {
+                let result = await http.verifyOTP(this.otp);
+                if (result.authentication) {
+                    // some redirect code with positive feedback
+                } else {
+                    // some redirect code with negative feedback
+                }
             }
         }
     }

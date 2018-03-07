@@ -18,7 +18,7 @@
                                     <v-layout row wrap>
                                         <v-flex xs4 v-for="n in 9" :key="n">
                                             <v-card flat tile>
-                                                <v-card-media @click="updateImageClass(n)" :src="`https://unsplash.it/150/300?image=${Math.floor(Math.random() * 100) + 1}`" height="150px">
+                                                <v-card-media @click="updateImageClass(n)" :src="urls[(n-1)]" height="150px">
                                                 </v-card-media>
                                             </v-card>
                                         </v-flex>
@@ -40,7 +40,7 @@
                                     <v-layout row wrap>
                                         <v-flex xs4 v-for="n in 9" :key="n">
                                             <v-card flat tile>
-                                                <v-card-media @click="updateImageClass(n)" :src="`https://unsplash.it/150/300?image=${Math.floor(Math.random() * 100) + 1}`" height="150px">
+                                                <v-card-media @click="updateImageClass(n)" :src="urls[(n-1)+9]" height="150px">
                                                 </v-card-media>
                                             </v-card>
                                         </v-flex>
@@ -62,7 +62,7 @@
                                     <v-layout row wrap>
                                         <v-flex xs4 v-for="n in 9" :key="n">
                                             <v-card flat tile>
-                                                <v-card-media @click="updateImageClass(n)" :src="`https://unsplash.it/150/300?image=${Math.floor(Math.random() * 100) + 1}`" height="150px">
+                                                <v-card-media @click="updateImageClass(n)" :src="urls[(n-1)+18]" height="150px">
                                                 </v-card-media>
                                             </v-card>
                                         </v-flex>
@@ -83,15 +83,22 @@
 
 <script>
     import router from '../router';
+    import http from '@/Services/http';
     export default {
         name: 'intermediatePage',
         data: () => ({
             valid: true,
             size: 'xs',
             e1: 0,
-            gridsSelected: []
+            gridsSelected: [],
+            urls: []
         }),
         computed: {},
+        async created(){
+            let result = await http.getImageGrid();
+            console.log(result);
+            this.urls = result.data;
+        },
         methods: {
             updateStepper(selection, nextStep) {
                 if (nextStep > 3) {

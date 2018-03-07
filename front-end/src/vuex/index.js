@@ -10,12 +10,25 @@ let vuexLocalStorage = new VuexPersist({
 
 let actions = {
   clearAuth({commit}){
-    commit('logout')
+    commit('logout');
+  },
+  destroySession({commit}){
+    commit('endSession');
   }
 };
 let mutations = {
   auth(state, payload) {
     state.auth = payload;
+  },
+  sessionId(state, payload) {
+    state.session.id = payload;
+  },
+  sessionEmail(state, payload) {
+    state.session.email = payload;
+  },
+  endSession(state, payload) {
+    console.log("Session Destroyed");
+    state.session = null
   },
   logout(state, payload) {
     console.log("AUTH VUEX");
@@ -23,7 +36,10 @@ let mutations = {
   }
 };
 let getters = {
-  auth: state => state.auth
+  auth: state => state.auth,
+  session: state => state.session,
+  sessionId: state => state.session.id,
+  sessionEmail: state => state.session.email,
 };
 
 export default new Vuex.Store({
@@ -32,7 +48,11 @@ export default new Vuex.Store({
   mutations,
   getters,
   state: {
-    auth: {}
+    auth: {},
+    session: {
+      email: "",
+      id: ""
+    }
   },
   modules: {
 

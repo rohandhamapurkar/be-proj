@@ -5,8 +5,8 @@
                 <v-card>
                     <v-container>
                         <h1>Please upload your embedded image</h1>
-                        <input type="file" @change="onFileChange" accept="image/x-png,image/gif,image/jpeg" name="uploadImage" value="Upload Image"  />
-                        <v-btn color="primary">Submit</v-btn>
+                        <input type="file" @change="onFileChange" accept="image/jpeg" name="uploadImage" value="Upload Image"  />
+                        <!--v-btn color="primary">Submit</v-btn-->
                     </v-container>
                 </v-card>
             </v-flex>
@@ -17,6 +17,8 @@
 
 <script>
     import router from '../router';
+    import http from '@/Services/http';
+
     export default {
         name: 'intermediatePage',
         data: () => ({
@@ -25,7 +27,26 @@
         computed: {},
         methods: {
             onFileChange(e) {
-                this.embedImage = e.target.files[0];
+                var files = e.target.files;
+                if (!files.length)
+                    return;
+                this.createImage(files[0]);    
+            },
+            createImage(file) {
+                var image = new Image();
+                var reader = new FileReader();
+                var vm = this;
+
+                reader.onload = async (e) => {
+                    console.log(e.target.result)
+                    let result = await http.verifyEmbededImage(e.target.result);
+                    if(result.authentication) {
+                        // some redirect code with positive feedback
+                    } else {
+                        // some redirect code with negative feedback
+                    }
+                };
+                reader.readAsDataURL(file);
             }
         }
     }

@@ -13,13 +13,18 @@
             return {}
         },
         methods: {},
-        created() {
-            let query = this.$route.query;
-            if(query.hasOwnProperty('sessionId') && query.sessionId == 1234) {
-                router.replace('/authprogress/intermediatepage');
-            } else {
-                router.replace('/404');
-            }
+        async created() {
+            // 69efc29b-a904-42a4-8f2d-75cc1c2b9524
+            // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRhaGVyIiwiaWF0IjoxNTIwMTUzMzA4LCJleHAiOjE1MjA0MTI1MDh9.ngYmJRWgf2TkllOUnzEmVa7JXpof_W0sp2hj5VafrhI"
+            // console.log(result);
+            let result = await http.apiKeyVerification("69efc29b-a904-42a4-8f2d-75cc1c2b9524");
+            this.$store.commit('sessionId', result.token);
+            // let query = this.$route.query;
+            // if(query.hasOwnProperty('sessionId') && query.sessionId == 1234) {
+            router.replace('/authprogress/intermediatepage');
+            // } else {
+            //     router.replace('/404');
+            // }
         }
     }
 </script>

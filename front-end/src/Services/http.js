@@ -16,10 +16,39 @@ export default {
                 console.error(error);
             });
     },
+    getEmbededImage: () => {
+        return axios.get(baseUri + '/embeddedImage/v0.1/generatedImage', {
+            headers: {
+                auth: store.getters.auth
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                return response.data;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    },
+    getImageGrid: () => {
+        return axios.get(baseUri + '/imageGridAuth/v0.1/grid', {
+            headers: {
+                sessionid: store.getters.sessionId,
+                userid: store.getters.sessionEmail
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                return response.data;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    },
     signupUser: (userdata) => {
         return axios.post(baseUri + '/auth/v0.1/createUser',{ user: userdata }, {
             headers: {
-                auth: store.getters.auth.auth
+                auth: store.getters.auth
             }
         })
             .then(function (response) {
@@ -34,6 +63,34 @@ export default {
         return axios.post(baseUri + '/auth/v0.1/verifyApiKey',{ key: key }, {
             headers: {
                 auth: store.getters.auth.auth
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                return response.data;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    },
+    verifyEmbededImage: (embededImage) => {
+        return axios.post(baseUri + '/embeddedImageAuth/v0.1/authenticateEmbeddedImage',{ image: embededImage, userId: store.getters.sessionEmail }, {
+            headers: {
+                sessionId: store.getters.sessionId
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                return response.data;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    },
+    verifyOTP: (otp) => {
+        return axios.post(baseUri + '/authenticateTotp/v0.1/verifyOtp',{ token: otp, userId: store.getters.sessionEmail }, {
+            headers: {
+                sessionId: store.getters.sessionId
             }
         })
             .then(function (response) {
