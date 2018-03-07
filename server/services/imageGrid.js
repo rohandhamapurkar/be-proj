@@ -29,23 +29,34 @@ module.exports = {
     },
     generateGridSequence: async(validSeq) =>{
         let data = JSON.parse(fs.readFileSync(process.cwd() + '/server/services/urls.json'));
-        valid1 = false;
-        valid2 = false;
-        valid3 = false;
+        let valid1 = false;
+        let valid2 = false;
+        let valid3 = false;
         let arr = []
-        for(let i=0;i<27;i++){
-            let num = Math.floor(Math.random() * 80)
-            arr.push(data[num]);
-            if(data[num].match(validSeq[0]) || data[num].match(validSeq[1]) || data[num].match(validSeq[2]) || data[num].match(validSeq[3])){
-                if(i<9){
-                    valid1 = true;
-                } else if(i<18){
-                    valid2 = true;
-                } else {
-                    valid3 = true;
-                }
-            } 
+        function generate() {
+            valid1 = false;
+            valid2 = false;
+            valid3 = false;
+            for(let i=0;i<27;i++){
+                let num = Math.floor(Math.random() * 269) + 0
+                arr.push(data[num]);
+                if(data[num].match(validSeq[0]) || data[num].match(validSeq[1]) || data[num].match(validSeq[2]) || data[num].match(validSeq[3])){
+                    if(i<9){
+                        valid1 = true;
+                    } else if(i<18){
+                        valid2 = true;
+                    } else {
+                        valid3 = true;
+                    }
+                } 
+            }
+            if(valid1 && valid2 && valid3){
+                generate();
+            } else if(!valid1 && !valid2 && !valid3){
+                generate();
+            }    
         }
+        generate();
         return {urls:arr,validity:[valid1,valid2,valid3]}
     }
 }
