@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
 public class OTP extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class OTP extends AppCompatActivity {
         WebView webView = findViewById(R.id.WebViewOtp);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setLayerType(View.LAYER_TYPE_HARDWARE,null);
+        webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(host+settings.getString("JWT",""));
 
         ImageView imageView = (ImageView) findViewById(R.id.successCheck);
