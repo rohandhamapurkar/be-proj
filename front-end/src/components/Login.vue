@@ -4,8 +4,8 @@
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
-            <v-card class="elevation-12">
-              <v-toolbar dark color="primary">
+            <v-card class="elevation-5">
+              <v-toolbar dark class="header-gradient elevation-0" style="margin-bottom:20px">
                 <v-toolbar-title>Login Form</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <h3 class="link" @click="updateRoute('/adminsignup')">Admin SignUp?</h3>
@@ -13,17 +13,15 @@
               <v-card-text>
                 <v-form v-model="valid" ref="form" lazy-validation>
                   <v-text-field prepend-icon="person" name="email" label="Email" :rules="emailRules" type="email" v-model="email"></v-text-field>
-                  <v-text-field prepend-icon="lock" name="password" label="Password" v-model="password" id="password" type="password" :rules="passwordRules" :append-icon="e1 ? 'visibility' :'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'"></v-text-field>               
+                  <v-text-field prepend-icon="lock" name="password" label="Password" v-model="password" id="password" type="password" :rules="passwordRules" :append-icon="e1 ? 'visibility' :'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'"></v-text-field>
                 </v-form>
               </v-card-text>
-              <v-card-actions>
+              <v-card-actions style="padding:20px">
                 <v-spacer></v-spacer>
-                <v-btn @click="updateRoute('/signup')" color="cyan darken-3">SignUp</v-btn>
+                <v-btn @click="updateRoute('/signup')" style="width:30%" color="primary white--text">SignUp</v-btn>
                 <v-spacer></v-spacer>
-                <v-btn @click="clear" color="error">clear</v-btn>
+                <v-btn color="secondary white--text" style="width:70%" :disabled="!valid" @click="submit">Login</v-btn>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" :disabled="!valid" @click="submit">Login</v-btn>
-                <v-spacer></v-spacer> 
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -50,8 +48,8 @@
                 ],
                 passwordRules: [
                     (v) => !!v || 'Password is required',
-                    
-                           
+
+
                     (v) => /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}/.test(v) || 'Password Must be atleast 8 char, 1 lowercase, 1 Uppercase char and 1 number'
                 ],
             }
@@ -81,5 +79,8 @@
 <style scoped>
     .link {
         cursor: pointer
+    }
+    .header-gradient{
+      background: linear-gradient(225deg, #2cb5e8, #0fb8ad)!important;
     }
 </style>

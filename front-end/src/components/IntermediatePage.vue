@@ -1,10 +1,13 @@
-<template>
-    <v-container>
-        <v-layout>
-            <v-flex xs12 sm6 offset-sm3>
-                <br>
-                <h1 class="text-center">Select Authentication Method</h1><br>
+<template style="background:#fafafa !important">
+    <v-app id="inspire">
+    <v-container  fluid fill-height>
+        <v-layout  align-center justify-center>
+            <v-flex xs12 sm8 md6 lg5>
                 <v-card>
+                  <v-toolbar dark class="header-gradient elevation-0" style="margin-bottom:20px">
+                    <v-toolbar-title>Select Authentication Method</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                  </v-toolbar>
                     <v-card-text>
                         <v-container>
                             <v-form v-model="valid" ref="form">
@@ -18,21 +21,20 @@
                             </v-form>
                         </v-container>
                     </v-card-text>
+                    <v-card-actions style="padding-bottom:20px">
+                            <v-spacer></v-spacer>
+                            <v-btn style="width:33%"  @click="updatePath('/authprogress/imagebased')" color="primary" :disabled="!valid">Image Grid Based</v-btn>
+                            <v-spacer></v-spacer>
+                            <v-btn style="width:33%" @click="updatePath('/authprogress/embeddedimagebased')" color="midpointary white--text" :disabled="!valid">Embedded Image Based</v-btn>
+                            <v-spacer></v-spacer>
+                            <v-btn style="width:33%" @click="updatePath('/authprogress/otpbased')" color="secondary" :disabled="!valid">OTP Based</v-btn>
+                            <v-spacer></v-spacer>
+                    </v-card-actions>
                 </v-card>
-                <v-layout>
-                    <v-layout row>
-                        <v-btn @click="updatePath('/authprogress/imagebased')" color="primary" :disabled="!valid">Image Grid Based</v-btn>
-                    </v-layout>
-                    <v-layout row>
-                        <v-btn @click="updatePath('/authprogress/embeddedimagebased')" color="primary" :disabled="!valid">Embedded Image Based</v-btn>
-                    </v-layout>
-                    <v-layout row>
-                        <v-btn @click="updatePath('/authprogress/otpbased')" color="primary" :disabled="!valid">OTP Based</v-btn>
-                    </v-layout>
-                </v-layout>
             </v-flex>
         </v-layout>
     </v-container>
+  </v-app>
 </template>
 
 
@@ -60,5 +62,7 @@
 
 
 <style scoped>
-
+.header-gradient{
+  background: linear-gradient(225deg, #2cb5e8, #0fb8ad)!important;
+}
 </style>

@@ -1,10 +1,12 @@
 <template>
-    <v-container>
-        <v-layout v-if="!displayGrid">
+    <v-container style="transform:translateY(30%)">
+        <v-layout v-if="!displayGrid" align-center>
             <v-flex xs12 sm6 offset-sm3>
-                <br>
-                <h1 class="text-center">User Registration</h1><br>
                 <v-card>
+                  <v-toolbar dark class="header-gradient elevation-0" style="margin-bottom:20px">
+                    <v-toolbar-title>User Registration</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                  </v-toolbar>
                     <v-card-text>
                         <v-container>
                             <v-form v-model="valid" ref="form">
@@ -39,17 +41,17 @@
                                 <v-layout>
                                     <h3>Upload image for embedded key (optional)</h3>
                                 </v-layout>
-                                <v-layout row>
+                                <v-layout row style="margin-top:10px">
                                     <input type="file" @change="onFileChange" accept="image/jpeg" name="uploadImage" value="Upload Image" />
                                 </v-layout>
-                                <v-card-actions>
+                                <v-card-actions style="margin-top:20px">
                                     <v-spacer></v-spacer>
-                                    <v-btn @click="updateView" color="primary" :disabled="!valid">Next</v-btn>
+                                    <v-btn @click="clear" style="width:25%" color="tertiary white--text">Clear</v-btn>
                                     <v-spacer></v-spacer>
-                                    <v-btn @click="clear" color="error">Clear</v-btn>
+                                    <v-btn @click="updateRoute('/')" style="width:25%" color="primary white--text">Login</v-btn>
                                     <v-spacer></v-spacer>
-                                    <v-btn @click="updateRoute('/')" color="cyan darken-3">Login</v-btn>
-                                    <v-spacer></v-spacer>  
+                                    <v-btn @click="updateView" style="width:50%"  color="secondary white--text" :disabled="valid">Next</v-btn>
+                                    <v-spacer></v-spacer>
                                 </v-card-actions>
                             </v-form>
                         </v-container>
@@ -342,7 +344,7 @@
                 var files = e.target.files;
                 if (!files.length)
                     return;
-                this.createImage(files[0]);    
+                this.createImage(files[0]);
             },
             createImage(file) {
                 var image = new Image();
@@ -364,44 +366,47 @@
     .redBorderClass {
         border: 2.5px solid red !important;
     }
-    
+
     .blackBorderClass {
         border: 4px solid black !important;
     }
-    
+
     .red {
         background-color: red !important;
     }
-    
+
     .blue {
         background-color: blue !important;
     }
-    
+
     .green {
         background-color: green !important;
     }
-    
+
     .yellow {
         background-color: #FFFF00 !important;
     }
-    
+
     .purple {
         background-color: purple !important;
     }
-    
+
     .pink {
         background-color: #D81B60 !important;
     }
-    
+
     .orange {
         background-color: #F4511E !important;
     }
-    
+
     .gray {
         background-color: gray !important;
     }
-    
+
     .brown {
         background-color: #3E2723 !important;
+    }
+    .header-gradient{
+      background: linear-gradient(225deg, #2cb5e8, #0fb8ad)!important;
     }
 </style>
