@@ -30,12 +30,12 @@
                                 </v-layout>
                                 <v-layout row>
                                     <v-flex xs12>
-                                        <v-text-field label="Password" id="password" v-model="password" :rules="passwordRules" type="password" :append-icon="e1 ? 'visibility' :'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'" required></v-text-field>
+                                        <v-text-field label="Password" id="password" v-model="password" :rules="passwordRules" type="password" :append-icon="p1 ? 'visibility' :'visibility_off'" :append-icon-cb="() => (p1 = !p1)" :type="p1 ? 'password' : 'text'" required></v-text-field>
                                     </v-flex>
                                 </v-layout>
                                 <v-layout row>
                                     <v-flex xs12>
-                                        <v-text-field label="Confirm Password" id="confirmPassword" v-model="confirmPassword" type="password" :append-icon="e2 ? 'visibility' :'visibility_off'" :append-icon-cb="() => (e2 = !e2)" :type="e2 ? 'password' : 'text'" required :rules="confirmPasswordRules"></v-text-field>
+                                        <v-text-field label="Confirm Password" id="confirmPassword" v-model="confirmPassword" type="password" :append-icon="p2 ? 'visibility' :'visibility_off'" :append-icon-cb="() => (p2 = !p2)" :type="p2 ? 'password' : 'text'" required :rules="confirmPasswordRules"></v-text-field>
                                     </v-flex>
                                 </v-layout>
                                 <v-layout>
@@ -50,7 +50,7 @@
                                     <v-spacer></v-spacer>
                                     <v-btn @click="updateRoute('/')" style="width:25%" color="primary white--text">Login</v-btn>
                                     <v-spacer></v-spacer>
-                                    <v-btn @click="updateView" style="width:50%"  color="secondary white--text" :disabled="valid">Next</v-btn>
+                                    <v-btn @click="updateView" style="width:50%"  color="secondary white--text" :disabled="!valid">Next</v-btn>
                                     <v-spacer></v-spacer>
                                 </v-card-actions>
                             </v-form>
@@ -60,85 +60,105 @@
             </v-flex>
         </v-layout>
         <v-layout v-else>
-            <v-flex xs12 sm6 offset-sm3>
-                <v-card>
-                    <v-container fluid v-bind="{ [`grid-list-${size}`]: true }">
-                        <h1>Select any 2 category images</h1>
-                        <v-layout row wrap>
-                            <v-flex xs4 v-for="n in Object.keys(imageClassName)" :key="n">
-                                <v-card flat tile v-bind:class="{redBorderClass: imageClassName[n]['set']}">
-                                    <v-card-media @click="updateImageClass(n)" :src="imageClassName[n]['url']" height="150px">
-                                    </v-card-media>
-                                </v-card>
-                            </v-flex>
-                        </v-layout>
-                    </v-container>
-                </v-card>
-                <v-card>
-                    <v-container fluid v-bind="{ [`grid-list-${size}`]: true }">
-                        <h1>Select any 2 Colors to tint the image</h1>
-                        <v-layout row wrap>
-                            <v-flex xs4>
-                                <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[1]['set'], red:true}">
-                                    <v-card-media @click="updateColorClass(1)" height="150px">
-                                    </v-card-media>
-                                </v-card>
-                            </v-flex>
-                            <v-flex xs4>
-                                <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[2]['set'], blue:true}">
-                                    <v-card-media @click="updateColorClass(2)" height="150px">
-                                    </v-card-media>
-                                </v-card>
-                            </v-flex>
-                            <v-flex xs4>
-                                <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[3]['set'], green:true}">
-                                    <v-card-media @click="updateColorClass(3)" height="150px">
-                                    </v-card-media>
-                                </v-card>
-                            </v-flex>
-                            <v-flex xs4>
-                                <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[4]['set'], yellow:true}">
-                                    <v-card-media @click="updateColorClass(4)" height="150px">
-                                    </v-card-media>
-                                </v-card>
-                            </v-flex>
-                            <v-flex xs4>
-                                <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[5]['set'], pink:true}">
-                                    <v-card-media @click="updateColorClass(5)" height="150px">
-                                    </v-card-media>
-                                </v-card>
-                            </v-flex>
-                            <v-flex xs4>
-                                <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[6]['set'], purple:true}">
-                                    <v-card-media @click="updateColorClass(6)" height="150px">
-                                    </v-card-media>
-                                </v-card>
-                            </v-flex>
-                            <v-flex xs4>
-                                <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[7]['set'], brown:true}">
-                                    <v-card-media @click="updateColorClass(7)" height="150px">
-                                    </v-card-media>
-                                </v-card>
-                            </v-flex>
-                            <v-flex xs4>
-                                <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[8]['set'], gray:true}">
-                                    <v-card-media @click="updateColorClass(8)" height="150px">
-                                    </v-card-media>
-                                </v-card>
-                            </v-flex>
-                            <v-flex xs4>
-                                <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[9]['set'], orange:true}">
-                                    <v-card-media @click="updateColorClass(9)" height="150px">
-                                    </v-card-media>
-                                </v-card>
-                            </v-flex>
-                        </v-layout>
-                    </v-container>
-                </v-card>
-                <v-btn @click="submit" color="primary" :disabled="!valid">Complete</v-btn>
-                <v-btn @click="clear" color="error">Clear</v-btn>
+        <v-stepper v-model="e1">
+            <v-stepper-header>
+                <v-stepper-step step="1" :complete="e1 > 1">Select any 2 category images</v-stepper-step>
+                <v-divider></v-divider>
+                <v-stepper-step step="2" >Select any 2 Colors to tint the image</v-stepper-step>
+            </v-stepper-header>
+            <v-stepper-items style="padding-top:4%;padding-bottom:4%">
+                <v-stepper-content step="1">
+                <v-layout>
+                    <v-flex xs12 sm6 offset-sm3>
+                        <v-card class="elevation-0">
+                            <v-container fluid v-bind="{ [`grid-list-${size}`]: true }">
+                                <h1>Select any 2 category images</h1>
+                                <v-layout row wrap>
+                                    <v-flex xs4 v-for="n in Object.keys(imageClassName)" :key="n">
+                                        <v-card flat tile v-bind:class="{redBorderClass: imageClassName[n]['set']}">
+                                            <v-card-media @click="updateImageClass(n)" :src="imageClassName[n]['url']" height="150px">
+                                            </v-card-media>
+                                        </v-card>
+                                    </v-flex>
+                                </v-layout>
+                            </v-container>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
+                <v-btn style="margin-top:10px;width:10%" :disabled="imageSelectionCounter!=2" @click="updateStepper(2)" color="blue white--text">NEXT</v-btn>
+                </v-stepper-content>
+                <v-stepper-content step="2">
+                <v-layout>
+                    <v-flex xs12 sm6 offset-sm3>
+                        <v-card class="elevation-0">
+                            <v-container fluid v-bind="{ [`grid-list-${size}`]: true }">
+                                <h1>Select any 2 Colors to tint the image</h1>
+                                <v-layout row wrap>
+                                    <v-flex xs4>
+                                        <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[1]['set'], red:true}">
+                                            <v-card-media @click="updateColorClass(1)" height="150px">
+                                            </v-card-media>
+                                        </v-card>
+                                    </v-flex>
+                                    <v-flex xs4>
+                                        <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[2]['set'], blue:true}">
+                                            <v-card-media @click="updateColorClass(2)" height="150px">
+                                            </v-card-media>
+                                        </v-card>
+                                    </v-flex>
+                                    <v-flex xs4>
+                                        <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[3]['set'], green:true}">
+                                            <v-card-media @click="updateColorClass(3)" height="150px">
+                                            </v-card-media>
+                                        </v-card>
+                                    </v-flex>
+                                    <v-flex xs4>
+                                        <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[4]['set'], yellow:true}">
+                                            <v-card-media @click="updateColorClass(4)" height="150px">
+                                            </v-card-media>
+                                        </v-card>
+                                    </v-flex>
+                                    <v-flex xs4>
+                                        <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[5]['set'], pink:true}">
+                                            <v-card-media @click="updateColorClass(5)" height="150px">
+                                            </v-card-media>
+                                        </v-card>
+                                    </v-flex>
+                                    <v-flex xs4>
+                                        <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[6]['set'], purple:true}">
+                                            <v-card-media @click="updateColorClass(6)" height="150px">
+                                            </v-card-media>
+                                        </v-card>
+                                    </v-flex>
+                                    <v-flex xs4>
+                                        <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[7]['set'], brown:true}">
+                                            <v-card-media @click="updateColorClass(7)" height="150px">
+                                            </v-card-media>
+                                        </v-card>
+                                    </v-flex>
+                                    <v-flex xs4>
+                                        <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[8]['set'], gray:true}">
+                                            <v-card-media @click="updateColorClass(8)" height="150px">
+                                            </v-card-media>
+                                        </v-card>
+                                    </v-flex>
+                                    <v-flex xs4>
+                                        <v-card flat tile v-bind:class="{blackBorderClass: colorClassName[9]['set'], orange:true}">
+                                            <v-card-media @click="updateColorClass(9)" height="150px">
+                                            </v-card-media>
+                                        </v-card>
+                                    </v-flex>
+                                </v-layout>
+                            </v-container>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
+                <v-btn @click="submit" color="primary" :disabled="colorSelectionCounter != 2">Complete</v-btn>
+                <v-btn @click="updateStepper(1)" color="cyan darken-3">Back</v-btn>
                 <v-btn @click="updateRoute('/')" color="cyan darken-3">Login</v-btn>
-            </v-flex>
+                </v-stepper-content>
+            </v-stepper-items>
+        </v-stepper>
         </v-layout>
     </v-container>
 </template>
@@ -153,8 +173,10 @@
             firstName: '',
             lastName: '',
             email: '',
-            e1: true,
-            e2: true,
+            p1: true,
+            p2: true,
+            size: 'xs',
+            e1: 0,
             mobileNumber: '',
             password: '',
             confirmPassword: '',
@@ -288,11 +310,7 @@
                         if (this.colorClassName[i]['set']) colors.push(this.colorClassName[i]['color']);
                     }
                     let validSeq = [];
-                    for(let i of categories){
-                        for(let j of colors){
-                            validSeq.push(i+j);
-                        }
-                    }
+                    validSeq = categories.concat(colors);
                     let user = {
                         id: this.email,
                         password: this.password,
@@ -356,7 +374,11 @@
                     this.embedImage = e.target.result;
                 };
                 reader.readAsDataURL(file);
+            },
+            updateStepper(nextStep) {
+                    this.e1 = nextStep;
             }
+
         }
     }
 </script>

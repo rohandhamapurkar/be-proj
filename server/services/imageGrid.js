@@ -34,21 +34,42 @@ module.exports = {
         let valid3 = false;
         let arr = []
         function generate() {
+            arr = []
             valid1 = false;
             valid2 = false;
             valid3 = false;
-            for(let i=0;i<27;i++){
-                let num = Math.floor(Math.random() * 269) + 0
-                arr.push(data[num]);
-                if(data[num].match(validSeq[0]) || data[num].match(validSeq[1]) || data[num].match(validSeq[2]) || data[num].match(validSeq[3])){
-                    if(i<9){
+            while(arr.length != 9){
+                let num = Math.floor(Math.random() * 269) + 0;
+                if(data[num].match(validSeq[0]) || data[num].match(validSeq[1])){
+                    if(data[num].match(validSeq[2]) || data[num].match(validSeq[3])){
+                        arr.push(data[num]);
                         valid1 = true;
-                    } else if(i<18){
+                    }
+                } else {
+                    arr.push(data[num]);
+                }
+            }
+            while(arr.length != 18){
+                let num = Math.floor(Math.random() * 269) + 0;
+                if(data[num].match(validSeq[0]) || data[num].match(validSeq[1])){
+                    if(data[num].match(validSeq[2]) || data[num].match(validSeq[3])){
+                        arr.push(data[num]);
                         valid2 = true;
-                    } else {
+                    }
+                } else {
+                    arr.push(data[num]);
+                }
+            }
+            while(arr.length != 27){
+                let num = Math.floor(Math.random() * 269) + 0;
+                if(data[num].match(validSeq[0]) || data[num].match(validSeq[1])){
+                    if(data[num].match(validSeq[2]) || data[num].match(validSeq[3])){
+                        arr.push(data[num]);
                         valid3 = true;
                     }
-                } 
+                } else {
+                    arr.push(data[num]);
+                }
             }
             if(valid1 && valid2 && valid3){
                 generate();

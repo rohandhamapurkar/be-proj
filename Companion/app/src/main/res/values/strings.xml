@@ -2,8 +2,8 @@
     <string name="app_name">Companion</string>
     <string name="a_title">AUTHENTICATION</string>
     <string name="authenticate">Use Fingerprint or enter the 4-digit PIN</string>
-    <string name="dialog_message">You have not signed up with us yet. Please register on our website before using this application</string>
-    <string name="dialog_title">Not Registered</string>
+    <string name="dialog_message">Invalid Login Credentials</string>
+    <string name="dialog_title">Invalid!</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="submit">Submit</string>
