@@ -1,7 +1,8 @@
 <template>
-    <v-container style="transform:translateY(30%)">
-        <v-layout v-if="!displayGrid" align-center>
-            <v-flex xs12 sm6 offset-sm3>
+  <v-app id="inspire">
+    <v-container fluid fill-height>
+        <v-layout v-if="!displayGrid" align-center justify-center>
+            <v-flex xs12 sm6>
                 <v-card>
                   <v-toolbar dark class="header-gradient elevation-0" style="margin-bottom:20px">
                     <v-toolbar-title>User Registration</v-toolbar-title>
@@ -50,7 +51,7 @@
                                     <v-spacer></v-spacer>
                                     <v-btn @click="updateRoute('/')" style="width:25%" color="primary white--text">Login</v-btn>
                                     <v-spacer></v-spacer>
-                                    <v-btn @click="updateView" style="width:50%"  color="secondary white--text" :disabled="!valid">Next</v-btn>
+                                    <v-btn @click="updateView" style="width:50%"  color="secondary white--text" :disabled="valid">Next</v-btn>
                                     <v-spacer></v-spacer>
                                 </v-card-actions>
                             </v-form>
@@ -59,17 +60,17 @@
                 </v-card>
             </v-flex>
         </v-layout>
-        <v-layout v-else>
+        <v-layout v-else  align-center justify-center>
         <v-stepper v-model="e1">
             <v-stepper-header>
-                <v-stepper-step step="1" :complete="e1 > 1">Select any 2 category images</v-stepper-step>
+                <v-stepper-step step="1" :complete="e1 > 1"><hr style="width:180px;height:4px;border-radius:3px"></v-stepper-step>
                 <v-divider></v-divider>
-                <v-stepper-step step="2" >Select any 2 Colors to tint the image</v-stepper-step>
+                <v-stepper-step step="2" ><hr style="width:180px;height:4px;border-radius:3px"></v-stepper-step>
             </v-stepper-header>
             <v-stepper-items style="padding-top:4%;padding-bottom:4%">
                 <v-stepper-content step="1">
                 <v-layout>
-                    <v-flex xs12 sm6 offset-sm3>
+                    <v-flex>
                         <v-card class="elevation-0">
                             <v-container fluid v-bind="{ [`grid-list-${size}`]: true }">
                                 <h1>Select any 2 category images</h1>
@@ -85,11 +86,11 @@
                         </v-card>
                     </v-flex>
                 </v-layout>
-                <v-btn style="margin-top:10px;width:10%" :disabled="imageSelectionCounter!=2" @click="updateStepper(2)" color="blue white--text">NEXT</v-btn>
+                <v-btn class="header-gradient" style="margin-top:10px;width:10%;" :disabled="imageSelectionCounter!=0" @click="updateStepper(2)" color="white--text">NEXT</v-btn>
                 </v-stepper-content>
                 <v-stepper-content step="2">
                 <v-layout>
-                    <v-flex xs12 sm6 offset-sm3>
+                    <v-flex>
                         <v-card class="elevation-0">
                             <v-container fluid v-bind="{ [`grid-list-${size}`]: true }">
                                 <h1>Select any 2 Colors to tint the image</h1>
@@ -153,14 +154,15 @@
                         </v-card>
                     </v-flex>
                 </v-layout>
-                <v-btn @click="submit" color="primary" :disabled="colorSelectionCounter != 2">Complete</v-btn>
-                <v-btn @click="updateStepper(1)" color="cyan darken-3">Back</v-btn>
-                <v-btn @click="updateRoute('/')" color="cyan darken-3">Login</v-btn>
+                <v-btn @click="submit" color="primary white--text" :disabled="colorSelectionCounter != 0">Complete</v-btn>
+                <v-btn @click="updateStepper(1)" class="header-gradient" color="white--text">Back</v-btn>
+                <v-btn @click="updateRoute('/')" color="secondary white--text">Login</v-btn>
                 </v-stepper-content>
             </v-stepper-items>
         </v-stepper>
         </v-layout>
     </v-container>
+  </v-app>
 </template>
 
 
