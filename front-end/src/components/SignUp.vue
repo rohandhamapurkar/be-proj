@@ -51,7 +51,7 @@
                                     <v-spacer></v-spacer>
                                     <v-btn @click="updateRoute('/')" style="width:25%" color="primary white--text">Login</v-btn>
                                     <v-spacer></v-spacer>
-                                    <v-btn @click="updateView" style="width:50%"  color="secondary white--text" :disabled="valid">Next</v-btn>
+                                    <v-btn @click="updateView" style="width:50%"  color="secondary white--text" :disabled="!valid">Next</v-btn>
                                     <v-spacer></v-spacer>
                                 </v-card-actions>
                             </v-form>
@@ -63,9 +63,9 @@
         <v-layout v-else  align-center justify-center>
         <v-stepper v-model="e1">
             <v-stepper-header>
-                <v-stepper-step step="1" :complete="e1 > 1"><hr style="width:180px;height:4px;border-radius:3px"></v-stepper-step>
+                <v-stepper-step step="1" :complete="e1 > 1"></v-stepper-step>
                 <v-divider></v-divider>
-                <v-stepper-step step="2" ><hr style="width:180px;height:4px;border-radius:3px"></v-stepper-step>
+                <v-stepper-step step="2" ></v-stepper-step>
             </v-stepper-header>
             <v-stepper-items style="padding-top:4%;padding-bottom:4%">
                 <v-stepper-content step="1">
@@ -86,7 +86,7 @@
                         </v-card>
                     </v-flex>
                 </v-layout>
-                <v-btn class="header-gradient" style="margin-top:10px;width:10%;" :disabled="imageSelectionCounter!=0" @click="updateStepper(2)" color="white--text">NEXT</v-btn>
+                <v-btn class="header-gradient" style="margin-top:10px;width:10%;" :disabled="imageSelectionCounter != 2" @click="updateStepper(2)" color="white--text">NEXT</v-btn>
                 </v-stepper-content>
                 <v-stepper-content step="2">
                 <v-layout>
@@ -154,7 +154,7 @@
                         </v-card>
                     </v-flex>
                 </v-layout>
-                <v-btn @click="submit" color="primary white--text" :disabled="colorSelectionCounter != 0">Complete</v-btn>
+                <v-btn @click="submit" color="primary white--text" :disabled="colorSelectionCounter != 2">Complete</v-btn>
                 <v-btn @click="updateStepper(1)" class="header-gradient" color="white--text">Back</v-btn>
                 <v-btn @click="updateRoute('/')" color="secondary white--text">Login</v-btn>
                 </v-stepper-content>
