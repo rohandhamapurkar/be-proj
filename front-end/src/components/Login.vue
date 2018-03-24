@@ -13,7 +13,7 @@
               <v-card-text>
                 <v-form v-model="valid" ref="form" lazy-validation>
                   <v-text-field prepend-icon="person" name="email" label="Email" :rules="emailRules" type="email" v-model="email"></v-text-field>
-                  <v-text-field prepend-icon="lock" name="password" label="Password" v-model="password" id="password" type="password" :rules="passwordRules" :append-icon="e1 ? 'visibility' :'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'"></v-text-field>
+                  <v-text-field prepend-icon="lock" name="password" label="Password" v-model="password" id="password" :rules="passwordRules" :append-icon="e1 ? 'visibility' :'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'"></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions style="padding:20px">

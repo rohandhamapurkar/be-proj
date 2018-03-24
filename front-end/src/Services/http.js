@@ -46,7 +46,7 @@ export default {
             });
     },
     signupUser: (userdata) => {
-        return axios.post(baseUri + '/auth/v0.1/createUser',{ user: userdata }, {
+        return axios.post(baseUri + '/auth/v0.1/createUser', { user: userdata }, {
             headers: {
                 auth: store.getters.auth
             }
@@ -60,7 +60,7 @@ export default {
             });
     },
     apiKeyVerification: (key) => {
-        return axios.post(baseUri + '/auth/v0.1/verifyApiKey',{ key: key }, {
+        return axios.post(baseUri + '/auth/v0.1/verifyApiKey', { key: key }, {
             headers: {
                 auth: store.getters.auth.auth
             }
@@ -74,7 +74,7 @@ export default {
             });
     },
     verifyEmbededImage: (embededImage) => {
-        return axios.post(baseUri + '/embeddedImageAuth/v0.1/authenticateEmbeddedImage',{ image: embededImage, userId: store.getters.sessionEmail }, {
+        return axios.post(baseUri + '/embeddedImageAuth/v0.1/authenticateEmbeddedImage', { image: embededImage, userId: store.getters.sessionEmail }, {
             headers: {
                 sessionId: store.getters.sessionId
             }
@@ -88,9 +88,35 @@ export default {
             });
     },
     verifyOTP: (otp) => {
-        return axios.post(baseUri + '/authenticateTotp/v0.1/verifyOtp',{ token: otp, userId: store.getters.sessionEmail }, {
+        return axios.post(baseUri + '/authenticateTotp/v0.1/verifyOtp', { token: otp, userId: store.getters.sessionEmail }, {
             headers: {
                 sessionId: store.getters.sessionId
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                return response.data;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    },
+    getProfile: () => {
+        return axios.get(baseUri + '/user/v0.1/getProfile', {
+            headers: {
+                auth: store.getters.auth
+            }
+        }).then(function (response) {
+            console.log(response.data);
+            return response.data;
+        }).catch(function (error) {
+            console.error(error)
+        })
+    },
+    updateProfile: (update) => {
+        return axios.post(baseUri + '/user/v0.1/updateProfile', { update: update }, {
+            headers: {
+                auth: store.getters.auth
             }
         })
             .then(function (response) {

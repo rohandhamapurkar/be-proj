@@ -2,7 +2,7 @@
     <div class="mainapp">
         <v-toolbar dark color="primary">
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-            <v-toolbar-title class="white--text">Title goes here</v-toolbar-title>
+            <v-toolbar-title class="white--text">{{title}}</v-toolbar-title>
             <v-spacer></v-spacer>
             <!-- The below commented code adds 3 more buttons to the right hand side of the toolbar -->
             <!--v-btn icon>
@@ -42,7 +42,7 @@
             </v-list>
         </v-navigation-drawer>
         
-        <router-view></router-view>
+        <router-view @updateTitle='updateTitle'></router-view>
     </div>
 </template>
 
@@ -70,11 +70,15 @@
                         path: '/mainapp/embeddedimagesettings'
                     }
                 ],
+                title: ''
             }
         },
         methods: {
             updateRoute(path) {
                 router.replace(path);
+            },
+            updateTitle(title) {
+                this.title = title;
             }
         },
         created() {
