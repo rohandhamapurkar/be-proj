@@ -41,7 +41,7 @@
                 </v-list-tile>
             </v-list>
         </v-navigation-drawer>
-        
+
         <router-view @updateTitle='updateTitle'></router-view>
     </div>
 </template>
@@ -83,7 +83,13 @@
         },
         created() {
             if(!!this.$store.getters.auth) {
-                this.updateRoute('/mainapp/profile');
+                if(this.$store.getters.accountType == 1){
+                    this.items = this.items.slice(0,1)
+                    this.updateRoute('/mainapp/adminprofile');
+                } else {
+                    this.updateRoute('/mainapp/profile');
+                }
+
             } else {
                 this.updateRoute('/')
             }
@@ -96,9 +102,9 @@
     .testClass {
         border: 1px solid black;
     }
-    
+
     .nayaClass {
         border: 1px solid red;
     }
-    
+
 </style>

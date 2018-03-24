@@ -38,7 +38,7 @@
                                 </v-layout>
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
-                                    <v-btn @click="updateRoute('/')" color="primary" :disabled="!valid">SignUp</v-btn>
+                                    <v-btn @click="submit" color="primary" :disabled="!valid">SignUp</v-btn>
                                     <v-spacer></v-spacer>
                                     <v-btn @click="clear" color="error">Clear</v-btn>
                                     <v-spacer></v-spacer>
@@ -71,7 +71,7 @@
             confirmPassword: '',
             nameRules: [
                 (v) => !!v || 'Name is required',
-                (v) => v && v.length <= 10 || 'Name must be less than 10 characters'
+                (v) => v && v.length <= 12 || 'Name must be less than 10 characters'
             ],
             passwordRules: [
                 (v) => !!v || 'Password is required',
@@ -105,11 +105,11 @@
                     lastName: this.lastName,
                     mobileNumber: this.mobileNumber
                 }
-                
-                let result = await http.signupUser(admin);
+
+                let result = await http.signupAdmin(admin);
                 // do something with response
                 console.log(result);
-                
+
             },
             clear() {
                 this.$refs.form.reset()

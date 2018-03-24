@@ -56,7 +56,7 @@ export default new Router({
         },
         {
           path: 'adminprofile',
-          name: 'AdminProfile',
+          name: 'adminprofile',
           component: AdminProfile
         },
         {

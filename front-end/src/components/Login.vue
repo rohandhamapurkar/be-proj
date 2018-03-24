@@ -59,8 +59,17 @@
                 if (this.$refs.form.validate()) {
                     let result = await http.login({id:this.email,password:this.password});
                     if(result.ok) {
-                        this.$store.commit('auth', result.token);
-                        this.updateRoute('/mainapp/profile');
+                        console.log(result)
+                        if(result.accountType == 10){
+                            this.$store.commit('auth', result.token);
+                            this.$store.commit('accountType', result.accountType);
+                            this.updateRoute('/mainapp/profile');
+                        } else {
+                            this.$store.commit('auth', result.token);
+                            this.$store.commit('accountType', result.accountType);
+                            this.updateRoute('/mainapp/adminprofile');
+                        }
+
                     } else {
                         alert("Invalid username or password");
                     }

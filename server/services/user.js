@@ -1,7 +1,7 @@
 module.exports = {
     getProfile: async (id) => {
         try {
-            let result = await db.auth.findOne({id:id}, { _id:0,password:0,sessions:0,secret:0,image:0,accountType:0,validSeq:0});
+            let result = await db.auth.findOne({id:id ,accountType:10}, { _id:0,password:0,sessions:0,secret:0,image:0,accountType:0,validSeq:0});
             if (result) {
                 return ({ ok: true, profile: result });
             }
@@ -18,13 +18,13 @@ module.exports = {
             let set = {$set:{}}
             for(i in update){
                 if(i == 'password'){
-                    set['$set'][i] = Services.auth.hashPassword(update[i]);
+                    set['$set'][i] = await Services.auth.hashPassword(update[i]);
                 } else {
                     set['$set'][i] = update[i];
                 }
-                
+
             }
-            let result = await db.auth.update({id:id},set);
+            let result = await db.auth.update({id:id,accountType:10},set);
             if (result.result.ok == 1 && result.result.n == 1) {
                 return { ok: true, message: 'Updated Profile' }
             } else {

@@ -123,7 +123,7 @@
                     this.editContact = true;
                     this.editPassword = true;
                 } else {
-                    alert('Spmething went wrong please refresh the page');
+                    alert('Something went wrong please refresh the page');
                 }
             },
             editFields(choice) {

@@ -46,11 +46,17 @@ export default {
             });
     },
     signupUser: (userdata) => {
-        return axios.post(baseUri + '/auth/v0.1/createUser', { user: userdata }, {
-            headers: {
-                auth: store.getters.auth
-            }
-        })
+        return axios.post(baseUri + '/auth/v0.1/createUser', { user: userdata })
+            .then(function (response) {
+                console.log(response);
+                return response.data;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    },
+    signupAdmin: (userdata) => {
+        return axios.post(baseUri + '/auth/v0.1/createDev', { user: userdata })
             .then(function (response) {
                 console.log(response);
                 return response.data;
@@ -60,11 +66,7 @@ export default {
             });
     },
     apiKeyVerification: (key) => {
-        return axios.post(baseUri + '/auth/v0.1/verifyApiKey', { key: key }, {
-            headers: {
-                auth: store.getters.auth.auth
-            }
-        })
+        return axios.post(baseUri + '/auth/v0.1/verifyApiKey', { key: key })
             .then(function (response) {
                 console.log(response);
                 return response.data;
@@ -115,6 +117,32 @@ export default {
     },
     updateProfile: (update) => {
         return axios.post(baseUri + '/user/v0.1/updateProfile', { update: update }, {
+            headers: {
+                auth: store.getters.auth
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                return response.data;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    },
+    getAdminProfile: () => {
+        return axios.get(baseUri + '/sudoAdmin/v0.1/getProfile', {
+            headers: {
+                auth: store.getters.auth
+            }
+        }).then(function (response) {
+            console.log(response.data);
+            return response.data;
+        }).catch(function (error) {
+            console.error(error)
+        })
+    },
+    updateAdminProfile: (update) => {
+        return axios.post(baseUri + '/sudoAdmin/v0.1/updateProfile', { update: update }, {
             headers: {
                 auth: store.getters.auth
             }
