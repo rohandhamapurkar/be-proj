@@ -2,12 +2,12 @@
     <v-container>
         <v-layout>
             <v-flex xs12 sm6 offset-sm3>
-                <v-card :disabled="true">
+                <v-card :disabled="editGridFields">
                     <v-container fluid v-bind="{ [`grid-list-${size}`]: true }">
                         <h1>Select any 2 category images</h1>
                         <v-layout row wrap>
                             <v-flex xs4 v-for="n in Object.keys(imageClassName)" :key="n">
-                                <v-card flat tile v-bind:class="{redBorderClass: imageClassName[n]['set']}">
+                                <v-card flat tile  v-bind:class="{redBorderClass: imageClassName[n]['set']}" >
                                     <v-card-media @click="updateImageClass(n)" :src="imageClassName[n]['url']" height="150px">
                                     </v-card-media>
                                 </v-card>
@@ -15,7 +15,7 @@
                         </v-layout>
                     </v-container>
                 </v-card>
-                <v-card :disabled="true">
+                <v-card :disabled="editGridFields">
                     <v-container fluid v-bind="{ [`grid-list-${size}`]: true }">
                         <h1>Select any 2 Colors to tint the image</h1>
                         <v-layout row wrap>
@@ -77,7 +77,7 @@
                     </v-container>
                 </v-card>
                 <v-btn @click="updateGridData" color="primary">update</v-btn>
-                <v-btn v-if="!editGridFields" @click="editGrid" color="accent">Edit</v-btn>
+                <v-btn v-if="editGridFields" @click="editGrid" color="accent">Edit</v-btn>
                 <v-btn v-else @click="editGrid" color="error">Cancel</v-btn>
             </v-flex>
         </v-layout>
@@ -90,7 +90,7 @@
     import http from '@/Services/http';
     export default {
         data: () => ({
-            editGridFields: false,
+            editGridFields: true,
             size: 'xs',
             imageClassName: {
                 '1': {
@@ -185,10 +185,14 @@
             async init(){
                 let result = await http.getImageGridSettings();
                 for(let i in this.imageClassName){
-                    if(this.imageClassName[i].name == result.validSeq[0] || this.imageClassName[i].name == result.validSeq[1]) this.imageClassName[i].set = true;
+                    if(this.imageClassName[i].name == result.validSeq[0] || this.imageClassName[i].name == result.validSeq[1]){
+                        this.imageClassName[i].set = true;
+                    } 
                 }
                 for(let i in this.colorClassName){
-                    if(this.colorClassName[i].color == result.validSeq[0] || this.colorClassName[i].color == result.validSeq[1]) this.colorClassName[i].set = true;
+                    if(this.colorClassName[i].color == result.validSeq[2] || this.colorClassName[i].color == result.validSeq[3]){
+                        this.colorClassName[i].set = true;
+                    } 
                 }
                 this.colorSelectionCounter = 2;
                 this.imageSelectionCounter = 2;

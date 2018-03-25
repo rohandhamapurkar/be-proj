@@ -17,7 +17,7 @@ module.exports = {
         try {
             let result = await db.auth.findOne({id:id ,accountType:10}, { _id:0,validSeq:1});
             if (result) {
-                return ({ ok: true, validSeq: result });
+                return ({ ok: true, validSeq:result.validSeq });
             }
             else {
                 return ({ ok: false, message: "User doesnt exist" });
