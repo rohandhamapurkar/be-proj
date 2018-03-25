@@ -34,5 +34,14 @@ module.exports = {
             console.log('Mongo issue ', err);
             return ({ ok: false, message: 'unknown db issue' });
         }
+    },
+    generateNewApiKey: async (id) => {
+        let apiKey = await Services.auth.generateUUID();
+        let result = await Services.sudoAdmin.updateProfile(id,{apiKey:apiKey});
+        if(result.ok){
+            res.json({ok:true,apiKey:apiKey});
+        } else {
+            res.json({ok:false,message:"APi generation failed"})
+        }
     }
 }

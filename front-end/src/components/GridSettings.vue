@@ -182,42 +182,67 @@
             embedImage: null
         }),
         methods: {
-            updateGridData() {
+            async init(){
+                let result = await http.getImageGridSettings();
+                for(i in imageClassName){
+                    if(imageClassName[i].name == result.validSeq[0] || imageClassName[i].name == result.validSeq[1]) imageClassName[i].set = true;
+                }
+                for(i in colorClassName){
+                    if(colorClassName[i].color == result.validSeq[0] || colorClassName[i].color == result.validSeq[1]) colorClassName[i].set = true;
+                }
+            },
+            async updateGridData() {
+                if (this.colorSelectionCounter != 2 || this.imageSelectionCounter != 2) {
+                    alert("please select atleast 2 categories and 2 colors")
+                } else {
+                    let categories = [];
+                    let colors = [];
+                    for (let i in this.imageClassName) {
+                        if (this.imageClassName[i]['set']) categories.push(this.imageClassName[i]['name']);
+                    }
+                    for (let i in this.colorClassName) {
+                        if (this.colorClassName[i]['set']) colors.push(this.colorClassName[i]['color']);
+                    }
+                    let validSeq = [];
+                    validSeq = categories.concat(colors);
+                    let result = await http.updateProfile({
+                        validSeq : validSeq
+                    });
+                    alert(result.message);
+                }
             },
             editGrid() {
                 this.editGridFields = !this.editGridFields
             },
             updateImageClass(num) {
-                if (this.editGridFields) {
-                    if (this.imageSelectionCounter < 2 || this.imageClassName[num]['set']) {
-                        if (this.imageClassName[num]['set'] == true) {
-                            this.imageSelectionCounter--;
-                        } else {
-                            this.imageSelectionCounter++;
-                        }
-                        this.imageClassName[num]['set'] = !this.imageClassName[num]['set'];
+                if (this.imageSelectionCounter < 2 || this.imageClassName[num]['set']) {
+                    if (this.imageClassName[num]['set'] == true) {
+                        this.imageSelectionCounter--;
                     } else {
-                        alert('Cannot select more than 2 images');
+                        this.imageSelectionCounter++;
                     }
+                    this.imageClassName[num]['set'] = !this.imageClassName[num]['set'];
+                } else {
+                    alert('Cannot select more than 2 images');
                 }
             },
             updateColorClass(num) {
-                if (this.editGridFields) {
-                    if (this.colorSelectionCounter < 2 || this.colorClassName[num]['set']) {
-                        if (this.colorClassName[num]['set'] == true) {
-                            this.colorSelectionCounter--;
-                        } else {
-                            this.colorSelectionCounter++;
-                        }
-                        this.colorClassName[num]['set'] = !this.colorClassName[num]['set'];
+                if (this.colorSelectionCounter < 2 || this.colorClassName[num]['set']) {
+                    if (this.colorClassName[num]['set'] == true) {
+                        this.colorSelectionCounter--;
                     } else {
-                        alert('Cannot select more than 2 colors');
+                        this.colorSelectionCounter++;
                     }
+                    this.colorClassName[num]['set'] = !this.colorClassName[num]['set'];
+                } else {
+                    alert('Cannot select more than 2 colors');
                 }
             }
+            
         },
         created() {
             console.log('taher')
+            this.init();
         }
     }
 </script>

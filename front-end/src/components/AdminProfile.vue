@@ -56,7 +56,7 @@
                                     </v-flex>
                                 </v-layout>
                             </v-form>
-                            <v-btn @click="" color="accent">Refresh</v-btn>
+                            <v-btn @click="generateNewApiKey" color="accent">Refresh</v-btn>
                         </v-container>
                     </v-card-text>
                 </v-card>
@@ -168,6 +168,14 @@
                     this.editPassword = true;
                 } else {
                     alert('Something went wrong please refresh the page');
+                }
+            },
+            async generateNewApiKey(){
+                let result = await http.generateNewApiKey();
+                if(result.ok){
+                    this.apiKey = result.apiKey;
+                } else {
+                    alert(result.message)
                 }
             },
             editFields(choice) {

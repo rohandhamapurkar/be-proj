@@ -168,5 +168,29 @@ export default {
             .catch(function (error) {
                 console.error(error);
             });
+    },
+    getImageGridSettings: () => {
+        return axios.get(baseUri + '/user/v0.1/getImageGridSettings', {
+            headers: {
+                auth: store.getters.auth
+            }
+        }).then(function (response) {
+            console.log(response.data);
+            return response.data;
+        }).catch(function (error) {
+            console.error(error)
+        })
+    },
+    generateNewApiKey: () => {
+        return axios.get(baseUri + '/sudoAdmin/v0.1/generateNewApiKey', {
+            headers: {
+                auth: store.getters.auth
+            }
+        }).then(function (response) {
+            console.log(response.data);
+            return response.data;
+        }).catch(function (error) {
+            console.error(error)
+        })
     }
 }

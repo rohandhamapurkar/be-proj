@@ -12,7 +12,7 @@
                       <label for="file-upload" class="custom-file-upload">
                         <div style="display:flex"><span class="material-icons">cloud_upload</span>&nbsp;&nbsp;<span>Upload Image</span></div>
                       </label>
-                        <input id="file-upload" type="file" @change="onFileChange" accept="image/jpeg" name="uploadImage" value="Upload Image"></input>
+                        <input id="file-upload" type="file" @change="onFileChange" accept="image/jpeg" name="uploadImage" value="Upload Image">
                     </v-container>
                 </v-card>
             </v-flex>

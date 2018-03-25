@@ -17,5 +17,12 @@ module.exports.routes = {
     'POST /uploadOrUpdateImage': async(req,res) => {
         let result = await Services.embeddedImage.generateImageBase64(req.body.image,{id:req.auth.id,accountType:10});
         res.json(result);
+    },
+    'GET /getImageGridSettings': async (req,res) => {
+        if(req.auth && req.auth.hasOwnProperty('id')){
+            res.json(await Services.user.getImageGridSettings(req.auth.id));
+        } else {
+            res.json({ok:false,message:"Missing params"})
+        }
     }
 }

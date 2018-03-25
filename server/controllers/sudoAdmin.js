@@ -13,5 +13,12 @@ module.exports.routes = {
         } else {
             res.json({ok:false,message:"Missing params"})
         }
+    },
+    'GET /generateNewApiKey': async (req,res) => {
+        if(req.auth && req.auth.hasOwnProperty('id')){
+            res.json(await Services.sudoAdmin.generateNewApiKey(req.auth.id));
+        } else {
+            res.json({ok:false,message:"Missing params"})
+        }
     }
 }

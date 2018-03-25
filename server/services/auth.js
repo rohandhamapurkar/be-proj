@@ -11,6 +11,17 @@ function generateUUID(){
     return uuid;
 }
 module.exports = {
+    generateUUID: () => {
+        var d = new Date().getTime();
+        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c)
+        {
+            var r = (d + Math.random()*16)%16 | 0;
+            d = Math.floor(d/16);
+            return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+        });
+    
+        return uuid;
+    },
     issueToken: claim => {
         return jwt.sign(claim, config.auth.secret, { expiresIn: config.auth.tokenLifeInSec });
     },
@@ -64,25 +75,6 @@ module.exports = {
             } else {
                 console.log('Mongo issue ', err.code);
                 return { ok: false, message: 'unknown db issue' };
-            }
-        }
-    },
-    registerAdmin: async (user) => {
-        try {
-            user.accountType = 1;
-            let result = await db.auth.insert(user);
-            if (result.result.ok == 1 && result.result.n == 1) {
-                return ({ ok: true, message: 'Admin created' });
-            }
-            else {
-                return ({ ok: false, message: 'Admin created' });
-            }
-        } catch (err) {
-            if (err.code && err.code == 11000) {
-                return ({ ok: false, message: 'admin already present' });
-            } else {
-                console.log('Mongo issue ', err.code);
-                return ({ ok: false, message: 'unknown db issue' });
             }
         }
     },

@@ -13,6 +13,20 @@ module.exports = {
             return ({ ok: false, message: 'unknown db issue' });
         }
     },
+    getImageGridSettings: async (id) => {
+        try {
+            let result = await db.auth.findOne({id:id ,accountType:10}, { _id:0,validSeq:1});
+            if (result) {
+                return ({ ok: true, validSeq: result });
+            }
+            else {
+                return ({ ok: false, message: "User doesnt exist" });
+            }
+        } catch (err) {
+            console.log('Mongo issue ', err);
+            return ({ ok: false, message: 'unknown db issue' });
+        }
+    },
     updateProfile: async (id,update) => {
         try{
             let set = {$set:{}}
