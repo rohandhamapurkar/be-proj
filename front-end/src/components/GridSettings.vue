@@ -184,10 +184,10 @@
         methods: {
             async init(){
                 let result = await http.getImageGridSettings();
-                for(i in this.imageClassName){
+                for(let i in this.imageClassName){
                     if(this.imageClassName[i].name == result.validSeq[0] || this.imageClassName[i].name == result.validSeq[1]) this.imageClassName[i].set = true;
                 }
-                for(i in this.colorClassName){
+                for(let i in this.colorClassName){
                     if(this.colorClassName[i].color == result.validSeq[0] || this.colorClassName[i].color == result.validSeq[1]) this.colorClassName[i].set = true;
                 }
             },
