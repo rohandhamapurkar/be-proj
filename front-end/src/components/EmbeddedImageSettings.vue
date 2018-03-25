@@ -16,10 +16,10 @@
                 <v-card v-if="uploadCard">
                     <v-card-text>
                         <v-container>
-                            <input type="file" @change="onFileChange" accept="image/jpeg" name="uploadImage" value="Upload Image" />
-                            <v-btn @click="toggleUploadCard" color="accent">Cancel</v-btn>
-                            <v-btn @click="uploadImageAndEmbed" color="error">Upload</v-btn>
-                        </v-container>
+                            <input type="file" @change="onFileChange" accept="image/jpeg" name="uploadImage" value="Upload Image" />     
+                            <v-btn @click="toggleUploadCard" color="accent">Cancel</v-btn>          
+                            <v-btn @click="uploadImageAndEmbed" :disabled="uploadNotDone" color="error">Upload</v-btn>         
+                            </v-container>
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -36,6 +36,7 @@
             disableDownload: false,
             uploadCard: false,
             embedImage: null,
+            uploadNotDone:true,
             img: null
         }),
         computed: {},
@@ -55,11 +56,29 @@
             toggleUploadCard() {
                 this.uploadCard = !this.uploadCard;
                 this.disableDownload = !this.disableDownload;
+                this.uploadNotDone = true;
             },
-            uploadImageAndEmbed() {
+            async uploadImageAndEmbed() {
+                let result = await http.updateorUploadImage(this.embedImage);
+                alert(result.message);
             },
             onFileChange(e) {
-                this.embedImage = e.target.files[0];
+                var files = e.target.files;
+                if (!files.length)
+                    return;
+                this.createImage(files[0]);
+            },
+            createImage(file) {
+                var image = new Image();
+                var reader = new FileReader();
+                var vm = this;
+
+                reader.onload = (e) => {
+                    console.log(e.target.result)
+                    this.embedImage = e.target.result;
+                    this.uploadNotDone = false;
+                };
+                reader.readAsDataURL(file);
             }
         }
     }

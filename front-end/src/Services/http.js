@@ -154,5 +154,19 @@ export default {
             .catch(function (error) {
                 console.error(error);
             });
+    },
+    updateorUploadImage: (data)=> {
+        return axios.post(baseUri + '/user/v0.1/uploadOrUpdateImage', { image: data }, {
+            headers: {
+                auth: store.getters.auth
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                return response.data;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
     }
 }

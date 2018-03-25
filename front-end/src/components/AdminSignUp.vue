@@ -28,12 +28,12 @@
                                 </v-layout>
                                 <v-layout row>
                                     <v-flex xs12>
-                                        <v-text-field label="Password" id="password" v-model="password" :rules="passwordRules" type="password" :append-icon="e1 ? 'visibility' :'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'" required></v-text-field>
+                                        <v-text-field label="Password" id="password" v-model="password" :rules="passwordRules"  :append-icon="e1 ? 'visibility' :'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'" required></v-text-field>
                                     </v-flex>
                                 </v-layout>
                                 <v-layout row>
                                     <v-flex xs12>
-                                        <v-text-field label="Confirm Password" id="confirmPassword" v-model="confirmPassword" type="password" :append-icon="e2 ? 'visibility' :'visibility_off'" :append-icon-cb="() => (e2 = !e2)" :type="e2 ? 'password' : 'text'" required :rules="confirmPasswordRules"></v-text-field>
+                                        <v-text-field label="Confirm Password" id="confirmPassword" v-model="confirmPassword"  :append-icon="e2 ? 'visibility' :'visibility_off'" :append-icon-cb="() => (e2 = !e2)" :type="e2 ? 'password' : 'text'" required :rules="confirmPasswordRules"></v-text-field>
                                     </v-flex>
                                 </v-layout>
                                 <v-card-actions>
