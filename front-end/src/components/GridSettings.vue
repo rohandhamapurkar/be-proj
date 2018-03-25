@@ -190,6 +190,8 @@
                 for(let i in this.colorClassName){
                     if(this.colorClassName[i].color == result.validSeq[0] || this.colorClassName[i].color == result.validSeq[1]) this.colorClassName[i].set = true;
                 }
+                this.colorSelectionCounter = 2;
+                this.imageSelectionCounter = 2;
             },
             async updateGridData() {
                 if (this.colorSelectionCounter != 2 || this.imageSelectionCounter != 2) {
