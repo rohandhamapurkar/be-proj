@@ -39,9 +39,9 @@ module.exports = {
         let apiKey = await Services.auth.generateUUID();
         let result = await Services.sudoAdmin.updateProfile(id,{apiKey:apiKey});
         if(result.ok){
-            res.json({ok:true,apiKey:apiKey});
+            return({ok:true,apiKey:apiKey});
         } else {
-            res.json({ok:false,message:"APi generation failed"})
+            return({ok:false,message:"APi generation failed"})
         }
     }
 }
