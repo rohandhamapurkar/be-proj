@@ -11,7 +11,7 @@ android:
   licenses:
   - ".+"
 script:
-- cd /Companion
+- cd Companion
 - "./gradlew clean assembleDebug"
 notifications:
   email: false
