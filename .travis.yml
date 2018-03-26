@@ -11,6 +11,7 @@ android:
   - android-27
 
 before_install:
+-cd Companion
 - chmod +x gradlew
 
 script:
