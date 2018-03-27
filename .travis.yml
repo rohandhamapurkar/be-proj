@@ -16,6 +16,7 @@ android:
   - sys-img-armeabi-v7a-android-27
 
 before_install:
+- chmod +x set_tags.sh
 - cd Companion
 - chmod +x gradlew
 
