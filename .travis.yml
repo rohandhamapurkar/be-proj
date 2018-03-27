@@ -50,7 +50,7 @@ deploy:
   file_glob: "true"
   skip_cleanup: true
   on:
-    repo: rohandhamapurkar/be-proj
+    repo: rohandhamapurkar/be-proj/Companion
 
 after_success:
 - sh set_tags.sh
