@@ -1,7 +1,7 @@
 let fs = require('fs');
 module.exports = {
     getValidity: async sessionId => {
-        let result = await db.auth.aggregate([{$unwind:"$sessions"},{$match:{$and:[{"sessions.sessionId":sessionId}]}},{$group:{_id:null,"result":{$push:"$sessions.validity"}}}]);
+        let result = await db.auth.aggregate([{$unwind:"$sessions"},{$match:{$and:[{"sessions.sessionId":sessionId}]}},{$group:{_id:null,"result":{$push:"$sessions.validity"}}}]).toArray();
         if (result[0] != undefined) {
             return result[0];
         }
