@@ -47,6 +47,7 @@
                 reader.onload = async (e) => {
                     console.log(e.target.result)
                     let result = await http.verifyEmbededImage(e.target.result);
+                    alert(JSON.stringify(result,null,2));
                     if(result.authentication) {
                         // some redirect code with positive feedback
                     } else {
