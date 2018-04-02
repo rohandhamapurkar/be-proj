@@ -1,8 +1,8 @@
 import axios from 'axios';
 import store from '@/vuex';
 
-// const baseUri = window.location.protocol+"//"+window.location.host; //production url
-const baseUri = 'http://localhost:3000';
+const baseUri = window.location.protocol+"//"+window.location.host; //production url
+// const baseUri = 'http://localhost:3000';
 
 export default {
     login: (userdata) => {
@@ -207,4 +207,31 @@ export default {
                 console.error(error);
             });
     },
+    verifySession: (data) => {
+        return axios.get(baseUri + '/verifySession/v0.1/verifySession', { 
+            headers:{
+                sessionId: data
+            }
+         })
+            .then(function (response) {
+                console.log(response);
+                return response.data;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    },
+    userExists: (sessionId,data) => {
+        return axios.get(baseUri + '/auth/v0.1/userExists', {
+            headers: {
+                userId: data,
+                sessionId: sessionId
+            }
+        }).then(function (response) {
+            console.log(response.data);
+            return response.data;
+        }).catch(function (error) {
+            console.error(error)
+        })
+    }
 }

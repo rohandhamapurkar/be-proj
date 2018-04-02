@@ -7,6 +7,7 @@ module.exports.routes = {
             step: 30
         }
         let result = await Services.totp.getSecret(req.body.userId);
-        res.json({ok:true,authentication:otplib.authenticator.check(req.body.token, result.secret)});
+        await Services.auth.saveAuthState(req.headers.sessionid,otplib.authenticator.check(req.body.token, result.secret));
+        res.json({ok:true});
     },
 }

@@ -9,14 +9,13 @@ module.exports = {
             return null;
         } 
     },
-    saveValidity: async (id,update) => {
+    saveValidity: async (id,sessionId,update) => {
         try{
-            let result = await db.auth.update({id:id},{$push:{sessions:update}});
+            let result = await db.auth.update({id:id,sessions:{$elemMatch:{'sessionId':sessionId}}},{$set:{'sessions.$.validity':update}});
         } catch (err) {
             console.log('Mongo issue ', err.code);
             return { ok: false, message: 'unknown db issue' };
         }
-        
     },
     getUserValidSeq: async id => {
         let result = await db.auth.findOne({'id':id},{'validSeq':1});

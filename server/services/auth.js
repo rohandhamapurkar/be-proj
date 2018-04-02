@@ -11,6 +11,31 @@ function generateUUID(){
     return uuid;
 }
 module.exports = {
+    saveSession: async (id,update) => {
+        try{
+            let result = await db.auth.update({id:id},{$push:{sessions:update}});
+        } catch (err) {
+            console.log('Mongo issue ', err.code);
+            return { ok: false, message: 'unknown db issue' };
+        }
+    },
+    saveAuthState: async (sessionId,set) => {
+        try{
+            let result = await db.auth.update({"sessions":{$elemMatch:{sessionId:sessionId}}},{$set:{'sessions.$.authentication':set}});
+        } catch (err) {
+            console.log('Mongo issue ', err.code);
+            return { ok: false, message: 'unknown db issue' };
+        }
+    },
+    getAuthState: async (sessionId) => {
+        let result = await db.auth.aggregate([{$unwind:"$sessions"},{$match:{$and:[{"sessions.sessionId":sessionId}]}},{$group:{_id:null,"result":{$push:"$sessions.authentication"}}}]).toArray();
+        if (result[0] != undefined) {
+            return result[0];
+        }
+        else {
+            return null;
+        } 
+    },
     generateUUID: () => {
         var d = new Date().getTime();
         var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c)

@@ -105,12 +105,12 @@
                     this.gridsSelected[nextStep - 2] = selection;
                     console.log('send request');
                     let result = await http.verifyImageGrid(this.gridsSelected);
-                    if (result.authentication) {
-                        // window.location.replace(this.$store.getters.onSuccessPath + '?sessionId=' + this.$store.getters.sessionId);
-                        window.location.replace('https://google.com');
+                    if (result.ok) {
+                        window.location.replace(this.$store.getters.onSuccessPath + '?sessionId=' + this.$store.getters.sessionId);
+                        // window.location.replace('https://google.com');
                     } else {
-                        // window.location.replace(this.$store.getters.onUnsuccessPath);
-                        window.location.replace('https://facebook.com');
+                        window.location.replace(this.$store.getters.onUnsuccessPath);
+                        // window.location.replace('https://facebook.com');
                     }
                 } else {
                     this.e1 = nextStep;

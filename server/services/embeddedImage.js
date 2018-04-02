@@ -46,14 +46,16 @@ module.exports = {
             if(encodedData && encodedData.hasOwnProperty('token')){
                 let result = await Services.auth.verifyToken(encodedData.token);
                 if(result.id == userId){
-                    return({ok:true,authentication:true})
+                    await Services.auth.saveAuthState(req.headers.sessionid,true);
+                    return({ok:true})
                 } else {
-                    return({ok:false,message:"Token data doesnt match",authentication:false})
+                    await Services.auth.saveAuthState(req.headers.sessionid,false);
+                    return({ok:false,message:"Token data doesnt match"})
                 }
             }
         }
         catch(e){
-            return({ok:false,message:"Invalid image cannot parse",authentication:false})
+            return({ok:false,message:"Invalid image cannot parse"})
         }
     }
 }

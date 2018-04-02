@@ -39,6 +39,7 @@
 
 
 <script>
+    import http from '../Services/http';
     import router from '../router';
     export default {
         name: 'intermediatePage',
@@ -52,9 +53,17 @@
         }),
         computed: {},
         methods: {
-            updatePath(path) {
-                this.$store.commit('sessionEmail', this.email);
-                router.replace(path);
+            async updatePath(path) {
+                let result = await http.userExists(this.$store.getters.sessionId,this.email);
+                if(result.ok){
+                    this.$store.commit('sessionEmail', this.email);
+                    router.replace(path);
+                } else {
+                    alert(result.message);
+                    // window.location.replace(this.$store.getters.onUnsuccessPath);
+                    window.location.replace('https://facebook.com');
+                }
+                
             }
         }
     }

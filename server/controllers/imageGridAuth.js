@@ -5,12 +5,7 @@ module.exports.routes = {
             userSeq = await Services.imageGrid.getUserValidSeq(req.headers.userid);
             if(userSeq != null){
                 let result = await Services.imageGrid.generateGridSequence(userSeq);
-                let update = {
-                    sessionId:req.headers.sessionid,
-                    validity:result.validity
-                };
-                await Services.imageGrid.saveValidity(req.headers.userid,update);
-                delete update;
+                await Services.imageGrid.saveValidity(req.headers.userid,req.headers.sessionid,result.validity);
                 res.json({ok:true,data:result.urls});
             } else {
                 res.json({ok:false,message:"Something went wrong"});
@@ -29,7 +24,8 @@ module.exports.routes = {
                         authentication = false;
                     }
                 }
-                res.json({ok:true,authentication:authentication});
+                await Services.auth.saveAuthState(req.headers.sessionid,authentication);
+                res.json({ok:true});
             } else {
                 res.json({ok:false,message:"Something went wrong"});
             }

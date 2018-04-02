@@ -57,5 +57,30 @@ module.exports.routes = {
         } else {
             res.json({ ok: false, message: "Missing Params" });
         }
+    },
+    'GET /userExists': async (req,res) => {
+        if (req.headers && req.headers.hasOwnProperty('userid') && req.headers.hasOwnProperty('sessionid')) {
+            let result = await Services.auth.checkUserExists({id:req.headers.userid, accountType:10});
+            if (result.ok) {
+                let update = {
+                    sessionId : req.headers.sessionid,
+                    authentication : false
+                };
+                await Services.auth.saveSession(req.headers.userid,update);
+                delete update;
+                res.json({ok: true});
+            } else {
+                res.json({ok: false,message:"No such user"});
+            }
+        } else {
+            res.json({ ok: false, message: "Missing Params" });
+        }
+    },
+    'GET /getAuthState': async (req,res) => {
+        if(req.headers && req.headers.hasOwnProperty('sessionid')){
+            res.json(await Services.auth.getAuthState(req.headers.sessionid));
+        } else {
+            res.json({ok:false,message:"Missing params"});
+        }
     }
 }

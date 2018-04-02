@@ -15,15 +15,16 @@
         methods: {},
         async created() {
             let query = this.$route.query;
-            console.log(query);
             if (query.hasOwnProperty('sessionId') && query.hasOwnProperty('onSuccessPath') && query.hasOwnProperty('onUnsuccessPath')) {
-                this.$store.commit('sessionId', query.sessionId);
-                this.$store.commit('sessionSuccessPath', query.onSuccessPath);
-                this.$store.commit('sessionuUnsuccessPath', query.onUnsuccessPath);
-
-                console.log(this.$store.getters.onSuccessPath)
-                console.log(this.$store.getters.onUnsuccessPath)
-                router.replace('/authprogress/intermediatepage');
+                let result = await http.verifySession(query.sessionId);
+                if(result.ok){
+                    this.$store.commit('sessionId', query.sessionId);
+                    this.$store.commit('sessionSuccessPath', query.onSuccessPath);
+                    this.$store.commit('sessionuUnsuccessPath', query.onUnsuccessPath);
+                    router.replace('/authprogress/intermediatepage');
+                } else {
+                    router.replace('/404');
+                }
             } else {
                 router.replace('/404');
             }

@@ -32,7 +32,7 @@
         methods: {
             async requestServer() {
                 let result = await http.verifyOTP(this.otp);
-                if (result.authentication) {
+                if (result.ok) {
                     window.location.replace(this.$store.getters.onSuccessPath + '?sessionId=' + this.$store.getters.sessionId);
                 } else {
                     window.location.replace(this.$store.getters.onUnsuccessPath);
