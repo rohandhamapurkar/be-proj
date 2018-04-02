@@ -29,6 +29,9 @@ let mutations = {
   sessionEmail(state, payload) {
     state.session.email = payload;
   },
+  sessionSuccessPath(state, payload) {
+    state.session.onSuccessPath = payload;
+  },
   endSession(state, payload) {
     console.log("Session Destroyed");
     state.session = null
@@ -44,6 +47,7 @@ let getters = {
   session: state => state.session,
   sessionId: state => state.session.id,
   sessionEmail: state => state.session.email,
+  onSuccessPath: state => state.session.onSuccessPath,
 };
 
 export default new Vuex.Store({
@@ -55,7 +59,8 @@ export default new Vuex.Store({
     auth: {},
     session: {
       email: "",
-      id: ""
+      id: "",
+      onSuccessPath: ""
   },
   accountType:''
   },

@@ -100,10 +100,12 @@
             this.urls = result.data;
         },
         methods: {
-            updateStepper(selection, nextStep) {
+            async updateStepper(selection, nextStep) {
                 if (nextStep > 3) {
                     this.gridsSelected[nextStep-2] = selection;
                     console.log('send request');
+                    let result = await http.verifyImageGrid(this.gridsSelected);
+                    console.log(result);
                 } else {
                     this.e1 = nextStep;
                     this.gridsSelected[nextStep-2] = selection;

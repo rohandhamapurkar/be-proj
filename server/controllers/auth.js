@@ -45,6 +45,7 @@ module.exports.routes = {
         }
     },
     'POST /verifyApiKey': async (req, res) => {
+        console.log(req.body)
         if (req.body && req.body.key){
             let result = await Services.auth.verifyApiKey(req.body.key);
             if (result.ok) {

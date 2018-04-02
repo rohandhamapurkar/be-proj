@@ -1,8 +1,8 @@
 import axios from 'axios';
 import store from '@/vuex';
 
-const baseUri = window.location.protocol+"//"+window.location.host; //production url
-//const baseUri = 'http://localhost:3000';
+// const baseUri = window.location.protocol+"//"+window.location.host; //production url
+const baseUri = 'http://localhost:3000';
 
 export default {
     login: (userdata) => {
@@ -192,5 +192,19 @@ export default {
         }).catch(function (error) {
             console.error(error)
         })
-    }
+    },
+    verifyImageGrid: (data)=> {
+        return axios.post(baseUri + '/imageGridAuth/v0.1/authenticateGrid', { userResponse: data }, {
+            headers: {
+                sessionId: store.getters.sessionId
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                return response.data;
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    },
 }
