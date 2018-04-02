@@ -96,6 +96,11 @@ export default new Router({
           component: OTPBased
         }
       ]
+    },
+    {
+      path:"*",
+      name:'PageNotFound',
+      component:PageNotFound
     }
   ]
 })

@@ -91,8 +91,7 @@
 
 		function callAuth() {
 			$.ajax({
-				// url: 'https://beproject.tk/auth/v0.1/verifyApiKey',
-				url: 'http://localhost:3000/auth/v0.1/verifyApiKey',
+				url: 'https://beproject.tk/auth/v0.1/verifyApiKey',
 				type: 'POST',
 				contentType: 'application/json',
 				data: JSON.stringify({
@@ -100,8 +99,8 @@
 				}),
 				dataType: 'json',
 				success: function (data) {
-					successPath = 'file:///Users/taherPardawala/Desktop/Projects/nodePracs/be-proj/LoginDemo/Snow%20-%20By%20Visual%20Soldiers/index.html'
-					unSuccessPath = 'file:///Users/taherPardawala/Desktop/Projects/nodePracs/be-proj/LoginDemo/index.html'
+					successPath = 'https://beproject.tk/testwebsite/landingpage'
+					unSuccessPath = 'https://beproject.tk/404'
 					window.location.replace(`http://localhost:8080/#/authprogress/intermediatepage?sessionId=${data.token}&onSuccessPath=${successPath}&onUnsuccessPath=${unSuccessPath}`);
 				}
 			});
