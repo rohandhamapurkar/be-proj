@@ -33,7 +33,7 @@ let mutations = {
     state.session.onSuccessPath = payload;
   },
   sessionuUnsuccessPath(state, payload) {
-    state.session.onSuccessPath = payload;
+    state.session.onUnsuccessPath = payload;
   },
   endSession(state, payload) {
     console.log("Session Destroyed");
@@ -51,7 +51,7 @@ let getters = {
   sessionId: state => state.session.id,
   sessionEmail: state => state.session.email,
   onSuccessPath: state => state.session.onSuccessPath,
-  onUnsuccessPath: state => state.session.onSuccessPath,
+  onUnsuccessPath: state => state.session.onUnsuccessPath,
 };
 
 export default new Vuex.Store({
