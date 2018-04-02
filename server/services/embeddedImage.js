@@ -36,7 +36,7 @@ module.exports = {
             return ({ ok: false, message: 'unknown db issue' });
         }
     },
-    authenticateImage: async(data,userId) =>{
+    authenticateImage: async(data,userId,sessionId) =>{
         let base64Data = data.replace('data:image/jpeg;base64,',"")
         base64Data += base64Data.replace('+', ' ');
         let imageArray = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0)) 
@@ -46,14 +46,11 @@ module.exports = {
             console.log(encodedData);
             if(encodedData && encodedData.hasOwnProperty('token')){
                 let result = await Services.auth.verifyToken(encodedData.token);
-                console.log(result)
+                console.log(result);
                 if(result.id == userId){
-                    console.log("true")
-                    let result1 = await Services.auth.saveAuthState(req.headers.sessionid,true);
+                    let result1 = await Services.auth.saveAuthState(sessionId,true);
                     return({ok:true})
                 } else {
-                    console.log("true")
-                    let result1 = await Services.auth.saveAuthState(req.headers.sessionid,false);
                     return({ok:false,message:"Token data doesnt match"})
                 }
             }
