@@ -33,7 +33,7 @@
             async requestServer() {
                 let result = await http.verifyOTP(this.otp);
                 console.log(result);
-                    alert(his.$store.getters.onSuccessPath,his.$store.getters.onUnsuccessPath)
+                    alert(this.$store.getters.onSuccessPath,this.$store.getters.onUnsuccessPath)
                 // if (result.ok) {
                 //     window.location.replace(this.$store.getters.onSuccessPath + '?sessionId=' + this.$store.getters.sessionId);
                 // } else {

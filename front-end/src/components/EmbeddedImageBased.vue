@@ -46,7 +46,7 @@
                     console.log(e.target.result)
                     let result = await http.verifyEmbededImage(e.target.result);
                     console.log(result);
-                    alert(his.$store.getters.onSuccessPath,his.$store.getters.onUnsuccessPath)
+                    alert(this.$store.getters.onSuccessPath,this.$store.getters.onUnsuccessPath)
                     // if (result.ok) {
                     //     window.location.replace(this.$store.getters.onSuccessPath + '?sessionId=' + this.$store.getters.sessionId);
                     // } else {
