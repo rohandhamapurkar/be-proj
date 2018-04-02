@@ -43,13 +43,17 @@ module.exports = {
         var message = stegger.extract(imageArray);
         try{
             let encodedData = JSON.parse(String.fromCharCode.apply(null, message))
+            console.log(encodedData);
             if(encodedData && encodedData.hasOwnProperty('token')){
                 let result = await Services.auth.verifyToken(encodedData.token);
+                console.log(result)
                 if(result.id == userId){
-                    await Services.auth.saveAuthState(req.headers.sessionid,true);
+                    console.log("true")
+                    let result1 = await Services.auth.saveAuthState(req.headers.sessionid,true);
                     return({ok:true})
                 } else {
-                    await Services.auth.saveAuthState(req.headers.sessionid,false);
+                    console.log("true")
+                    let result1 = await Services.auth.saveAuthState(req.headers.sessionid,false);
                     return({ok:false,message:"Token data doesnt match"})
                 }
             }
