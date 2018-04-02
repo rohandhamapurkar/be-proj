@@ -1,9 +1,7 @@
 <template>
     <v-container>
         <v-layout>
-            <v-flex xs12 sm6 offset-sm3>
-                <br>
-                <h1 class="text-center">My Profile</h1><br>
+            <v-flex xs12 sm8 offset-sm3>
                 <v-card>
                     <v-card-text>
                         <v-container>
@@ -25,23 +23,6 @@
                             <v-btn @click="editFields(1)" color="accent" v-if="editName">Edit</v-btn>
                             <v-btn @click="editFields(2)" color="error" v-else>Cancel</v-btn>
                             <v-btn @click="updateFields(1)" color="primary" :disabled="!nameValid || editName">Update</v-btn>
-                        </v-container>
-                    </v-card-text>
-                </v-card>
-                <v-card>
-                    <v-card-text>
-                        <v-container>
-                            <h3>Whitelisted Domain</h3>
-                            <v-form v-model="domainValid">
-                                <v-layout>
-                                    <v-flex>
-                                        <v-text-field label="Domain Name" id="domain" type="text" v-model="domainName" :disabled="editDomain" ></v-text-field>
-                                    </v-flex>
-                                </v-layout>
-                            </v-form>
-                            <v-btn @click="editFields(7)" color="accent" v-if="editDomain">Edit</v-btn>
-                            <v-btn @click="editFields(8)" color="error" v-else>Cancel</v-btn>
-                            <v-btn @click="updateFields(4)" color="primary" :disabled="!nameValid || editDomain">Update</v-btn>
                         </v-container>
                     </v-card-text>
                 </v-card>

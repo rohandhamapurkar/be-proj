@@ -107,8 +107,13 @@
                 }
 
                 let result = await http.signupAdmin(admin);
-                // do something with response
-                console.log(result);
+                if(result.ok) {
+                    alert('Created Developer Account Login in to comtinue')
+                    router.replace('/')
+                } else {
+                    alert('Coulf not Created Developer Account try again')
+                    this.clear();
+                }
 
             },
             clear() {
