@@ -322,7 +322,8 @@
   <!-- Placed at the end of the document so the pages load faster -->
   <script>
     var sessionId = new URLSearchParams(window.location.search).get('sessionId');
-    if(sessionId == null){
+    console.log(sessionId);
+    if(!sessionId){
       alert('Session ID missing')
       window.location.replace('https://beproject.tk/404');
     } else {
@@ -334,6 +335,7 @@
           success: function (data) {
             console.log(data);
           }
+      })
     }
   </script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
