@@ -100,8 +100,9 @@
 				}),
 				dataType: 'json',
 				success: function (data) {
-					path = 'file:///Users/taherPardawala/Desktop/Projects/nodePracs/be-proj/LoginDemo/nextPage.html'
-					window.location.replace(`http://localhost:8080/#/authprogress/intermediatepage?sessionId=${data.token}&onSuccessPath=${path}`);
+					successPath = 'file:///Users/taherPardawala/Desktop/Projects/nodePracs/be-proj/LoginDemo/nextPage.html'
+					unSuccessPath = 'file:///Users/taherPardawala/Desktop/Projects/nodePracs/be-proj/LoginDemo/index.html'
+					window.location.replace(`http://localhost:8080/#/authprogress/intermediatepage?sessionId=${data.token}&onSuccessPath=${successPath}&onUnsuccessPath=${unSuccessPath}`);
 				}
 			});
 		}

@@ -49,8 +49,8 @@
                             </v-card>
                         </v-flex>
                     </v-layout>
-                      <v-btn  style="margin-top:10px;width:10%" @click="updateStepper(true, 3)" color="yes white--text">Yes</v-btn>
-                      <v-btn  style="margin-top:10px;width:10%" @click="updateStepper(false, 3)" color="nope white--text">No</v-btn>
+                    <v-btn style="margin-top:10px;width:10%" @click="updateStepper(true, 3)" color="yes white--text">Yes</v-btn>
+                    <v-btn style="margin-top:10px;width:10%" @click="updateStepper(false, 3)" color="nope white--text">No</v-btn>
                     <!--v-btn color="accent" @click.native="e1 = 3">Continue</v-btn-->
                 </v-stepper-content>
                 <v-stepper-content step="3">
@@ -94,7 +94,7 @@
             urls: []
         }),
         computed: {},
-        async created(){
+        async created() {
             let result = await http.getImageGrid();
             console.log(result);
             this.urls = result.data;
@@ -102,13 +102,19 @@
         methods: {
             async updateStepper(selection, nextStep) {
                 if (nextStep > 3) {
-                    this.gridsSelected[nextStep-2] = selection;
+                    this.gridsSelected[nextStep - 2] = selection;
                     console.log('send request');
                     let result = await http.verifyImageGrid(this.gridsSelected);
-                    console.log(result);
+                    if (result.authentication) {
+                        // window.location.replace(this.$store.getters.onSuccessPath + '?sessionId=' + this.$store.getters.sessionId);
+                        window.location.replace('https://google.com');
+                    } else {
+                        // window.location.replace(this.$store.getters.onUnsuccessPath);
+                        window.location.replace('https://facebook.com');
+                    }
                 } else {
                     this.e1 = nextStep;
-                    this.gridsSelected[nextStep-2] = selection;
+                    this.gridsSelected[nextStep - 2] = selection;
                 }
                 console.log(this.gridsSelected)
             }
