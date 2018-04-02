@@ -4,7 +4,7 @@ module.exports = {
     stegKey:[7,8,6,7,8,6,7,8,6],
     auth: {
         secret: '6twgh876ejlwhi8e2ej2i878eyh2d3g74gi4g38gno65756giosekrgi43ogv8347gvirelngkb4i3gib',
-        tokenLifeInSec: 60 * 60 * 24 * 3,// 300 days
+        tokenLifeInSec: 60 * 60 * 24 * 300,// 300 days
     },
     versions: {
         default: 'v0.1',
