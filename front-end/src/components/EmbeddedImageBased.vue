@@ -45,13 +45,11 @@
                 reader.onload = async(e) => {
                     console.log(e.target.result)
                     let result = await http.verifyEmbededImage(e.target.result);
-                    console.log(result);
-                    alert(this.$store.getters.onSuccessPath,this.$store.getters.onUnsuccessPath)
-                    // if (result.ok) {
-                    //     window.location.replace(this.$store.getters.onSuccessPath + '?sessionId=' + this.$store.getters.sessionId);
-                    // } else {
-                    //     window.location.replace(this.$store.getters.onUnsuccessPath);
-                    // }
+                    if (result.ok) {
+                        window.location.replace(this.$store.getters.onSuccessPath + '?sessionId=' + this.$store.getters.sessionId);
+                    } else {
+                        window.location.replace(this.$store.getters.onUnsuccessPath);
+                    }
                 };
                 reader.readAsDataURL(file);
             }

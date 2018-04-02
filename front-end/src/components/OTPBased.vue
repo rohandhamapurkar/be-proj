@@ -32,13 +32,11 @@
         methods: {
             async requestServer() {
                 let result = await http.verifyOTP(this.otp);
-                console.log(result);
-                    alert(this.$store.getters.onSuccessPath,this.$store.getters.onUnsuccessPath)
-                // if (result.ok) {
-                //     window.location.replace(this.$store.getters.onSuccessPath + '?sessionId=' + this.$store.getters.sessionId);
-                // } else {
-                //     window.location.replace(this.$store.getters.onUnsuccessPath);
-                // }
+                if (result.ok) {
+                    window.location.replace(this.$store.getters.onSuccessPath + '?sessionId=' + this.$store.getters.sessionId);
+                } else {
+                    window.location.replace(this.$store.getters.onUnsuccessPath);
+                }
             }
         }
     }
