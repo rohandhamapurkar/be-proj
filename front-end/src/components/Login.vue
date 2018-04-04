@@ -29,6 +29,7 @@
       </v-container>
     </v-content-->
     <v-form v-model="valid" ref="form" lazy-validation>
+    <label class="link" @click="updateRoute('/adminsignup')" >Admin?</label>
 	<div class="svgContainer">
 		<div>
 			<svg class="mySVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200">
@@ -123,8 +124,6 @@
 	<div class="inputGroup inputGroup1">
 		<label for="email1">Email</label>
 		<input id="email" class="email" type="email" v-model="email" :rules="emailRules" maxlength="256"/>
-		<p class="helper helper1">email@domain.com</p>
-		<span class="indicator"></span>
 	</div>
 	<div class="inputGroup inputGroup2">
 		<label for="password">Password</label>
@@ -133,7 +132,9 @@
 	<div class="inputGroup inputGroup3">
 		<button id="login" @click="submit" :disabled="!valid">Log in</button>
         <v-btn @click="updateRoute('/signup')" style="margin-top:15px" color="primary white--text">SignUp</v-btn>
-	</div>	
+	</div>
+	<br>
+	<label class="link" @click="updateRoute('/adminsignup')" >Admin?</label>
 	<!--/v-form-->
 </v-form>
   </v-app>
