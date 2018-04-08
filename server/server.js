@@ -104,6 +104,7 @@ let loadStaticRoutes = () => new Promise((resolve, reject) => {
     server.app.use('/testwebsite/landingpage',express.static(process.cwd()+"/LoginDemo/Snow - By Visual Soldiers"))
     server.app.use('/atvm',express.static(process.cwd()+'/atvm'))
     server.app.use('/atvm1',express.static(process.cwd()+'/atvm1'))
+    server.app.use('/atvm2',express.static(process.cwd()+'/atvm2'))
     server.app.use('/404',express.static(process.cwd()+'/404.html'))
     server.app.get('*',(req,res)=>{res.redirect('/404')})
     resolve();
