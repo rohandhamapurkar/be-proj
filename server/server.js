@@ -103,7 +103,7 @@ let loadStaticRoutes = () => new Promise((resolve, reject) => {
     server.app.use('/testwebsite/login', express.static(process.cwd()+"/LoginDemo"));
     server.app.use('/testwebsite/landingpage',express.static(process.cwd()+"/LoginDemo/Snow - By Visual Soldiers"))
     server.app.use('/emobot/static', express.static('/home/ubuntu/ek-project/front-end/dist' + "/static"));
-    server.app.use('/emobot',express.static('/home/ubuntu/ek-project/front-end/dist');
+    server.app.use('/emobot',express.static('/home/ubuntu/ek-project/front-end/dist'));
     server.app.use('/404',express.static(process.cwd()+'/404.html'))
     server.app.get('*',(req,res)=>{res.redirect('/404')})
     resolve();
