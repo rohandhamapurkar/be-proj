@@ -1,90 +1,113 @@
 <template>
-  <div class="error-container">
-  <h1>404</h1>
-  <p class="return">Take me back to <a href="/">beproject.tk</a></p>
+<div>
+<div class="error-page">
+  <div>
+    <!--h1(data-h1='400') 400-->
+    <!--p(data-p='BAD REQUEST') BAD REQUEST-->
+    <!--h1(data-h1='401') 401-->
+    <!--p(data-p='UNAUTHORIZED') UNAUTHORIZED-->
+    <!--h1(data-h1='403') 403-->
+    <!--p(data-p='FORBIDDEN') FORBIDDEN-->
+    <h1 data-h1="404">404</h1>
+    <p data-p="NOT FOUND">NOT FOUND</p>
+    <!--h1(data-h1='500') 500-->
+    <!--p(data-p='SERVER ERROR') SERVER ERROR-->
+  </div>
+</div>
+<div id="particles-js"></div>
 </div>
 </template>
 
 <style scoped>
-html,
-body {
-  margin: 0;
-  padding: 0;
+html, body {
   height: 100%;
+  overflow: hidden;
 }
 
-body {
-  font-family: "Whitney SSm A", "Whitney SSm B", "Helvetica Neue", Helvetica,
-    Arial, Sans-Serif;
-  background: -webkit-linear-gradient(225deg, #0fb8ad, #2cb5e8);
-  color: #fff;
-  -moz-font-smoothing: antialiased;
-  -webkit-font-smoothing: antialiased;
-}
-
-.error-container {
+.error-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   height: 100%;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+.error-page h1 {
+  font-size: 30vh;
+  font-weight: bold;
+  position: relative;
+  margin: -8vh 0 0;
+  padding: 0;
+}
+.error-page h1:after {
+  content: attr(data-h1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: transparent;
+  /* webkit only for graceful degradation to IE */
+  background: -webkit-repeating-linear-gradient(-45deg, #71b7e6, #69a6ce, #b98acc, #ee8176, #b98acc, #69a6ce, #9b59b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 400%;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0);
+  animation: animateTextBackground 10s ease-in-out infinite;
+}
+.error-page h1 + p {
+  color: #000000;
+  font-size: 8vh;
+  font-weight: bold;
+  line-height: 10vh;
+  max-width: 600px;
+  position: relative;
+}
+.error-page h1 + p:after {
+  content: attr(data-p);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: transparent;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
 }
 
-@media (max-width: 480px) {
-  .error-container {
-    position: relative;
-    top: 50%;
-    height: initial;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+#particles-js {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@keyframes animateTextBackground {
+  0% {
+    background-position: 0 0;
+  }
+  25% {
+    background-position: 100% 0;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0 100%;
+  }
+  100% {
+    background-position: 0 0;
   }
 }
-
-.error-container h1 {
-  margin: 0;
-  font-size: 130px;
-  font-weight: 300;
-}
-
-@media (min-width: 480px) {
-  .error-container h1 {
-    position: relative;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+@media (max-width: 767px) {
+  .error-page h1 {
+    font-size: 32vw;
   }
-}
-
-@media (min-width: 768px) {
-  .error-container h1 {
-    font-size: 220px;
+  .error-page h1 + p {
+    font-size: 8vw;
+    line-height: 10vw;
+    max-width: 70vw;
   }
-}
-
-.return {
-  color: rgba(255, 255, 255, 0.6);
-  font-weight: 400;
-  letter-spacing: -0.04em;
-  margin: 0;
-}
-
-@media (min-width: 480px) {
-  .return {
-    position: absolute;
-    width: 100%;
-    bottom: 30px;
-  }
-}
-
-.return a {
-  padding-bottom: 1px;
-  color: #fff;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
-  -webkit-transition: border-color 0.1s ease-in;
-  transition: border-color 0.1s ease-in;
-}
-
-.return a:hover {
-  border-bottom-color: #fff;
 }
 </style>

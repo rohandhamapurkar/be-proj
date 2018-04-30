@@ -1,35 +1,6 @@
 <template>
   <v-app id="inspire">
-    <!--v-content>
-      <v-container fluid fill-height>
-        <v-layout align-center justify-center>
-          <v-flex xs12 sm8 md4>
-            <v-card class="elevation-5">
-              <v-toolbar dark class="header-gradient elevation-0" style="margin-bottom:20px">
-                <v-toolbar-title>Login Form</v-toolbar-title>
-                <v-spacer></v-spacer>
-                <h3 class="link" @click="updateRoute('/adminsignup')">Admin SignUp?</h3>
-              </v-toolbar>
-              <v-card-text>
-                <v-form v-model="valid" ref="form" lazy-validation>
-                  <v-text-field prepend-icon="person" name="email" label="Email" :rules="emailRules" type="email" v-model="email"></v-text-field>
-                  <v-text-field prepend-icon="lock" name="password" label="Password" v-model="password" id="password" :rules="passwordRules" :append-icon="e1 ? 'visibility' :'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'"></v-text-field>
-                </v-form>
-              </v-card-text>
-              <v-card-actions style="padding:20px">
-                <v-spacer></v-spacer>
-                <v-btn @click="updateRoute('/signup')" style="width:30%" color="primary white--text">SignUp</v-btn>
-                <v-spacer></v-spacer>
-                <v-btn color="secondary white--text" style="width:70%" :disabled="!valid" @click="submit">Login</v-btn>
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-content-->
     <v-form v-model="valid" ref="form" lazy-validation>
-    <label class="link" @click="updateRoute('/adminsignup')" >Admin?</label>
 	<div class="svgContainer">
 		<div>
 			<svg class="mySVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200">
@@ -130,11 +101,11 @@
 		<input type="password" v-model="password" id="password" class="password" :rules="passwordRules" />
 	</div>
 	<div class="inputGroup inputGroup3">
-		<button id="login" @click="submit" :disabled="!valid">Log in</button>
-        <v-btn @click="updateRoute('/signup')" style="margin-top:15px" color="primary white--text">SignUp</v-btn>
+      <v-btn id="login" @click="submit" :disabled="!valid" style="margin-top:15px" color="primary white--text">Login</v-btn>
+      <v-btn @click="updateRoute('/signup')" style="margin-top:15px" color="primary white--text">SignUp</v-btn>
 	</div>
 	<br>
-	<label class="link" @click="updateRoute('/adminsignup')" >Admin?</label>
+	<label class="link" @click="updateRoute('/adminsignup')" >Want to be a Developer?</label>
 	<!--/v-form-->
 </v-form>
   </v-app>

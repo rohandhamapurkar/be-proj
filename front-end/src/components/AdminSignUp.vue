@@ -3,7 +3,7 @@
         <v-layout>
             <v-flex xs12 sm6 offset-sm3>
                 <br>
-                <h1 class="text-center">Admin Registration</h1><br>
+                <h1 class="text-center">Developer Registration</h1><br>
                 <v-card>
                     <v-card-text>
                         <v-container>
@@ -108,10 +108,10 @@
 
                 let result = await http.signupAdmin(admin);
                 if(result.ok) {
-                    alert('Created Developer Account Login in to comtinue')
+                    alert('Created Developer Account Login in to continue')
                     router.replace('/')
                 } else {
-                    alert('Coulf not Created Developer Account try again')
+                    alert('Could not Created Developer Account try again')
                     this.clear();
                 }
 

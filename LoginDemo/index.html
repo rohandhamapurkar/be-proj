@@ -95,12 +95,12 @@
 				type: 'POST',
 				contentType: 'application/json',
 				data: JSON.stringify({
-					"key": "8b0b2f05-44e8-42cf-a854-d5310843a218",
+					"key": "ce0adbda-94e5-4cff-ab5f-2606f1e319e1",
 				}),
 				dataType: 'json',
 				success: function (data) {
 					successPath = 'https://beproject.tk/testwebsite/landingpage'
-					unSuccessPath = 'https://beproject.tk/404'
+					unSuccessPath = 'https://beproject.tk/unauthorized'
 					window.location.replace(`https://beproject.tk/#/authprogress/intermediatepage?sessionId=${data.token}&onSuccessPath=${successPath}&onUnsuccessPath=${unSuccessPath}`);
 				}
 			});

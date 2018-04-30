@@ -60,8 +60,8 @@
                     router.replace(path);
                 } else {
                     alert(result.message);
-                    // window.location.replace(this.$store.getters.onUnsuccessPath);
-                    window.location.replace('https://facebook.com');
+                    window.location.replace(this.$store.getters.onUnsuccessPath);
+                    // window.location.replace('https://facebook.com');
                 }
                 
             }

@@ -323,8 +323,12 @@
                     }
                     if(this.embedImage != null) user.embedImage = this.embedImage
                     let result = await http.signupUser(user);
-                    // do something with response
-                    console.log(result);
+                    if(result.ok) {
+                        alert(result.message)
+                        router.replace('/')
+                    } else {
+                        alert("Something went wrong please try again");
+                    }
                 }
             },
             clear() {
