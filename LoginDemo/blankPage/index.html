@@ -4,7 +4,7 @@
 <head>
   <meta name="description" content="Webpage description goes here" />
   <meta charset="utf-8">
-  <title>Change_me</title>
+  <title>Redirecting</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="">
   <link rel="stylesheet" href="css/style.css">
@@ -23,9 +23,8 @@
         beforeSend: function(xhr){xhr.setRequestHeader('sessionid', sessionId);},
         success: function (data) {
           if(data.result[0]){
-            
+            window.location.replace('https://beproject.tk/testwebsite/landingpage');
           } else {
-            alert("Your authentication has failed");
             window.location.replace('https://beproject.tk/unauthorized/');
           }
         }
@@ -37,7 +36,7 @@
 <body>
   
 <div class="container">
-  
+  <h1 align="center">Redirecting . . . . .</h1>
 </div>
 
 <script>
