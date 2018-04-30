@@ -99,8 +99,8 @@
 				}),
 				dataType: 'json',
 				success: function (data) {
-					successPath = 'https://beproject.tk/testwebsite/landingpage'
-					unSuccessPath = 'https://beproject.tk/unauthorized'
+					successPath = 'https://beproject.tk/testwebsite/processPage'
+					unSuccessPath = 'https://beproject.tk/unauthorized/'
 					window.location.replace(`https://beproject.tk/#/authprogress/intermediatepage?sessionId=${data.token}&onSuccessPath=${successPath}&onUnsuccessPath=${unSuccessPath}`);
 				}
 			});

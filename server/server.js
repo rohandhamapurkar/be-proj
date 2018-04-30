@@ -101,6 +101,7 @@ let loadStaticRoutes = () => new Promise((resolve, reject) => {
     server.app.get('/', express.static(process.cwd()+"/front-end/dist"));
     server.app.use('/otp', express.static(process.cwd()+'/test/totp'));
     server.app.use('/testwebsite/login', express.static(process.cwd()+"/LoginDemo"));
+    server.app.use('/testwebsite/processPage',express.static(process.cwd()+"/LoginDemo/blankPage"))
     server.app.use('/testwebsite/landingpage',express.static(process.cwd()+"/LoginDemo/Snow - By Visual Soldiers"))
     server.app.use('/unauthorized',express.static(process.cwd()+"/AuthFail"))
     server.app.use('/emobot/static', express.static('/home/ubuntu/ek-project/front-end/dist' + "/static"));

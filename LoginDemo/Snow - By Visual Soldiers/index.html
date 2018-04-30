@@ -25,33 +25,6 @@
   <link rel="stylesheet" href="css/main.css">
 
   <script src="js/modernizr-2.7.1.js"></script>
-  <script>
-      window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')
-    </script>
-  <script>
-    var sessionId = new URLSearchParams(window.location.search).get('sessionId');
-    console.log(sessionId);
-    if(!sessionId){
-      alert('Session ID missing')
-      window.location.replace('https://beproject.tk/404');
-    } else {
-      $.ajax({
-          url: 'https://beproject.tk/auth/v0.1/getAuthState',
-          type: 'GET',
-          contentType: 'application/json',
-          beforeSend: function(xhr){xhr.setRequestHeader('sessionid', sessionId);},
-          success: function (data) {
-            if(data.result[0]){
-
-            } else {
-              alert("Your authentication has failed");
-              window.location.replace('https://beproject.tk/404');
-            }
-          }
-      })
-    }
-  </script>
-
 </head>
 
 <body>
